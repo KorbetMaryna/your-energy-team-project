@@ -1,0 +1,34 @@
+:root {
+    --main-font: 'DM Sans', sans-serif;
+    
+    --transition-duration-time-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* backgrounds*/
+    --background-light-theme: #F4F4F4;
+    --modal-background-light-theme: #040404; /* необхідно додати додатково opacity 40% */
+
+    /* colors */
+    --main-color-light-theme: #242424;
+    --second-color-light-theme: #F4F4F4;
+
+    /* pagination */
+    --pagination-not-activ: #D4D4D4;
+
+    /* stars */
+    --stars-color-activ: #EEA10C;
+
+    /* footer */
+    --footer-privacy-terms: #C6CDD1;
+
+    /* secondary colors */
+    --grey-one: #DFDFDF;      /* 242424 10% */
+    --grey-two: #A7A7A7;      /* 242424 40% */
+    --grey-free: #7C7C7C;     /* 242424 60% */
+    --grey-four: #777777;     /* 242424 60% modal*/
+    --grey-five: #505050;     /* 242424 80% */
+
+    --grey-six: #393939;     /* F4F4F4 10% */
+    --grey-seven: #4E4E4E;      /* F4F4F4 20% */
+    --grey-eight: #999795;    /* F4F4F4 40% */
+    --grey-nine: #A1A1A1;    /* F4F4F4 60% */
+}

@@ -1,0 +1,14 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--main-font);
+    font-size: 14px;
+    background-color: var(--background-light-theme);
+    color: var(--main-color-light-theme);
+    position: relative;
+}
+
+
+
