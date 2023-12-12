@@ -1,22 +1,22 @@
-<button id="openModalBtn">Open Modal</button>
+<!-- <button id="openModalBtn">Open Modal</button> -->
 
-<div id="myModal" class="background">
-  <div class="modal">
-    <button class="close" type="button">
-      <svg class="close-icon" aria-label="logo icon">
+<div id="myModal" class="main-modal__background">
+  <div class="main-modal">
+    <button class="main-modal__close" type="button">
+      <svg class="main-modal__close-icon" aria-label="logo icon">
         <use href="./img/icons.svg#icon-close-btn"></use>
       </svg>
     </button>
-    <div class="main-container" id="exerciseDetails"></div>
-    <div class="btns-wrapper">
-      <button class="btn fav-btn">
-        <span class="btn-text fav-btn-text">Add to favorites</span>
-        <svg class="heart-icon" aria-label="logo icon">
+    <div class="main-modal__main-container" id="exerciseDetails"></div>
+    <div class="main-modal__btns-wrapper">
+      <button class="main-modal__btn main-modal__fav-btn">
+        <span class="main-modal__btn-text main-modal__fav-btn-text">Add to favorites</span>
+        <svg class="main-modal__heart-icon" aria-label="logo icon">
           <use href="./img/icons.svg#icon-heart"></use>
         </svg>
       </button>
-      <button class="btn rating-btn">
-        <span class="btn-text">Give a rating</span>
+      <button class="main-modal__btn main-modal__rating-btn">
+        <span class="main-modal__btn-text">Give a rating</span>
       </button>
     </div>
   </div>

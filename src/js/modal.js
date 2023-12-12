@@ -5,7 +5,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("openModalBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("main-modal__close")[0];
 
 // When the user clicks the button, open the modal
 btn.onclick = function() {
@@ -24,7 +24,7 @@ window.onclick = function(event) {
   }
 }
 
-const apiUrl = 'https://your-energy.b.goit.study/api/exercises/64f389465ae26083f39b17a2';
+const apiUrl = 'https://your-energy.b.goit.study/api/exercises/64f389465ae26083f39b17a3';
 
 fetch(apiUrl)
 .then(response => {
@@ -48,62 +48,62 @@ function displayExerciseDetails(data) {
   let gifImage = null
   
   if(data.gifUrl){
-    gifImage = `<div class="gif-wrapper">
+    gifImage = `<div class="main-modal__gif-wrapper">
     <img class="gif" src="${data.gifUrl}" alt="Exercise GIF">
     <div class="gif-overlay"></div>
     </div>`;
   }else{
-    gifImage = `<div class="gif-wrapper">
-    <img class="gif" src="https://i.ibb.co/ZfpKSXz/depositphotos-197890504-stock-illustration-vector-man-engaged-gym.webp" alt="depositphotos-197890504-stock-illustration-vector-man-engaged-gym" alt="Exercise IMG">
-    <div class="gif-overlay"></div>
+    gifImage = `<div class="main-modal__gif-wrapper">
+    <img class="main-modal__gif" src="https://i.ibb.co/ZfpKSXz/depositphotos-197890504-stock-illustration-vector-man-engaged-gym.webp" alt="depositphotos-197890504-stock-illustration-vector-man-engaged-gym" alt="Exercise IMG">
+    <div class="main-modal__gif-overlay"></div>
     </div>`;
   }
   
-  const title = `<p class='card-title'>${data.name}</p>`
+  const title = `<p class='main-modal__card-title'>${data.name}</p>`
   const stars = generateStarRating(Math.round(data.rating));
   
-  const rating = `<div class='rating-container'>
-  <span class="rating">${data.rating % 1 >= 0.5 ? Math.ceil(data.rating) +'.0' : Math.floor(data.rating) +'.0'}</span>
+  const rating = `<div class='main-modal__rating-container'>
+  <span class="main-modal__rating">${data.rating % 1 >= 0.5 ? Math.ceil(data.rating) +'.0' : Math.floor(data.rating) +'.0'}</span>
   ${stars}
   </div>`
   
-  const details = `<div class="details-container">
-  <div class="details-wrapper">
-  <p class="details-title">Target</p>
-  <p class="details-info">${data.target}</p>
+  const details = `<div class="main-modal__details-container">
+  <div class="main-modal__details-wrapper">
+  <p class="main-modal__details-title">Target</p>
+  <p class="main-modal__details-info">${data.target}</p>
   </div>
-  <div class="details-wrapper">
-  <p class="details-title">Body Part</p>
-  <p class="details-info">${data.bodyPart}</p>
+  <div class="main-modal__details-wrapper">
+  <p class="main-modal__details-title">Body Part</p>
+  <p class="main-modal__details-info">${data.bodyPart}</p>
   </div>
-  <div class="details-wrapper">
-  <p class="details-title">Equipment</p>
-  <p class="details-info">${data.equipment}</p>
+  <div class="main-modal__details-wrapper">
+  <p class="main-modal__details-title">Equipment</p>
+  <p class="main-modal__details-info">${data.equipment}</p>
   </div>
-  <div class="details-wrapper">
-  <p class="details-title">Popular</p>
-  <p class="details-info">${data.popularity}</p>
+  <div class="main-modal__details-wrapper">
+  <p class="main-modal__details-title">Popular</p>
+  <p class="main-modal__details-info">${data.popularity}</p>
   </div>
   </div>
-  <div class="details-wrapper calories">
-  <p class="details-title">Burned Calories</p>
-  <p class="details-info">${data.burnedCalories}</p>
+  <div class="main-modal__details-wrapper calories">
+  <p class="main-modal__details-title">Burned Calories</p>
+  <p class="main-modal__details-info">${data.burnedCalories}</p>
   </div>`
   
-  const description = `<div class="description">${data.description}</div>`
+  const description = `<div class="main-modal__description">${data.description}</div>`
   
-  exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="content-wrapper">${title + rating + details + description}</div>`}`;
+  exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-wrapper">${title + rating + details + description}</div>`}`;
 }
 
 // Function to generate star icons based on rating
 function generateStarRating(rating) {
-  const starIcon = `<div class="star-wrapper"><svg class="star-icon colored-star" aria-label="logo icon">
+  const starIcon = `<div class="star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star" aria-label="logo icon">
   <use href="./img/icons.svg#icon-star"></use>
   </svg></div>`;
   
-  const emptyStar = `<svg class="star-icon " aria-label="logo icon">
+  const emptyStar = `<div class="star-wrapper"><svg class="main-modal__star-icon " aria-label="logo icon">
   <use href="./img/icons.svg#icon-star"></use>
-  </svg>`;
+  </svg></div>`;
   let starsHTML = '';
   let integerPart = Math.floor(rating);  
   let decimalPart = rating - integerPart;  
