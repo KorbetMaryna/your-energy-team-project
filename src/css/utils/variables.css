@@ -21,14 +21,14 @@
     --footer-privacy-terms: #C6CDD1;
 
     /* secondary colors */
-    --grey-one: #DFDFDF;      /* 242424 10% */
-    --grey-two: #A7A7A7;      /* 242424 40% */
-    --grey-free: #7C7C7C;     /* 242424 60% */
-    --grey-four: #777777;     /* 242424 60% modal*/
-    --grey-five: #505050;     /* 242424 80% */
-
-    --grey-six: #393939;     /* F4F4F4 10% */
-    --grey-seven: #4E4E4E;      /* F4F4F4 20% */
-    --grey-eight: #999795;    /* F4F4F4 40% */
-    --grey-nine: #A1A1A1;    /* F4F4F4 60% */
+    --grey-one: rgba(36, 36, 36, 0.10);    /* 242424 10% */
+    --grey-two: rgba(36, 36, 36, 0.40);    /* 242424 40% */
+    --grey-free: rgba(36, 36, 36, 0.60);   /* 242424 60% */
+    --grey-four: rgba(36, 36, 36, 0.60);   /* 242424 60% modal */
+    --grey-five: rgba(36, 36, 36, 0.80);   /* 242424 80% */
+    
+    --grey-six: rgba(244, 244, 244, 0.10); /* F4F4F4 10% */
+    --grey-seven: rgba(244, 244, 244, 0.20); /* F4F4F4 20% */
+    --grey-eight: rgba(244, 244, 244, 0.40); /* F4F4F4 40% */
+    --grey-nine: rgba(244, 244, 244, 0.60); /* F4F4F4 60% */
 }

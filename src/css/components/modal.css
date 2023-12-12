@@ -1,6 +1,6 @@
 /* Styles for the modal */
 
-.background {
+.main-modal__background {
     display: none;
     position: fixed;
     z-index: 1;
@@ -14,18 +14,18 @@
     align-items: center; 
 }
 
-.modal{
+.main-modal{
     position: relative;
     background-color: var( --main-color-light-theme);
     color: var(--background-light-theme);
     margin-left: 20px;
     margin-right: 20px;
     padding: 40px 20px;
-    /* width: 100%; */
     width: 335px;
     border-radius: 20px;
 }
-.close {
+
+.main-modal__close {
     position: absolute;
     top: 14px;
     right: 14px;
@@ -34,19 +34,20 @@
     background-color: transparent;
     border: none;
 }
-.close:focus {
+
+.main-modal__close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-.close-icon{
+.main-modal__close-icon{
     width: 24px;
     height: 24px;
     stroke: var(--background-light-theme)
 }
 
-.gif-wrapper {
+.main-modal__gif-wrapper {
     position: relative;
     width: 295px;
     height: 258px;
@@ -57,14 +58,14 @@
     overflow: hidden;
 }
 
-.gif {
+.main-modal__gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.gif-overlay {
+.main-modal__gif-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -73,7 +74,7 @@
     background: linear-gradient(0deg, rgba(4, 4, 4, 0.20) 0%, rgba(4, 4, 4, 0.20) 100%) ;
 }
 
-.card-title{
+.main-modal__card-title{
     font-family: var(--main-font);
     color: inherit;
     font-size: 20px;
@@ -82,13 +83,14 @@
     margin-bottom: 10px;
 }
 
-.rating-container{
+.main-modal__rating-container{
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(244, 244, 244, 0.20);;
+    border-bottom: 1px solid var(--grey-seven);
 }
-.rating{
+
+.main-modal__rating{
     color: inherit;  
     font-family: inherit;
     font-size: 12px;
@@ -96,25 +98,19 @@
     line-height: 1.5;
 }
 
-.close-icon{
-    width: 24px;
-    height: 24px;
-    stroke: var(--background-light-theme)
-}
-
-.star-icon{
+.main-modal__star-icon{
     width: 14px;
     height: 14px;
-    fill: rgba(244, 244, 244, 0.20);
+    fill: var(--grey-seven);
     stroke: transparent;
     margin-left: 3px;
 }
 
-.colored-star{
+.main-modal__colored-star{
     fill: #EEA10C;
 }
 
-.star-wrapper{
+.main-modal__star-wrapper{
     width: 18px;
     height: 18px;
     display: flex;
@@ -122,26 +118,26 @@
 }
 
 
-.details-container{
+.main-modal__details-container{
     display: flex;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-.details-wrapper{
+.main-modal__details-wrapper{
     display: flex;
     flex-direction: column;
     margin-right: 20px;
 }
 
-.calories{
+.main-modal__calories{
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(244, 244, 244, 0.20);;
+    border-bottom: 1px solid var(--grey-seven);
 }
 
 
-.details-title{
-    color: rgba(244, 244, 244, 0.40);
+.main-modal__details-title{
+    color: var(--grey-eight);
     font-family: inherit;
     font-size: 12px;
     font-weight: 400;
@@ -149,7 +145,11 @@
     margin-bottom: 4px;
 }
 
-.details-info{
+.main-modal__details-title:nth-child(2){
+    width: 55px;
+}
+
+.main-modal__details-info{
     color: #F4F4F4;
     font-family: inherit;
     font-size: 14px;
@@ -157,22 +157,22 @@
     line-height: 1.28;  
 }
 
-.description{
+.main-modal__description{
     margin-top: 20px;
     margin-bottom: 40px;
-    color: rgba(244, 244, 244, 0.60);   
+    color: var(--grey-nine);   
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.28;
 }
 
-.btns-wrapper{
+.main-modal__btns-wrapper{
     display: flex;
     justify-content: space-between;
 }
 
-.btn{
+.main-modal__btn{
     display: flex;
     align-items: center;
     height: 42px;
@@ -180,31 +180,103 @@
     padding: 12px 19px;
 }
 
-.fav-btn{
+.main-modal__fav-btn{
     background-color: var(--background-light-theme);
     color: var(--main-color-light-theme);
     border: none;
 }
-.rating-btn{
+.main-modal__rating-btn{
     background-color: var(--main-color-light-theme);
     color: var(--second-color-light-theme);
     border: 1px solid var(--second-color-light-theme);
 }
 
-.btn-text{
+.main-modal__btn-text{
     font-size: 14px;
     font-weight: 400;
     line-height: 1.28; 
 }
 
-.fav-btn-text{
+.main-modal__fav-btn-text{
     margin-right: 8px;
 }
 
-.heart-icon{
+.main-modal__heart-icon{
     stroke: var(--main-color-light-theme);
     fill: none;
     width: 18px;
     height: 18px;
 }
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+    .main-modal{
+        margin-left: 32px;
+        margin-right: 32px;
+        padding: 32px;
+        width: 704px;
+        border-radius: 20px;
+    }
+    
+    .main-modal__close {
+        top: 16px;
+        right: 16px;
+        width: 28px;
+        height: 28px;
+    }
+    
+    .main-modal__close-icon{
+        width: 28px;
+        height: 28px;
+    }
+    .main-modal__main-container{
+        display: flex;
+    }
+    
+    .main-modal__content-wrapper{
+        margin-left: 32px;
+        width: 338px;
+        height: auto;
+        margin-bottom: 64px;
+    }
+    
+    .main-modal__gif-wrapper {
+        width: 270px;
+        height: 259px;
+    }
+    
+    .main-modal__rating-container{
+        padding-bottom: 16px;
+    }
+    
+    
+    .main-modal__details-container{
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .main-modal__calories{
+        padding-bottom: 8px;
+    }
+
+    .main-modal__btns-wrapper{
+        justify-content: flex-end;
+    }
+
+    .main-modal__fav-btn{
+        margin-right: 7px;
+    }
+
+    .main-modal__description{
+        margin-bottom: 0;
+    }
+
+    .main-modal__card-title{
+        font-size: 24px;
+        line-height: 1.33; 
+    }
+
+    .main-modal__btn-text{
+        font-size: 16px;
+        line-height: 1.5; 
+    }
+    
+}
