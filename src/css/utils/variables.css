@@ -5,7 +5,7 @@
 
     /* backgrounds*/
     --background-light-theme: #F4F4F4;
-    --modal-background-light-theme: #040404; /* необхідно додати додатково opacity 40% */
+    --modal-background-light-theme: rgba(4, 4, 4, 0.4);
 
     /* colors */
     --main-color-light-theme: #242424;
