@@ -21,10 +21,10 @@
     margin-left: 20px;
     margin-right: 20px;
     padding: 40px 20px;
-    /* width: 100%; */
     width: 335px;
     border-radius: 20px;
 }
+
 .close {
     position: absolute;
     top: 14px;
@@ -34,6 +34,7 @@
     background-color: transparent;
     border: none;
 }
+
 .close:focus {
     color: black;
     text-decoration: none;
@@ -86,7 +87,7 @@
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(244, 244, 244, 0.20);;
+    border-bottom: 1px solid var(--grey-seven);
 }
 .rating{
     color: inherit;  
@@ -105,7 +106,7 @@
 .star-icon{
     width: 14px;
     height: 14px;
-    fill: rgba(244, 244, 244, 0.20);
+    fill: var(--grey-seven);
     stroke: transparent;
     margin-left: 3px;
 }
@@ -136,17 +137,21 @@
 
 .calories{
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(244, 244, 244, 0.20);;
+    border-bottom: 1px solid var(--grey-seven);
 }
 
 
 .details-title{
-    color: rgba(244, 244, 244, 0.40);
+    color: var(--grey-eight);
     font-family: inherit;
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
     margin-bottom: 4px;
+}
+
+.details-title:nth-child(2){
+    width: 55px;
 }
 
 .details-info{
@@ -160,7 +165,7 @@
 .description{
     margin-top: 20px;
     margin-bottom: 40px;
-    color: rgba(244, 244, 244, 0.60);   
+    color: var(--grey-nine);   
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
@@ -207,4 +212,52 @@
     width: 18px;
     height: 18px;
 }
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+    .modal{
+        margin-left: 32px;
+        margin-right: 32px;
+        padding: 32px;
+        width: 704px;
+        border-radius: 20px;
+    }
+    
+    .close {
+        top: 16px;
+        right: 16px;
+        width: 28px;
+        height: 28px;
+    }
+    
+    .close-icon{
+        width: 28px;
+        height: 28px;
+    }
+    .main-container{
+        display: flex;
+    }
+    
+    .content-wrapper{
+        margin-left: 32px;
+        width: 338px;
+    }
+    
+    .gif-wrapper {
+        width: 270px;
+        height: 259px;
+        margin-bottom: 158px;
+    }
+    
+    .rating-container{
+        padding-bottom: 16px;
+    }
+    
+    
+    .details-container{
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .calories{
+        padding-bottom: 8px;
+    }
+}

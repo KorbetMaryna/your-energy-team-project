@@ -92,7 +92,7 @@ function displayExerciseDetails(data) {
   
   const description = `<div class="description">${data.description}</div>`
   
-  exerciseDetailsContainer.innerHTML =  gifImage + title + rating + details + description;
+  exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="content-wrapper">${title + rating + details + description}</div>`}`;
 }
 
 // Function to generate star icons based on rating
