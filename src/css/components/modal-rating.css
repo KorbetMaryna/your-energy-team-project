@@ -35,13 +35,20 @@
     gap: 2px;
 }
 
-.rating__icon-close {
+.rating__close-btn {
     position: absolute;
     top: 14px;
     right: 14px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.rating__icon-close {
     width: 28px;
     height: 28px;
-    stroke: var(--second-color-light-theme)
+    stroke: var(--second-color-light-theme);
 }
 
 .rating__icon-star {
