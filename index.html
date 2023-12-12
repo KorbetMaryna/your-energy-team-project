@@ -20,8 +20,8 @@
     <title>YOUR ENERGY</title>
     
     <script type="module" crossorigin src="/your-energy-team-project/assets/vendor-a61d8330.js"></script>
-    <script type="module" crossorigin src="/your-energy-team-project/assets/modal-rating-f0e69d43.js"></script>
-    <link rel="stylesheet" href="/your-energy-team-project/assets/modal-rating-3252f6ce.css">
+    <script type="module" crossorigin src="/your-energy-team-project/assets/modal-rating-b800bec6.js"></script>
+    <link rel="stylesheet" href="/your-energy-team-project/assets/modal-rating-023d10be.css">
   </head>
   <body>
     <header>
@@ -166,25 +166,25 @@
   </div>
 </div>
 
-    <button id="openModalBtn">Open Modal</button>
+    <!-- <button id="openModalBtn">Open Modal</button> -->
 
-<div id="myModal" class="background">
-  <div class="modal">
-    <button class="close" type="button">
-      <svg class="close-icon" aria-label="logo icon">
+<div id="myModal" class="main-modal__background">
+  <div class="main-modal">
+    <button class="main-modal__close" type="button">
+      <svg class="main-modal__close-icon" aria-label="logo icon">
         <use href="/your-energy-team-project/assets/icons-ead6a8e3.svg#icon-close-btn"></use>
       </svg>
     </button>
-    <div id="exerciseDetails"></div>
-    <div  class="btns-wrapper">
-      <button class="btn fav-btn">
-        <span class="btn-text fav-btn-text">Add to favorites</span>
-        <svg class="heart-icon" aria-label="logo icon">
+    <div class="main-modal__main-container" id="exerciseDetails"></div>
+    <div class="main-modal__btns-wrapper">
+      <button class="main-modal__btn main-modal__fav-btn">
+        <span class="main-modal__btn-text main-modal__fav-btn-text">Add to favorites</span>
+        <svg class="main-modal__heart-icon" aria-label="logo icon">
           <use href="/your-energy-team-project/assets/icons-ead6a8e3.svg#icon-heart"></use>
         </svg>
       </button>
-      <button class="btn rating-btn">
-        <span class="btn-text">Give a rating</span>
+      <button class="main-modal__btn main-modal__rating-btn">
+        <span class="main-modal__btn-text">Give a rating</span>
       </button>
     </div>
   </div>
