@@ -1,0 +1,12 @@
+.logo {
+    width: 132px;
+    height: 24px;
+    fill: var(--background-dark-theme);
+    cursor: pointer;
+    transition: opacity var(--transition-duration-time-function);
+
+    &:hover,
+    &:focus {
+        opacity: 80%;
+    }
+}

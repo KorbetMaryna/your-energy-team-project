@@ -1,0 +1,90 @@
+/* -------header --------*/
+
+.header-socials-list {
+    display: none;
+
+    @media screen and (min-width: 767px) {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 12px;
+    }
+}
+
+.header-socials-list-item {
+    display: flex;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    align-items: flex-start;
+    border: 1px solid rgba(36, 36, 36, 0.10);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration-time-function);
+}   
+
+.header-socials-list-item-link-icon {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    justify-content: center;
+    align-items: center;
+    fill: var(--main-color-light-theme, #242424);
+    opacity: 0.8;
+    transition: fill var(--transition-duration-time-function);
+}
+
+.header-socials-list-item:hover,
+.header-socials-list-item:focus {
+    background-color: rgba(36, 36, 36, 0.80);
+}
+
+.header-socials-list-item:hover .header-socials-list-item-link-icon,
+.header-socials-list-item:focus .header-socials-list-item-link-icon,
+.header-socials-list-item:active .header-socials-list-item-link-icon {
+    fill: var(--second-color-light-theme, #F4F4F4);
+}
+
+/* -------mobile-menu--------*/
+
+.mobile-menu-socials-list {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.mobile-menu-socials-item {
+    display: flex;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    align-items: flex-start;
+    border: 1px solid rgba(244, 244, 244, 0.10);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration-time-function);
+}
+
+.mobile-menu-socials-icon {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    justify-content: center;
+    align-items: center;
+    fill: var(--second-color-light-theme, #F4F4F4);
+    opacity: 0.8;
+    transition: fill var(--transition-duration-time-function);
+}
+
+.mobile-menu-socials-item:hover,
+.mobile-menu-socials-item:focus {
+    background-color: var(--main-color-light-theme, #242424);
+}
+
+.mobile-menu-socials-item:hover .mobile-menu-socials-icon,
+.mobile-menu-socials-item:focus .mobile-menu-socials-icon,
+.mobile-menu-socials-item:active .mobile-menu-socials-icon {
+    fill: var(--second-color-light-theme, #F4F4F4);
+}
