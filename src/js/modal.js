@@ -97,11 +97,11 @@ function displayExerciseDetails(data) {
 
 // Function to generate star icons based on rating
 function generateStarRating(rating) {
-  const starIcon = `<div class="star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star" aria-label="logo icon">
+  const starIcon = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star" aria-label="logo icon">
   <use href="./img/icons.svg#icon-star"></use>
   </svg></div>`;
   
-  const emptyStar = `<div class="star-wrapper"><svg class="main-modal__star-icon " aria-label="logo icon">
+  const emptyStar = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon " aria-label="logo icon">
   <use href="./img/icons.svg#icon-star"></use>
   </svg></div>`;
   let starsHTML = '';

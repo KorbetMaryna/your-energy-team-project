@@ -35,16 +35,18 @@
     border: none;
 }
 
-.main-modal__close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .main-modal__close-icon{
     width: 24px;
     height: 24px;
-    stroke: var(--background-light-theme)
+    stroke: var(--background-light-theme);
+}
+
+.main-modal__close-icon:hover {
+    stroke: var(--grey-five);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--background-light-theme);
 }
 
 .main-modal__gif-wrapper {
@@ -98,25 +100,25 @@
     line-height: 1.5;
 }
 
-.main-modal__star-icon{
-    width: 14px;
-    height: 14px;
-    fill: var(--grey-seven);
-    stroke: transparent;
-    margin-left: 3px;
-}
-
-.main-modal__colored-star{
-    fill: #EEA10C;
-}
-
 .main-modal__star-wrapper{
     width: 18px;
     height: 18px;
     display: flex;
     align-items: center;
+    justify-content: center;  
+    margin-left: 2px;
 }
 
+.main-modal__star-icon{
+    width: 14px;
+    height: 14px;
+    fill: var(--grey-seven);
+    stroke: transparent;
+}
+
+.main-modal__colored-star{
+    fill: #EEA10C;
+}
 
 .main-modal__details-container{
     display: flex;
@@ -185,9 +187,22 @@
     color: var(--main-color-light-theme);
     border: none;
 }
+
+.main-modal__fav-btn:hover{
+    background-color: var(--main-color-light-theme);
+    color: var(--second-color-light-theme);
+    border: 1px solid var(--second-color-light-theme);
+}
+
 .main-modal__rating-btn{
     background-color: var(--main-color-light-theme);
     color: var(--second-color-light-theme);
+    border: 1px solid var(--second-color-light-theme);
+}
+
+.main-modal__rating-btn:hover{
+    background-color: var(--background-light-theme);
+    color: var(--main-color-light-theme);
     border: 1px solid var(--second-color-light-theme);
 }
 
@@ -207,13 +222,17 @@
     width: 18px;
     height: 18px;
 }
+
+.main-modal__fav-btn:hover > .main-modal__heart-icon{
+    stroke: var(--background-light-theme);
+}
+
 @media screen and (min-width: 768px) {
     .main-modal{
         margin-left: 32px;
         margin-right: 32px;
         padding: 32px;
         width: 704px;
-        border-radius: 20px;
     }
     
     .main-modal__close {
@@ -241,6 +260,7 @@
     .main-modal__gif-wrapper {
         width: 270px;
         height: 259px;
+        margin-bottom: 0;
     }
     
     .main-modal__rating-container{
@@ -279,4 +299,12 @@
         line-height: 1.5; 
     }
     
+}
+
+@media screen and (min-width: 768px) {
+    .main-modal{
+        margin-left: 366px;
+        margin-right: 366px;
+        width: 708px;
+    }
 }
