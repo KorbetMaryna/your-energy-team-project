@@ -1,0 +1,72 @@
+<!-- modal backdrop -->
+<div class="modal rating-backdrop">
+
+  <!-- modal content -->
+  <div class="rating-container">
+
+    <!-- close button -->
+    <button class="rating__close-btn">
+      <svg class="rating__icon-close">
+        <use href="./img/icons.svg#icon-close-btn"></use>
+      </svg>
+    </button>
+
+    <!-- stars rating -->
+    <fieldset class="rating__fieldset">
+      <legend class="rating__title">Rating</legend>
+
+      <!-- average rating -->
+      <span class="rating__value">0.0</span>
+    
+      <!-- 1 star -->
+      <input class="rating__input" type="radio" id="star1" name="star"/>
+      <label class="rating__label" for="star1">
+        <svg class="rating__icon-star">
+          <use href="./img/icons.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 2 stars -->
+      <input class="rating__input" type="radio" id="star2" name="star"/>
+      <label class="rating__label" for="star2">
+        <svg class="rating__icon-star">
+          <use href="./img/icons.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 3 stars -->
+      <input class="rating__input" type="radio" id="star3" name="star"/>
+      <label class="rating__label" for="star3">
+        <svg class="rating__icon-star">
+          <use href="./img/icons.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 4 starts -->
+      <input class="rating__input" type="radio" id="star4" name="star"/>
+      <label class="rating__label" for="star4">
+        <svg class="rating__icon-star">
+          <use href="./img/icons.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 5 stars -->
+      <input class="rating__input" type="radio" id="star5" name="star"/>
+      <label class="rating__label" for="star5">
+        <svg class="rating__icon-star">
+          <use href="./img/icons.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+    </fieldset>
+
+    <!-- email input -->
+    <input class="rating__input-email" type="email" name="email" placeholder="Email" required>
+
+    <!-- comment input -->
+    <textarea class="rating__input-comment" name="comment" placeholder="Your comment" requireds></textarea>
+
+    <!-- submit button -->
+    <button class="rating__submit-btn">Send</button>
+
+  </div>
+</div>
