@@ -67,4 +67,4 @@ import{a as _,o as O,i as A,b}from"./vendor-1e9366a1.js";(function(){const t=doc
             </ul>
         </li>`);if(!t.length)return b.warning({message:"Unfortunately, we don't have any exercises in this category"});c.tilesList.innerHTML=t.join("")}function k(e){return e[0].toUpperCase()+e.slice(1)}const Q=document.querySelector(".quote-wrapper"),H="https://your-energy.b.goit.study/api/quote";async function J(){const{data:e}=await _(H);return e}function W(){const e=new Date().toLocaleDateString(),t=K(),s=JSON.parse(t);!s||s.date!=e?X(e):M(s.quote,s.author)}function G(e,t,s){const i={quote:e,author:t,date:s};localStorage.setItem("quoteOfDay",JSON.stringify(i))}function K(){return localStorage.getItem("quoteOfDay")}async function X(e){await J().then(({quote:t,author:s})=>{M(t,s),G(t,s,e)})}function M(e,t){const s=`<p class="quote quote-text">${e}</p>
     <p class="qoute-author">${t}</p>`;Q.insertAdjacentHTML("beforeend",s)}W();
-//# sourceMappingURL=main-b501662d.js.map
+//# sourceMappingURL=main-03cf5869.js.map
