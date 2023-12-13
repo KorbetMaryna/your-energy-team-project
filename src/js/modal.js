@@ -1,10 +1,14 @@
 import axios from 'axios';
 
 // Get the modal element
-var modal = document.getElementById("myModal");
+const modal = document.getElementById("myModal");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("main-modal__close")[0];
+const span = document.getElementsByClassName("main-modal__close")[0];
+
+let addToFavBtn = null
+
+let savedExercises = localStorage.getItem('savedExercises') ? JSON.parse(localStorage.getItem('savedExercises')) : [];
 
 // When the user clicks on (x), close the modal
 span.onclick = function() {
@@ -39,7 +43,33 @@ for (let i = 0; i < exercisesTilesList.length; i++) {
           return response.data;
         }})
         .then(data => {
-          displayExerciseDetails(data);  
+          displayExerciseDetails(data);
+  
+          const favBtn = document.getElementById("fav-btn");
+          if (favBtn) {
+            // Check if the exercise is in the savedExercises array
+            const isSaved = savedExercises.some(exercise => exercise._id === data._id);
+
+            console.log('isSaved',isSaved);
+            // Set button text based on whether the exercise is saved or not
+            favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Remove from' : 'Add to favorites';
+  
+            favBtn.addEventListener('click', function() {
+              // If the exercise is already saved, remove it; otherwise, add it
+              if (isSaved) {
+                // Remove the exercise from savedExercises array
+                savedExercises = savedExercises.filter(exercise => exercise._id !== data._id);
+              } else {
+                // Add the exercise to savedExercises array
+                savedExercises.push(data);
+              }
+              // Update localStorage with the updated savedExercises array
+              localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
+  
+              // Toggle button text between 'Add to favorites' and 'Remove from favorites'
+              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Remove from favorites';
+            });
+          }
         })
         .catch(error => {       
           console.error('There was a problem with the Axios request:', error);
@@ -79,7 +109,7 @@ for (let i = 0; i < exercisesTilesList.length; i++) {
     <p class="main-modal__details-info">${data.target}</p>
     </div>
     <div class="main-modal__details-wrapper">
-    <p class="main-modal__details-title">Body Part</p>
+    <p class="main-modal__details-title body-part">Body Part</p>
     <p class="main-modal__details-info">${data.bodyPart}</p>
     </div>
     <div class="main-modal__details-wrapper">
@@ -97,8 +127,19 @@ for (let i = 0; i < exercisesTilesList.length; i++) {
     </div>`
     
     const description = `<div class="main-modal__description">${data.description}</div>`
-    
-    exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-wrapper">${title + rating + details + description}</div>`}`;
+    const buttons = `<div class="main-modal__btns-wrapper">
+    <button class="main-modal__btn main-modal__fav-btn" id="fav-btn">
+    <span class="main-modal__btn-text main-modal__fav-btn-text">Add to favorites</span>
+    <svg class="main-modal__heart-icon" aria-label="logo icon">
+    <use href="./img/icons.svg#icon-heart"></use>
+    </svg>
+    </button>
+    <button class="main-modal__btn main-modal__rating-btn">
+    <span class="main-modal__btn-text">Give a rating</span>
+    </button>
+    </div>`
+    exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-wrapper">${title + rating + details + description + buttons}</div>`}`;
+    // addToFavBtn = document.getElementById("fav-btn");
   }
   
   // Function to generate star icons based on rating
