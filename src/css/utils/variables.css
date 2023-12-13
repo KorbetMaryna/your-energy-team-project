@@ -1,34 +1,34 @@
 :root {
-    --main-font: 'DM Sans', sans-serif;
-    
-    --transition-duration-time-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --main-font: 'DM Sans', sans-serif;
 
-    /* backgrounds*/
-    --background-light-theme: #F4F4F4;
-    --modal-background-light-theme: rgba(4, 4, 4, 0.4);
+  --transition-duration-time-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* colors */
-    --main-color-light-theme: #242424;
-    --second-color-light-theme: #F4F4F4;
+  /* backgrounds*/
+  --background-light-theme: #f4f4f4;
+  --modal-background-light-theme: rgba(4, 4, 4, 0.4);
 
-    /* pagination */
-    --pagination-not-activ: #D4D4D4;
+  /* colors */
+  --main-color-light-theme: #242424;
+  --second-color-light-theme: #f4f4f4;
 
-    /* stars */
-    --stars-color-activ: #EEA10C;
+  /* pagination */
+  --pagination-not-activ: #d4d4d4;
 
-    /* footer */
-    --footer-privacy-terms: #C6CDD1;
+  /* stars */
+  --stars-color-activ: #eea10c;
 
-    /* secondary colors */
-    --grey-one: rgba(36, 36, 36, 0.10);    /* 242424 10% */
-    --grey-two: rgba(36, 36, 36, 0.40);    /* 242424 40% */
-    --grey-three: rgba(36, 36, 36, 0.60);   /* 242424 60% */
-    --grey-four: rgba(36, 36, 36, 0.60);   /* 242424 60% modal */
-    --grey-five: rgba(36, 36, 36, 0.80);   /* 242424 80% */
-    
-    --grey-six: rgba(244, 244, 244, 0.10); /* F4F4F4 10% */
-    --grey-seven: rgba(244, 244, 244, 0.20); /* F4F4F4 20% */
-    --grey-eight: rgba(244, 244, 244, 0.40); /* F4F4F4 40% */
-    --grey-nine: rgba(244, 244, 244, 0.60); /* F4F4F4 60% */
+  /* footer */
+  --footer-privacy-terms: #c6cdd1;
+
+  /* secondary colors */
+  --grey-one: rgba(36, 36, 36, 0.1); /* 242424 10% */
+  --grey-two: rgba(36, 36, 36, 0.4); /* 242424 40% */
+  --grey-three: rgba(36, 36, 36, 0.6); /* 242424 60% */
+  --grey-four: rgba(36, 36, 36, 0.6); /* 242424 60% modal */
+  --grey-five: rgba(36, 36, 36, 0.8); /* 242424 80% */
+
+  --grey-six: rgba(244, 244, 244, 0.1); /* F4F4F4 10% */
+  --grey-seven: rgba(244, 244, 244, 0.2); /* F4F4F4 20% */
+  --grey-eight: rgba(244, 244, 244, 0.4); /* F4F4F4 40% */
+  --grey-nine: rgba(244, 244, 244, 0.6); /* F4F4F4 60% */
 }
