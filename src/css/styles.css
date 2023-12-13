@@ -1,11 +1,8 @@
-
 /*-----base-----*/
 @import url('../css/base/reset.css');
 @import url('../css/base/common.css');
 @import url('../css/base/container.css');
 @import url('../css/base/visually-hidden.css');
-
-
 
 /*-----components-----*/
 @import url('../css/components/logo.css');
@@ -13,16 +10,10 @@
 @import url('../css/components/mobile-menu.css');
 @import url('../css/components/modal.css');
 @import url('../css/components/modal-rating.css');
-
-
+@import url('../css/components/exercises.css');
 
 /*-----layouts-----*/
 @import url('./layouts/header.css');
 
-
-
 /*-----variables-----*/
 @import url('./utils/variables.css');
-
-
-
