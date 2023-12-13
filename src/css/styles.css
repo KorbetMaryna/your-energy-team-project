@@ -11,6 +11,7 @@
 @import url('../css/components/modal.css');
 @import url('../css/components/modal-rating.css');
 @import url('../css/components/exercises.css');
+@import url('../css/components/hero.css');
 
 /*-----layouts-----*/
 @import url('./layouts/header.css');
