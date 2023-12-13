@@ -227,6 +227,10 @@
     stroke: var(--background-light-theme);
 }
 
+.body-part{
+    width: 55px;
+}
+
 @media screen and (min-width: 768px) {
     .main-modal{
         margin-left: 32px;
@@ -254,7 +258,6 @@
         margin-left: 32px;
         width: 338px;
         height: auto;
-        margin-bottom: 64px;
     }
     
     .main-modal__gif-wrapper {
@@ -286,7 +289,7 @@
     }
 
     .main-modal__description{
-        margin-bottom: 0;
+        margin-bottom: 64px;
     }
 
     .main-modal__card-title{
