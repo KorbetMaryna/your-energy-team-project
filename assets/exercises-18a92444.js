@@ -56,4 +56,4 @@ import{a as m,o as x,i as E,b as u}from"./vendor-f0888250.js";(function(){const 
                 <li><span>Target</span>${r}</li>
             </ul>
         </li>`);if(!t.length)return u.warning({message:"Unfortunately, we don't have any exercises in this category"});o.tilesList.innerHTML=t.join("")}function w(e){return e[0].toUpperCase()+e.slice(1)}
-//# sourceMappingURL=exercises-e04fd1c1.js.map
+//# sourceMappingURL=exercises-18a92444.js.map
