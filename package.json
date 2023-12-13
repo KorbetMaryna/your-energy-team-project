@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/your-energy-team-project/",
+    "build": "vite build --base=/your-energy-team-project/ && cp -rf src/img dist/img",
     "preview": "vite preview"
   },
   "devDependencies": {
