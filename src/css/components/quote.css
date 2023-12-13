@@ -1,0 +1,153 @@
+.quote-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: inherit;
+  max-width: 335px;
+}
+
+.quote-article {
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 72px;
+  background-color: var(--main-color-light-theme);
+  border-radius: 20px;
+}
+
+.quote-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-title {
+  margin-bottom: 8px;
+  color: var(--second-color-light-theme);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.quote-text {
+  margin-bottom: 8px;
+  color: var(--grey-nine);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.qoute-author {
+  color: var(--second-color-light-theme);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.icon-circle {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: var(--grey-seven);
+  border-radius: 50%;
+}
+
+.icon-running-man {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  fill: var(--second-color-light-theme);
+  width: 18px;
+  height: 20px;
+}
+
+.icon-commas {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  fill: var(--second-color-light-theme);
+}
+
+.quote-img {
+  max-width: 100%;
+
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.daily-norm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 72px;
+  height: 201px;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.daily-norm-title {
+  color: var(--main-color-light-theme);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+
+.daily-norm-desc {
+  margin-bottom: 16px;
+  color: var(--grey-three);
+
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.daily-norm-text {
+  overflow: hidden;
+  color: var(--main-color-light-theme);
+  text-overflow: ellipsis;
+
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+
+  height: 105px;
+}
+
+.daily-norm-icon-circle {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: var(--main-color-light-theme);
+  border-radius: 50%;
+}
+
+.icon-dumb-bell {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  fill: #f4f4f4;
+  background-color: #242424;
+}
