@@ -54,7 +54,5 @@ function errorHandler(errorMessage) {
     message: `${errorMessage}`,
   });
 }
-
 checkQuote();
-
 export { checkQuote, errorHandler };
