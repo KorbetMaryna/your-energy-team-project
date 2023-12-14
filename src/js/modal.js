@@ -4,7 +4,7 @@ import axios from 'axios';
 function initializeExercisePage() {
 
   // Get the HTMLCollection of elements with class 'exercises-tiles-list'
-  const exercisesTilesList = document.getElementsByClassName('exercises-tiles-list');
+  const exercisesTilesList = document.getElementsByClassName('exercises-tiles-category-list');
   
   // Get the modal element
   const modal = document.getElementById("myModal");
