@@ -11,8 +11,7 @@ async function subscribeHandler(event) {
   event.preventDefault();
 
   const email = event.target.email.value;
-  //   const { data } = await axios.post(`${BASE_URL}subscription`, { email });
-  //   console.log(data);
+
   try {
     const { data } = await axios.post(`${BASE_URL}subscription`, { email });
 
