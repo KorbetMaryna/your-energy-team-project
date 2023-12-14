@@ -4,3 +4,4 @@ import './js/modal';
 import './js/modal-rating';
 import './js/exercises';
 import './js/quote';
+import './js/your-choice';

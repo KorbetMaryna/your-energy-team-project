@@ -35,6 +35,61 @@
     <load ="partials/exercises.html" />
     <load ="partials/quote.html" />
 
+    <!-- <div id="your-choice-modal hidden" aria-hidden="true"> -->
+    <div
+      class="modal micromodal-slide"
+      id="your-choice-modal"
+      aria-hidden="true"
+    >
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="your-choice-modal-title"
+        >
+          <header class="modal__header">
+            <h2 class="modal__title" id="your-choice-modal-title">
+              Choose this...
+            </h2>
+            <button
+              class="modal__close"
+              aria-label="Close modal"
+              data-micromodal-close
+            ></button>
+          </header>
+          <main class="modal__content" id="your-choice-modal-content">
+            <div class="modal__content-loading">Loading...</div>
+
+            <div class="select-group hidden">
+              <label>Body part</label>
+              <select id="you-choice-body-part"></select>
+            </div>
+
+            <div class="select-group hidden">
+              <label>Muscle</label>
+              <select id="your-choice-muscle"></select>
+            </div>
+
+            <div class="select-group hidden">
+              <label>Equipment</label>
+              <select id="your-choice-equipment"></select>
+            </div>
+          </main>
+          <footer class="modal__footer">
+            <button class="modal__btn modal__btn-primary">Continue</button>
+            <button
+              class="modal__btn"
+              data-micromodal-close
+              aria-label="Close this dialog window"
+            >
+              Close
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

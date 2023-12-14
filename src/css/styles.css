@@ -13,6 +13,7 @@
 @import url('../css/components/exercises.css');
 @import url('../css/components/hero.css');
 @import url('../css/components/quote.css');
+@import url('../css/components/your-choice.css');
 
 /*-----layouts-----*/
 @import url('./layouts/header.css');
@@ -22,3 +23,5 @@
 
 /*-----variables-----*/
 @import url('./utils/variables.css');
+
+@import 'slim-select/slimselect.css';

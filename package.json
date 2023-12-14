@@ -16,6 +16,8 @@
     "axios": "^1.6.2",
     "izitoast": "^1.4.0",
     "lodash": "^4.17.21",
+    "micromodal": "^0.4.10",
+    "slim-select": "^2.7.1",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   }
