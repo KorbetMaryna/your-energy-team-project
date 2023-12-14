@@ -18,6 +18,7 @@ function initializeExercisePage() {
   if(closeBtn){
     closeBtn.onclick = function() {
       modal.style.display = "none";
+      localStorage.removeItem('currentExercise');
     }
   }
   
@@ -25,6 +26,7 @@ function initializeExercisePage() {
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      localStorage.removeItem('currentExercise');
     }
   }
   
@@ -43,6 +45,8 @@ function initializeExercisePage() {
         
         axios.get(apiUrl).then(response => {
           if (response) {
+            // Saves current exercise that is opened in the modal for modal rating 
+            localStorage.setItem('currentExercise', JSON.stringify(response.data));
             return response.data;
           }})
           .then(data => {
