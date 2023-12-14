@@ -12,13 +12,13 @@
 @import url('../css/components/modal.css');
 @import url('../css/components/modal-rating.css');
 @import url('../css/components/exercises.css');
+@import url('../css/components/search-input.css');
 @import url('../css/components/hero.css');
 @import url('../css/components/quote.css');
 @import url('../css/components/footer.css');
 @import url('../css/components/privacy-terms.css');
 
 @import url('../css/components/page-error.css');
-
 
 /*-----layouts-----*/
 @import url('../css/layouts/loader.css');
