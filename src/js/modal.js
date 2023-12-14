@@ -36,9 +36,10 @@ function initializeExercisePage() {
     
     // Add an event listener to each element in the HTMLCollection
     currentList.addEventListener('click', function(event) {
-      const clickedListItem = event.target.closest('.exercises-category-tile-item');
+      const clickedListItem = event.target.closest('.exercises-category-tile-button');
+      const categoryTileItem = event.target.closest('.exercises-category-tile-item');
       if (clickedListItem) {
-        const exerciseId = clickedListItem.dataset.id;
+        const exerciseId = categoryTileItem.dataset.id;
         modal.style.display = "flex"
         
         const apiUrl = `https://your-energy.b.goit.study/api/exercises/${exerciseId}`;
