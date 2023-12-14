@@ -119,15 +119,15 @@ function initializeExercisePage() {
       const details = `<div class="main-modal__details-container">
       <div class="main-modal__details-wrapper">
       <p class="main-modal__details-title">Target</p>
-      <p class="main-modal__details-info">${data.target}</p>
+      <p class="main-modal__details-info">${data.target.charAt(0).toUpperCase() + data.target.slice(1)}</p>
       </div>
       <div class="main-modal__details-wrapper">
       <p class="main-modal__details-title body-part">Body Part</p>
-      <p class="main-modal__details-info">${data.bodyPart}</p>
+      <p class="main-modal__details-info">${data.bodyPart.charAt(0).toUpperCase() + data.bodyPart.slice(1)}</p>
       </div>
       <div class="main-modal__details-wrapper">
       <p class="main-modal__details-title">Equipment</p>
-      <p class="main-modal__details-info">${data.equipment}</p>
+      <p class="main-modal__details-info">${data.equipment.charAt(0).toUpperCase() + data.equipment.slice(1)}</p>
       </div>
       <div class="main-modal__details-wrapper">
       <p class="main-modal__details-title">Popular</p>
