@@ -108,7 +108,7 @@ function initializeExercisePage() {
         </div>`;
       }
       
-      const title = `<p class='main-modal__card-title'>${data.name}</p>`
+      const title = `<p class='main-modal__card-title'>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>`
       const stars = generateStarRating(Math.round(data.rating * 10) / 10);
       
       const rating = `<div class='main-modal__rating-container'>
