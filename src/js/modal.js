@@ -109,10 +109,10 @@ function initializeExercisePage() {
       }
       
       const title = `<p class='main-modal__card-title'>${data.name}</p>`
-      const stars = generateStarRating(data.rating);
+      const stars = generateStarRating(Math.round(data.rating * 10) / 10);
       
       const rating = `<div class='main-modal__rating-container'>
-      <span class="main-modal__rating">${data.rating.toString().includes('.') ? data.rating : data.rating + '.0'}</span>
+      <span class="main-modal__rating">${data.rating.toString().includes('.') ? Math.round(data.rating * 10) / 10 : data.rating + '.0'}</span>
       ${stars}
       </div>`
       
