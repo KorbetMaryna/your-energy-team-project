@@ -14,9 +14,10 @@
 @import url('../css/components/hero.css');
 @import url('../css/components/quote.css');
 @import url('../css/components/header.css');
+@import url('../css/components/page-error.css');
 
 /*-----layouts-----*/
-
+@import url('../css/layouts/loader.css');
 
 /*-----variables-----*/
 @import url('./utils/variables.css');
