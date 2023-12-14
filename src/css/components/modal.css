@@ -295,6 +295,7 @@
     .main-modal__card-title{
         font-size: 24px;
         line-height: 1.33; 
+        margin-right: 15px;
     }
 
     .main-modal__btn-text{
