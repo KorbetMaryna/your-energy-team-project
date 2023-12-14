@@ -26,8 +26,8 @@
     <title>YOUR ENERGY</title>
     
     <script type="module" crossorigin src="/your-energy-team-project/assets/vendor-f9c1c104.js"></script>
-    <script type="module" crossorigin src="/your-energy-team-project/assets/main-64344aad.js"></script>
-    <link rel="stylesheet" href="/your-energy-team-project/assets/main-5ca51352.css">
+    <script type="module" crossorigin src="/your-energy-team-project/assets/main-bf866007.js"></script>
+    <link rel="stylesheet" href="/your-energy-team-project/assets/main-4e2f54f2.css">
   </head>
   <body>
     <header>
@@ -235,18 +235,18 @@
   <div class="rating-container">
 
     <!-- close button -->
-    <button class="rating__close-btn">
+    <a class="rating__close-btn">
       <svg class="rating__icon-close">
         <use href="/your-energy-team-project/assets/icons-63ec95c7.svg#icon-close-btn"></use>
       </svg>
-    </button>
+    </a>
 
     <!-- stars rating -->
     <fieldset class="rating__fieldset">
       <legend class="rating__title">Rating</legend>
 
       <!-- average rating -->
-      <span class="rating__value">0.0</span>
+      <p class="rating__value">0.0</p>
     
       <!-- 1 star -->
       <input class="rating__input" type="radio" id="star1" name="star"/>
@@ -289,14 +289,25 @@
       </label>
     </fieldset>
 
-    <!-- email input -->
-    <input class="rating__input-email" type="email" name="email" placeholder="Email" required>
+    <form class="rating_form">
+      <!-- email input -->
+      <input 
+        class="rating__input-email" 
+        type="email" 
+        name="email" 
+        placeholder="Email"
+        required
+      >
 
-    <!-- comment input -->
-    <textarea class="rating__input-comment" name="comment" placeholder="Your comment" requireds></textarea>
-
+      <!-- comment input -->
+      <textarea 
+        class="rating__input-comment" 
+        name="comment" 
+        placeholder="Your comment"
+      ></textarea>
     <!-- submit button -->
-    <button class="rating__submit-btn">Send</button>
+    <button class="rating__submit-btn" type="submit">Send</button>
+  </form>
 
   </div>
 </div>
