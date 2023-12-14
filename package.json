@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/your-energy-team-project/",
+    "build": "vite build --base=/your-energy-team-project/ && cp -rf src/img dist/img",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^1.6.2",
     "izitoast": "^1.4.0",
+    "lodash": "^4.17.21",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   }

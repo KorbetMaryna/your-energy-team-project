@@ -1,3 +1,8 @@
-import './js/page-switcher';
-import './js/mobile-menu';
-import './js/modal-rating';
+import './js/pageSwitcher';
+import './js/mobileMenu';
+import './js/modal';
+import './js/modalRating';
+import './js/exercises';
+import './js/quote';
+import './js/loader';
+// import './js/showPageError';
