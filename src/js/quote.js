@@ -1,21 +1,18 @@
-import axios from 'axios';
+import iziToast from 'izitoast';
+import { fetchApiData } from './api';
 
 const QUOTE = document.querySelector('.quote-wrapper');
 
-const BASE_URL = 'https://your-energy.b.goit.study/api/quote';
-
-async function fetchQuote() {
-  const { data } = await axios(BASE_URL);
-  return data;
-}
-
-function checkQuote() {
+async function checkQuote() {
   const todayDate = new Date().toLocaleDateString();
   const restoredData = getQuoteFromStorage();
   const restoredQuote = JSON.parse(restoredData);
 
   if (!restoredQuote || restoredQuote.date != todayDate) {
-    getQuote(todayDate);
+    let { quote, author } = await getQuote();
+
+    quoteMarkup(quote, author);
+    storeQuote(quote, author, todayDate);
   } else {
     quoteMarkup(restoredQuote.quote, restoredQuote.author);
   }
@@ -25,7 +22,7 @@ function storeQuote(quote, author, date) {
   const quoteOfDay = {
     quote,
     author,
-    date: date,
+    date,
   };
 
   localStorage.setItem('quoteOfDay', JSON.stringify(quoteOfDay));
@@ -35,11 +32,14 @@ function getQuoteFromStorage() {
   return localStorage.getItem('quoteOfDay');
 }
 
-async function getQuote(todayDate) {
-  await fetchQuote().then(({ quote, author }) => {
-    quoteMarkup(quote, author);
-    storeQuote(quote, author, todayDate);
-  });
+async function getQuote() {
+  try {
+    const { quote, author } = await fetchApiData('quote', '');
+
+    return { quote, author };
+  } catch (err) {
+    errorHandler(err.message);
+  }
 }
 
 function quoteMarkup(quote, author) {
@@ -47,6 +47,12 @@ function quoteMarkup(quote, author) {
     <p class="qoute-author">${author}</p>`;
 
   QUOTE.insertAdjacentHTML('beforeend', markup);
+}
+
+function errorHandler(errorMessage) {
+  iziToast.error({
+    message: `${errorMessage}`,
+  });
 }
 
 checkQuote();
