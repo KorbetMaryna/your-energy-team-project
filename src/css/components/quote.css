@@ -7,6 +7,7 @@
   gap: 20px;
   font-family: inherit;
   max-width: 375px;
+  margin: auto;
 }
 
 /* Quote of the day */
@@ -68,8 +69,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   fill: var(--second-color-light-theme);
-  width: 18px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .icon-commas {
@@ -196,6 +197,10 @@
     right: 40px;
   }
 
+  .quote-img {
+    max-width: 288px;
+  }
+
   .daily-norm {
     padding-top: 40px;
     padding-right: 40px;
@@ -239,6 +244,10 @@
     padding-bottom: 40px;
     padding-left: 90px;
     max-width: 100%;
+  }
+
+  .quote-img {
+    max-width: 444px;
   }
 
   .daily-norm {
