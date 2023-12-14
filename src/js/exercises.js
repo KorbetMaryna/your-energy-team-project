@@ -1,5 +1,5 @@
 import iziToast from 'izitoast';
-import { fetchFilterData, fetchExercisesData } from './api';
+import { fetchApiData } from './api';
 
 iziToast.settings({
   position: 'topRight',
@@ -12,27 +12,62 @@ const refs = {
   headlineCategory: document.querySelector('.js-headline-category'),
   searchForm: document.querySelector('.js-search-form'),
   filterButtons: document.querySelectorAll('.js-button'),
-  tilesList: document.querySelector('.js-tiles-list'),
+  tilesFilterList: document.querySelector('.js-tiles-filter-list'),
+  tilesCategoryList: document.querySelector('.js-tiles-category-list'),
+  paginationList: document.querySelector('.js-pagination'),
 };
 
-fetchData('Muscles', 1);
+let basicUrlParams = {
+  filter: 'Muscles',
+  bodypart: '',
+  muscles: '',
+  equipment: '',
+  keyword: '',
+  page: 1,
+};
+
+function checkScreenWidth(filter, width) {
+  if (filter !== '') {
+    basicUrlParams.limit = width < 768 ? 9 : 12;
+  } else {
+    basicUrlParams.limit = width < 768 ? 8 : 10;
+  }
+}
+
+checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+
+fetchData('filters', basicUrlParams);
 
 refs.filterButtons.forEach(el => {
   el.addEventListener('click', () => {
-    fetchData(el.innerText, 1);
-    document.querySelector('.active-button')?.classList.remove('active-button');
-    el?.classList.add('active-button');
+    let obj = {
+      bodypart: '',
+      muscles: '',
+      equipment: '',
+    };
+
+    Object.assign(basicUrlParams, obj);
+    basicUrlParams.filter = el.innerText;
+    basicUrlParams.page = 1;
+    fetchData('filters', basicUrlParams);
+    document.querySelector('.active-button').classList.remove('active-button');
+    el.classList.add('active-button');
   });
 });
 
-async function fetchData(filter, page) {
-  await fetchFilterData(filter, page)
+async function fetchData(type, obj) {
+  await fetchApiData(type, obj)
     .then(data => {
-      console.log(data);
-      createFilterMarkup(data);
-      refs.headlineWrapper.classList.add('hidden');
-      refs.headlineCategory.innerText = '';
-      refs.searchForm.classList.add('hidden');
+      if (data.results[0]?.filter) {
+        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+        createFilterMarkup('filters', data);
+        refs.headlineCategory.innerText = '';
+        refs.headlineWrapper.classList.add('visually-hidden');
+        refs.searchForm.classList.add('visually-hidden');
+      } else {
+        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+        createExercisesMarkup('exercises', data);
+      }
     })
     .catch(err => {
       console.log(err);
@@ -42,87 +77,149 @@ async function fetchData(filter, page) {
     });
 }
 
-function createFilterMarkup({ results }) {
+function createFilterMarkup(type, data) {
+  refs.tilesCategoryList.innerHTML = '';
+  refs.tilesCategoryList.classList.add('visually-hidden');
+  refs.tilesFilterList.classList.remove('visually-hidden');
+
+  const { page, totalPages, results } = data;
+
   const markup = results
     .map(
       ({ filter, name, imgURL }) => `      
-  <li class="exercises-filter-tile-item" data-name=${name} data-filter=${filter.toLowerCase()}>
-        <div class="exercises-filter-tile-gradient"></div>
-        <img class="exercises-filter-tile-img" src="${imgURL}" alt="${name}" />
-        <div class="exercises-filter-tile-text-wrapper">
-            <h3 class="exercises-filter-tile-headline">${capitalizeFirstLetter(
-              name
-            )}</h3>
-            <p class="exercises-filter-tile-text">${filter}</p>
-        </div>
-  </li>`
+        <li class="exercises-filter-tile-item" data-name=${name} data-filter=${filter.toLowerCase()}>
+              <div class="exercises-filter-tile-gradient"></div>
+              <img class="exercises-filter-tile-img" src="${imgURL}" alt="${name}" onerror="this.onerror=null; this.src='./../img/no-image.jpg'"/>
+              <div class="exercises-filter-tile-text-wrapper">
+                  <h3 class="exercises-filter-tile-headline">${capitalizeFirstLetter(
+                    name
+                  )}</h3>
+                  <p class="exercises-filter-tile-text">${filter}</p>
+              </div>
+        </li>`
     )
     .join('');
-  refs.tilesList.innerHTML = markup;
+  refs.tilesFilterList.innerHTML = markup;
+  renderPagination(page, totalPages, type);
 }
 
-refs.tilesList.addEventListener('click', onTileClick);
+refs.tilesFilterList.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();
 
+  let obj = {
+    filter: '',
+    bodypart: '',
+    muscles: '',
+    equipment: '',
+  };
+
+  Object.assign(basicUrlParams, obj);
+
   if (e.currentTarget === e.target) {
     return;
   }
+
   let { name, filter } = e.target.parentNode.dataset;
+
   if (filter === 'body') {
     filter = 'bodypart';
   }
-  const urlParamsObject = {
-    [filter]: name,
-  };
-  fetchCategoryData(urlParamsObject);
-  refs.headlineWrapper.classList.remove('hidden');
+
+  Object.assign(basicUrlParams, { [filter]: name });
+
+  fetchData('exercises', basicUrlParams);
+  refs.headlineWrapper.classList.remove('visually-hidden');
   refs.headlineCategory.innerText = capitalizeFirstLetter(name);
-  refs.searchForm.classList.remove('hidden');
+  refs.searchForm.classList.remove('visually-hidden');
 }
 
-async function fetchCategoryData(urlParamsObject, page) {
-  await fetchExercisesData(urlParamsObject, page)
-    .then(data => {
-      console.log(data);
-      createExercisesMarkup(data);
-    })
-    .catch(err => {
-      console.log(err);
-      iziToast.error({
-        message: 'Something went wrong :-( try again later.',
-      });
-    });
-}
-
-function createExercisesMarkup({ results }) {
-  const markup = results.map(
-    ({ rating, name, burnedCalories, bodyPart, target, _id }) => `      
-        <li class="exercises-category-tile-item" data-id=${_id}>
-            <div>
-                <span>WORKOUT</span>
-                <span>${rating}</span>
-                <button>Start</button>
-            </div>
-            <div>
-                <h3>${name}</h3>
-            </div>
-            <ul>
-                <li><span>Burned calories</span>${burnedCalories}</li>
-                <li><span>Body part</span>${bodyPart}</li>
-                <li><span>Target</span>${target}</li>
-            </ul>
-        </li>`
-  );
-
-  if (!markup.length) {
+function createExercisesMarkup(type, { page, totalPages, results }) {
+  if (!results.length) {
     return iziToast.warning({
       message: "Unfortunately, we don't have any exercises in this category",
     });
   }
+  refs.tilesFilterList.innerHTML = '';
+  refs.tilesFilterList.classList.add('visually-hidden');
+  refs.tilesCategoryList.classList.remove('visually-hidden');
+  const markup = results
+    .map(
+      ({ rating, name, burnedCalories, bodyPart, target, _id }) => `      
+        <li class="exercises-category-tile-item" data-id=${_id}>
+            <div class="exercises-category-tile-top">
+              <div class="exercises-category-tile-workout-wrapper">
+                <span class="exercises-category-tile-badge">WORKOUT</span>
+                <div class="exercises-category-tile-rating-wrapper">
+                  <span class="exercises-category-tile-rating">${rating.toFixed(
+                    1
+                  )}</span>
+                  <svg
+                  class="exercises-category-tile-star-icon"
+                  width="18"
+                  height="18">
+                    <use href="./../img/icons.svg#icon-star"></use>
+                  </svg>
+                </div>
+              </div>
+              <button class="exercises-category-tile-button">Start 
+                <svg 
+                class="exercises-category-tile-arrow-icon"
+                width="36" 
+                height="36">
+                  <use xlink:href="./../img/icons.svg#icon-arrow"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="exercises-category-tile-middle">
+              <svg 
+              class="exercises-category-tile-man-icon"
+              width="24" 
+              height="24">
+                <use href="./../img/icons.svg#icon-running-man"></use>
+              </svg>
+              <h3 class="exercises-category-tile-name">${name}</h3>
+            </div>
+            <ul class="exercises-category-tile-bottom">
+                <li class="exercises-category-tile-bottom-item">
+                <span class="exercises-category-tile-bottom-title">Burned calories:</span>
+                ${burnedCalories}</li>
+                <li class="exercises-category-tile-bottom-item">
+                <span class="exercises-category-tile-bottom-title">Body part:</span>
+                ${capitalizeFirstLetter(bodyPart)}</li>
+                <li class="exercises-category-tile-bottom-item">
+                <span class="exercises-category-tile-bottom-title">Target:</span>
+                ${capitalizeFirstLetter(target)}</li>
+            </ul>
+        </li>`
+    )
+    .join('');
 
-  refs.tilesList.innerHTML = markup.join('');
+  refs.tilesCategoryList.innerHTML = markup;
+  renderPagination(page, totalPages, type);
+}
+
+function renderPagination(page, totalPages, type) {
+  console.log('totalPages:', totalPages);
+  refs.paginationList.innerHTML = '';
+
+  for (let i = 1; i <= totalPages; i++) {
+    const pageElement = document.createElement('span');
+    pageElement.classList.add('exercises-pagination-item');
+    pageElement.textContent = i;
+
+    if (i == page) {
+      pageElement.classList.add('exercises-pagination-item-active');
+    }
+
+    pageElement.addEventListener('click', () => {
+      basicUrlParams.page = i;
+      fetchData(type, basicUrlParams);
+    });
+
+    refs.paginationList.appendChild(pageElement);
+  }
 }
 
 function capitalizeFirstLetter(str) {
