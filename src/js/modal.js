@@ -2,8 +2,9 @@
 import axios from 'axios';
 
 function initializeExercisePage() {
+
   // Get the HTMLCollection of elements with class 'exercises-tiles-list'
-  const exercisesTilesList = document.getElementsByClassName('exercises-tiles-list');
+  const exercisesTilesList = document.getElementsByClassName('exercises-tiles-category-list');
   
   // Get the modal element
   const modal = document.getElementById("myModal");
@@ -27,8 +28,8 @@ function initializeExercisePage() {
     }
   }
   
-  // Loop through the HTMLCollection (if there are multiple elements with this class)
-  for (let i = 0; i < exercisesTilesList.length; i++) {
+  // Loop through the HTML collection (if there are multiple elements with this class)
+  for (let i = 0; i < exercisesTilesList.length; i+=1) {
     const currentList = exercisesTilesList[i];
     
     // Add an event listener to each element in the HTMLCollection
@@ -51,13 +52,13 @@ function initializeExercisePage() {
             if (favBtn) {
               // Check if the exercise is in the savedExercises array
               const isSaved = savedExercises.some(exercise => exercise._id === data._id);
-              
+
+              // Check if the exercise is in the savedExercises array and render necessary icon accordingly
               const heartIcon = favBtn.querySelector('.main-modal__heart-icon use');
               heartIcon.setAttribute('href', isSaved ? './img/icons.svg#icon-trash' : './img/icons.svg#icon-heart');
               
-              console.log('isSaved',isSaved);
               // Set button text based on whether the exercise is saved or not
-              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Remove from' : 'Add to favorites';
+              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Unfavorite' : 'Add to favorites';
               
               favBtn.addEventListener('click', function() {
                 const isSaved = savedExercises.some(exercise => exercise._id === data._id);
@@ -74,8 +75,9 @@ function initializeExercisePage() {
                 localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
                 
                 // Toggle button text between 'Add to favorites' and 'Remove from favorites'
-                favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Remove from';
+                favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Unfavorite';
 
+              // Change btn's icon when it is being saved/removed to/from favorires
                 const heartIcon = favBtn.querySelector('.main-modal__heart-icon use');
                 heartIcon.setAttribute('href', isSaved ? './img/icons.svg#icon-heart' : './img/icons.svg#icon-trash');
               });
@@ -87,7 +89,8 @@ function initializeExercisePage() {
         }
       });
     }
-    
+
+    // This function is used to add a page markup
     function displayExerciseDetails(data) {
       const exerciseDetailsContainer = document.getElementById('exerciseDetails');
       
@@ -106,10 +109,10 @@ function initializeExercisePage() {
       }
       
       const title = `<p class='main-modal__card-title'>${data.name}</p>`
-      const stars = generateStarRating(Math.round(data.rating));
+      const stars = generateStarRating(Math.round(data.rating * 10) / 10);
       
       const rating = `<div class='main-modal__rating-container'>
-      <span class="main-modal__rating">${data.rating % 1 >= 0.5 ? Math.ceil(data.rating) +'.0' : Math.floor(data.rating) +'.0'}</span>
+      <span class="main-modal__rating">${data.rating.toString().includes('.') ? Math.round(data.rating * 10) / 10 : data.rating + '.0'}</span>
       ${stars}
       </div>`
       
@@ -131,12 +134,13 @@ function initializeExercisePage() {
       <p class="main-modal__details-info">${data.popularity}</p>
       </div>
       </div>
-      <div class="main-modal__details-wrapper calories">
+      <div class="main-modal__details-wrapper main-modal__calories">
       <p class="main-modal__details-title">Burned Calories</p>
       <p class="main-modal__details-info">${data.burnedCalories}</p>
       </div>`
       
       const description = `<div class="main-modal__description">${data.description}</div>`
+
       const buttons = `<div class="main-modal__btns-wrapper">
       <button class="main-modal__btn main-modal__fav-btn" id="fav-btn">
       <span class="main-modal__btn-text main-modal__fav-btn-text">Add to favorites</span>
@@ -148,44 +152,44 @@ function initializeExercisePage() {
       <span class="main-modal__btn-text">Give a rating</span>
       </button>
       </div>`
+
       exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-wrapper">${title + rating + details + description + buttons}</div>`}`;
-      // addToFavBtn = document.getElementById("fav-btn");
     }
-    
-    // Function to generate star icons based on rating
+
     function generateStarRating(rating) {
-      const starIcon = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star" aria-label="logo icon">
+      const starIcon = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star">
       <use href="./img/icons.svg#icon-star"></use>
       </svg></div>`;
-      
-      const emptyStar = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon " aria-label="logo icon">
+    
+      const emptyStar = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon">
       <use href="./img/icons.svg#icon-star"></use>
       </svg></div>`;
+
       let starsHTML = '';
-      let integerPart = Math.floor(rating);  
-      let decimalPart = rating - integerPart;  
-      
-      // Fill stars based on the integer part (whole number)
+      let integerPart = Math.floor(rating);
+      let decimalPart = rating - integerPart;
+    
+      // Fill stars 
       for (let i = 0; i < 5; i++) {
         if (i < integerPart) {
-          starsHTML += starIcon;  
+          starsHTML += starIcon;
+        } else if (i === integerPart && decimalPart > 0) {
+          const gradientPercentage = Math.round(decimalPart * 100);
+          starsHTML += `<div class="main-modal__star-wrapper" style="mask-image: linear-gradient(90deg, #EEA10C ${gradientPercentage}%, rgba(244, 244, 244, 0.2) ${gradientPercentage}%); -webkit-mask-image: linear-gradient(90deg, #EEA10C ${gradientPercentage}%, rgba(244, 244, 244, 0.2) ${gradientPercentage}%);"><svg class="main-modal__star-icon main-modal__colored-star" >
+          <use href="./img/icons.svg#icon-star"></use>
+          </svg></div>`;
         } else {
-          if (i === integerPart && decimalPart >= 0.5) {
-            starsHTML += starIcon;  
-          } else {
-            starsHTML += emptyStar;  
-          }
+          starsHTML += emptyStar;
         }
       }
-      
       return `${starsHTML}`;
-    }
+    } 
   }
   
   // Trigger the code when the window finishes loading
   window.onload = function() {
     // Check if the current page matches the specific page structure
-    const isExercisePage = document.querySelector('.exercises-section .exercises-container');
+    const isExercisePage = document.querySelector('.exercises-container');
     
     // If the page structure matches, initialize the exercise page
     if (isExercisePage) {

@@ -112,12 +112,12 @@
 .main-modal__star-icon{
     width: 14px;
     height: 14px;
-    fill: var(--grey-seven);
+    fill: #4c3d26;
     stroke: transparent;
 }
 
 .main-modal__colored-star{
-    fill: #EEA10C;
+    fill: var(--stars-color-activ);
 }
 
 .main-modal__details-container{
@@ -295,6 +295,7 @@
     .main-modal__card-title{
         font-size: 24px;
         line-height: 1.33; 
+        margin-right: 15px;
     }
 
     .main-modal__btn-text{
