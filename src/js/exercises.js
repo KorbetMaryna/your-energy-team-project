@@ -145,23 +145,61 @@ function createExercisesMarkup(type, { page, totalPages, results }) {
 }
 
 function renderPagination(page, totalPages, type) {
-  console.log('totalPages:', totalPages);
   refs.paginationList.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
-    const pageElement = document.createElement('span');
-    pageElement.classList.add('exercises-pagination-item');
-    pageElement.textContent = i;
+  const maxPagesToShow = 6;
 
-    if (i == page) {
-      pageElement.classList.add('exercises-pagination-item-active');
+  if (totalPages <= maxPagesToShow) {
+    renderPages(1, totalPages, page, type);
+  } else {
+    if (page < 4) {
+      renderPages(1, 4, page, type);
+      renderEllipsis();
+      renderLastPage(totalPages, page);
+    } else if (page > totalPages - 3) {
+      renderFirstPage();
+      renderEllipsis();
+      renderPages(totalPages - 3, totalPages, page, type);
+    } else {
+      renderFirstPage();
+      renderEllipsis();
+      renderPages(page - 1, page + 1, page, type);
+      renderEllipsis();
+      renderLastPage(totalPages, page);
     }
+  }
 
-    pageElement.addEventListener('click', () => {
-      basicUrlParams.page = i;
-      fetchData(type, basicUrlParams);
-    });
+  function renderPages(start, end, currentPage, type) {
+    for (let i = start; i <= end; i++) {
+      const pageElement = document.createElement('span');
+      pageElement.classList.add('exercises-pagination-item');
+      pageElement.textContent = i;
 
-    refs.paginationList.appendChild(pageElement);
+      if (i === Number(currentPage)) {
+        pageElement.classList.add('exercises-pagination-item-active');
+      }
+
+      pageElement.addEventListener('click', () => {
+        basicUrlParams.page = i;
+        fetchData(type, basicUrlParams);
+      });
+
+      refs.paginationList.appendChild(pageElement);
+    }
+  }
+
+  function renderEllipsis() {
+    const ellipsisElement = document.createElement('span');
+    ellipsisElement.classList.add('exercises-pagination-item');
+    ellipsisElement.textContent = '...';
+    refs.paginationList.appendChild(ellipsisElement);
+  }
+
+  function renderFirstPage() {
+    renderPages(1, 1, page, type);
+  }
+
+  function renderLastPage(totalPages, currentPage) {
+    renderPages(totalPages, totalPages, currentPage, type);
   }
 }
