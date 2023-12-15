@@ -264,7 +264,7 @@ footer {
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .footer-wrapper {
     max-width: 1440px;
     height: 328px;
