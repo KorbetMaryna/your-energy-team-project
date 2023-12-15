@@ -5,16 +5,20 @@
 @import url('../css/base/visually-hidden.css');
 
 /*-----components-----*/
+@import url('../css/components/header.css');
 @import url('../css/components/logo.css');
 @import url('../css/components/social-list.css');
 @import url('../css/components/mobile-menu.css');
 @import url('../css/components/modal.css');
 @import url('../css/components/modal-rating.css');
-@import url('../css/components/exercises.css');
 @import url('../css/components/hero.css');
+@import url('../css/components/exercises-meta.css');
+@import url('../css/components/exercises.css');
 @import url('../css/components/quote.css');
-@import url('../css/components/header.css');
+@import url('../css/components/footer.css');
+@import url('../css/components/privacy-terms.css');
 @import url('../css/components/page-error.css');
+@import url('../css/components/meta-exercises-quote-section.css');
 @import url('../css/components/favorite-workouts.css');
 
 /*-----layouts-----*/

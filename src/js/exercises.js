@@ -1,5 +1,8 @@
 import iziToast from 'izitoast';
 import { fetchApiData } from './api';
+import { filterMarkup, exercisesMarkup } from './exercises-markup';
+import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
+import { toggleLoader } from './loader';
 
 iziToast.settings({
   position: 'topRight',
@@ -56,6 +59,7 @@ refs.filterButtons.forEach(el => {
 });
 
 async function fetchData(type, obj) {
+  toggleLoader(true)
   await fetchApiData(type, obj)
     .then(data => {
       if (data.results[0]?.filter) {
@@ -74,7 +78,7 @@ async function fetchData(type, obj) {
       iziToast.error({
         message: 'Something went wrong :-( try again later.',
       });
-    });
+    }).finally(toggleLoader(false));
 }
 
 function createFilterMarkup(type, data) {
@@ -85,25 +89,13 @@ function createFilterMarkup(type, data) {
   const { page, totalPages, results } = data;
 
   const markup = results
-    .map(
-      ({ filter, name, imgURL }) => `      
-        <li class="exercises-filter-tile-item" data-name=${name} data-filter=${filter.toLowerCase()}>
-              <div class="exercises-filter-tile-gradient"></div>
-              <img class="exercises-filter-tile-img" src="${imgURL}" alt="${name}" onerror="this.onerror=null; this.src='./../img/no-image.jpg'"/>
-              <div class="exercises-filter-tile-text-wrapper">
-                  <h3 class="exercises-filter-tile-headline">${capitalizeFirstLetter(
-                    name
-                  )}</h3>
-                  <p class="exercises-filter-tile-text">${filter}</p>
-              </div>
-        </li>`
-    )
+    .map(({ filter, name, imgURL }) => filterMarkup(filter, name, imgURL))
     .join('');
   refs.tilesFilterList.innerHTML = markup;
   renderPagination(page, totalPages, type);
 }
 
-refs.tilesFilterList.addEventListener('click', onTileClick);
+refs.tilesFilterList?.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();
@@ -145,54 +137,8 @@ function createExercisesMarkup(type, { page, totalPages, results }) {
   refs.tilesFilterList.classList.add('visually-hidden');
   refs.tilesCategoryList.classList.remove('visually-hidden');
   const markup = results
-    .map(
-      ({ rating, name, burnedCalories, bodyPart, target, _id }) => `      
-        <li class="exercises-category-tile-item" data-id=${_id}>
-            <div class="exercises-category-tile-top">
-              <div class="exercises-category-tile-workout-wrapper">
-                <span class="exercises-category-tile-badge">WORKOUT</span>
-                <div class="exercises-category-tile-rating-wrapper">
-                  <span class="exercises-category-tile-rating">${rating.toFixed(
-                    1
-                  )}</span>
-                  <svg
-                  class="exercises-category-tile-star-icon"
-                  width="18"
-                  height="18">
-                    <use href="./../img/icons.svg#icon-star"></use>
-                  </svg>
-                </div>
-              </div>
-              <button class="exercises-category-tile-button">Start 
-                <svg 
-                class="exercises-category-tile-arrow-icon"
-                width="36" 
-                height="36">
-                  <use xlink:href="./../img/icons.svg#icon-arrow"></use>
-                </svg>
-              </button>
-            </div>
-            <div class="exercises-category-tile-middle">
-              <svg 
-              class="exercises-category-tile-man-icon"
-              width="24" 
-              height="24">
-                <use href="./../img/icons.svg#icon-running-man"></use>
-              </svg>
-              <h3 class="exercises-category-tile-name">${name}</h3>
-            </div>
-            <ul class="exercises-category-tile-bottom">
-                <li class="exercises-category-tile-bottom-item">
-                <span class="exercises-category-tile-bottom-title">Burned calories:</span>
-                ${burnedCalories}</li>
-                <li class="exercises-category-tile-bottom-item">
-                <span class="exercises-category-tile-bottom-title">Body part:</span>
-                ${capitalizeFirstLetter(bodyPart)}</li>
-                <li class="exercises-category-tile-bottom-item">
-                <span class="exercises-category-tile-bottom-title">Target:</span>
-                ${capitalizeFirstLetter(target)}</li>
-            </ul>
-        </li>`
+    .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
+      exercisesMarkup(rating, name, burnedCalories, bodyPart, target, _id)
     )
     .join('');
 
@@ -201,27 +147,61 @@ function createExercisesMarkup(type, { page, totalPages, results }) {
 }
 
 function renderPagination(page, totalPages, type) {
-  console.log('totalPages:', totalPages);
   refs.paginationList.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
-    const pageElement = document.createElement('span');
-    pageElement.classList.add('exercises-pagination-item');
-    pageElement.textContent = i;
+  const maxPagesToShow = 6;
 
-    if (i == page) {
-      pageElement.classList.add('exercises-pagination-item-active');
+  if (totalPages <= maxPagesToShow) {
+    renderPages(1, totalPages, page, type);
+  } else {
+    if (page < 4) {
+      renderPages(1, 4, page, type);
+      renderEllipsis();
+      renderLastPage(totalPages, page);
+    } else if (page > totalPages - 3) {
+      renderFirstPage();
+      renderEllipsis();
+      renderPages(totalPages - 3, totalPages, page, type);
+    } else {
+      renderFirstPage();
+      renderEllipsis();
+      renderPages(page - 1, page + 1, page, type);
+      renderEllipsis();
+      renderLastPage(totalPages, page);
     }
-
-    pageElement.addEventListener('click', () => {
-      basicUrlParams.page = i;
-      fetchData(type, basicUrlParams);
-    });
-
-    refs.paginationList.appendChild(pageElement);
   }
-}
 
-function capitalizeFirstLetter(str) {
-  return str[0].toUpperCase() + str.slice(1);
+  function renderPages(start, end, currentPage, type) {
+    for (let i = start; i <= end; i++) {
+      const pageElement = document.createElement('span');
+      pageElement.classList.add('exercises-pagination-item');
+      pageElement.textContent = i;
+
+      if (i === Number(currentPage)) {
+        pageElement.classList.add('exercises-pagination-item-active');
+      }
+
+      pageElement.addEventListener('click', () => {
+        basicUrlParams.page = i;
+        fetchData(type, basicUrlParams);
+      });
+
+      refs.paginationList.appendChild(pageElement);
+    }
+  }
+
+  function renderEllipsis() {
+    const ellipsisElement = document.createElement('span');
+    ellipsisElement.classList.add('exercises-pagination-item');
+    ellipsisElement.textContent = '...';
+    refs.paginationList.appendChild(ellipsisElement);
+  }
+
+  function renderFirstPage() {
+    renderPages(1, 1, page, type);
+  }
+
+  function renderLastPage(totalPages, currentPage) {
+    renderPages(totalPages, totalPages, currentPage, type);
+  }
 }
