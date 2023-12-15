@@ -73,9 +73,10 @@
 
 .hero-tags-list {
   display: flex;
-  gap: 7px;
-  justify-content: space-between;
+  gap: 6px;
+  justify-content: center;
   padding-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .hero-tag {
