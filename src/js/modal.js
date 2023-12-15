@@ -158,7 +158,7 @@ function initializeExercisePage() {
       </button>
       </div>`
 
-      exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-wrapper">${title + rating + details + description + buttons}</div>`}`;
+      exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-container">${ `<div class="main-modal__content-wrapper">${title + rating + details + description} </div> ${buttons}`}</div>`}`;
     }
 
     function generateStarRating(rating) {

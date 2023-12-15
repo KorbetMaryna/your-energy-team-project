@@ -1,5 +1,11 @@
 /* Styles for the modal */
 
+button{
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
 .main-modal__background {
     display: none;
     position: fixed;
@@ -161,7 +167,6 @@
 
 .main-modal__description{
     margin-top: 20px;
-    margin-bottom: 40px;
     color: var(--grey-nine);   
     font-family: inherit;
     font-size: 14px;
@@ -179,13 +184,13 @@
     align-items: center;
     height: 42px;
     border-radius: 30px;
-    padding: 12px 19px;
 }
 
 .main-modal__fav-btn{
     background-color: var(--background-light-theme);
     color: var(--main-color-light-theme);
     border: none;
+    padding: 12px 19px;
 }
 
 .main-modal__fav-btn:hover{
@@ -198,6 +203,7 @@
     background-color: var(--main-color-light-theme);
     color: var(--second-color-light-theme);
     border: 1px solid var(--second-color-light-theme);
+    padding: 12px 19px;
 }
 
 .main-modal__rating-btn:hover{
@@ -231,6 +237,10 @@
     width: 55px;
 }
 
+.main-modal__content-wrapper{
+    margin-bottom: 40px;
+}
+
 @media screen and (min-width: 768px) {
     .main-modal{
         margin-left: 32px;
@@ -250,20 +260,52 @@
         width: 28px;
         height: 28px;
     }
+
+    .main-modal__heart-icon{
+        width: 20px;
+        height: 20px;
+    }
+    
+    .main-modal__btn{
+        height: 48px;
+    }
+
+    .main-modal__fav-btn{
+        width: 194px;
+        padding: 12px 24px;
+
+    }
+    
+    .main-modal__rating-btn{
+        padding: 12px 22px;
+        width: 137px;
+    }
+
     .main-modal__main-container{
         display: flex;
+    }
+    
+    .main-modal__content-container{
+        height: auto;
+    }
+
+    .main-modal__btns-wrapper{
+        justify-content: flex-end;
+        margin-left: 32px;
     }
     
     .main-modal__content-wrapper{
         margin-left: 32px;
         width: 338px;
-        height: auto;
+        margin-bottom: 64px;
     }
     
     .main-modal__gif-wrapper {
         width: 270px;
         height: 259px;
         margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
     }
     
     .main-modal__rating-container{
@@ -278,6 +320,7 @@
 
     .main-modal__calories{
         padding-bottom: 8px;
+        margin-right: 0;
     }
 
     .main-modal__btns-wrapper{
@@ -286,10 +329,6 @@
 
     .main-modal__fav-btn{
         margin-right: 7px;
-    }
-
-    .main-modal__description{
-        margin-bottom: 64px;
     }
 
     .main-modal__card-title{
@@ -305,7 +344,7 @@
     
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1440px) {
     .main-modal{
         margin-left: 366px;
         margin-right: 366px;
