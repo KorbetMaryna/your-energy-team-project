@@ -1,4 +1,4 @@
-import{t as q,f as O,a as I,b as P,c as M,d as H,e as _}from"./assets/quote-ff5326c2.js";import{i as m,l as E,a as A}from"./assets/vendor-09c79f2e.js";function f(e){return e[0].toUpperCase()+e.slice(1)}function W(e,s,t){return`      
+import{t as q,f as O,a as I,b as P,c as M,d as H,e as _}from"./assets/quote-c34fcaba.js";import{i as m,l as E,a as A}from"./assets/vendor-09c79f2e.js";function f(e){return e[0].toUpperCase()+e.slice(1)}function W(e,s,t){return`      
 <li class="exercises-filter-tile-item" data-name=${s} data-filter=${e.toLowerCase()}>
       <div class="exercises-filter-tile-gradient"></div>
       <img class="exercises-filter-tile-img" src="${t}" alt="${s}" onerror="this.onerror=null; this.src='./../img/no-image.jpg'"/>
