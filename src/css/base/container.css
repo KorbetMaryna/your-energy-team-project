@@ -4,9 +4,15 @@
     margin: 0 auto;
 }
 
+@media screen and (min-width: 375px) {
+    .container {
+        max-width: 375px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .container {
-        width: 768px;
+        max-width: 768px;
         padding: 0 32px;
         overflow: hidden;
     }
@@ -14,6 +20,6 @@
 
 @media screen and (min-width: 1440px) {
     .container {
-        width: 1440px;
+        max-width: 1440px;
     }
 }
