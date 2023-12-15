@@ -1,7 +1,20 @@
 import MicroModal from 'micromodal';
-import { fetchBodyParts, fetchEquipment, fetchMuscles } from './api';
-import { endsWith } from 'lodash';
-// import SlimSelect from 'slim-select';
+import iziToast from 'izitoast';
+
+import {
+  fetchBodyParts,
+  fetchEquipment,
+  fetchExercises,
+  fetchMuscles,
+} from './api';
+import {
+  checkScreenWidth,
+  createExercisesMarkup,
+  displayHeadline,
+  hideSearchInput,
+  makeFilterButtonActive,
+  renderPagination,
+} from './exercises';
 
 const youChoiceBtnElem = document.querySelector('.your-choice-button');
 
@@ -20,6 +33,11 @@ class YourChoiceModal {
 
     this.selectGroups = document.querySelectorAll(`#${this.id} .select-group`);
 
+    this.submitBtnElem = document.getElementById('search-exercises');
+    this.submitBtnElem.addEventListener('click', () => {
+      this.triggerSearchExercises();
+    });
+
     MicroModal.init();
   }
 
@@ -33,15 +51,27 @@ class YourChoiceModal {
         fetchEquipment(),
       ]);
 
-      this.musclesOptions = muscles;
-      this.bodyPartsOptions = bodyParts;
-      this.equipmentOptions = equipment;
+      this.musclesOptions = muscles.results;
+      this.bodyPartsOptions = bodyParts.results;
+      this.equipmentOptions = equipment.results;
       console.log({ muscles, bodyParts, equipment });
 
+      this.hideLoading();
+      this.toggleShowSelectGroups(true);
+
       [
-        { filters: muscles, elem: this.musclesSelectElem },
-        { filters: bodyParts, elem: this.bodyPartsSelectElem },
-        { filters: equipment, elem: this.equipmentSelectElem },
+        {
+          filters: this.musclesOptions,
+          elem: this.musclesSelectElem,
+        },
+        {
+          filters: this.bodyPartsOptions,
+          elem: this.bodyPartsSelectElem,
+        },
+        {
+          filters: this.equipmentOptions,
+          elem: this.equipmentSelectElem,
+        },
       ].forEach(({ filters, elem }) => {
         console.log({ filters, elem });
         const options = [];
@@ -51,13 +81,8 @@ class YourChoiceModal {
         }
         elem.innerHTML = options.join('');
 
-        new SlimSelect({
-          select: elem,
-        });
+        this.hideLoading();
       });
-
-      this.hideLoading();
-      this.toggleShowSelectGroups(true);
     } catch (err) {
       const msg = 'Could not fetch lists of filters for modal';
       console.error(msg, err);
@@ -68,7 +93,9 @@ class YourChoiceModal {
   }
 
   hideLoading() {
-    document.querySelector(`#${this.id} .modal__content-loading`);
+    document
+      .querySelector(`#${this.id} .modal__content-loading`)
+      .classList.add('hidden');
   }
 
   toggleShowSelectGroups(isShow) {
@@ -79,6 +106,68 @@ class YourChoiceModal {
         elem.classList.add('hidden');
       }
     }
+  }
+
+  async triggerSearchExercises() {
+    this.submitBtnElem.disabled = true;
+
+    try {
+      await this.getAndRenderExercises({ page: 1 });
+      displayHeadline('you choice');
+      hideSearchInput();
+      MicroModal.close();
+      makeFilterButtonActive(youChoiceBtnElem);
+    } catch (err) {
+      const msg = `Could not fetch exercises because of error`;
+      console.error(msg, err);
+      iziToast.error({
+        message: msg,
+      });
+    } finally {
+      this.submitBtnElem.disabled = false;
+    }
+  }
+
+  async getAndRenderExercises({ page = 1 }) {
+    const bodyPart = this.bodyPartsOptions[this.bodyPartsSelectElem.value].name;
+    const muscle = this.musclesOptions[this.musclesSelectElem.value].name;
+    const equipment =
+      this.equipmentOptions[this.equipmentSelectElem.value].name;
+
+    const limit = checkScreenWidth();
+
+    console.log('Calling api with', {
+      bodyPart,
+      muscle,
+      equipment,
+      page,
+      limit,
+    });
+    const { totalPages, results } = await fetchExercises({
+      bodyPart,
+      muscle,
+      equipment,
+      page,
+      limit,
+    });
+    console.log({ results });
+
+    if (!(results || []).length) {
+      iziToast.warning({
+        message:
+          'No exercises found. Try another set of muscle, body part, equipment paramaters.',
+      });
+      return;
+    }
+
+    createExercisesMarkup({ results });
+    renderPagination({
+      page,
+      totalPages,
+      customListener: page => {
+        this.getAndRenderExercises({ page });
+      },
+    });
   }
 }
 

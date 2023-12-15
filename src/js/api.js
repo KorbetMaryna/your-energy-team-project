@@ -24,8 +24,6 @@ export const fetchMuscles = async ({ page = 1, limit = 100 } = {}) => {
   return data;
 };
 
-// your-energy.b.goit.study/api/exercises?bodypart=back&muscles=lats&equipment=barbell&keyword=pull&page=1&limit=10  (приклад з переліком усіх можливих параметрів, кожен з яких можна прибрати за потреби)
-
 export const fetchBodyParts = async ({ page = 1, limit = 100 } = {}) => {
   const { data } = await axios.get(
     `${BASE_URL}/filters?filter=Body+parts&page=${page}&limit=${limit}`
@@ -37,5 +35,24 @@ export const fetchEquipment = async ({ page = 1, limit = 100 } = {}) => {
   const { data } = await axios.get(
     `${BASE_URL}/filters?filter=Equipment&page=${page}&limit=${limit}`
   );
+  return data;
+};
+
+export const fetchExercises = async ({
+  bodyPart,
+  muscle,
+  equipment,
+  page = 1,
+  limit = 100,
+}) => {
+  const urlParams = new URLSearchParams({
+    bodypart: bodyPart,
+    muscles: muscle,
+    equipment,
+    page,
+    limit,
+  });
+
+  const { data } = await axios.get(`${BASE_URL}/exercises?${urlParams}`);
   return data;
 };

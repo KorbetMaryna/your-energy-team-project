@@ -69,6 +69,10 @@ button {
   line-height: 1.43;
 }
 
+.exercises-category-button:focus-visible {
+  outline: none;
+}
+
 .active-button {
   position: relative;
   color: var(--main-color-light-theme);
