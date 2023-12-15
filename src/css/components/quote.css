@@ -180,8 +180,8 @@
     column-gap: 16px;
 
     max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .quote-article {
@@ -226,13 +226,6 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .content-wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    column-gap: 32px;
-  }
-
   .quote-section {
     flex-direction: column;
     flex-wrap: no-wrap;
