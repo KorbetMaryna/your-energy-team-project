@@ -1,7 +1,12 @@
-import './js/page-switcher';
-import './js/mobile-menu';
+import './js/pageSwitcher';
+import './js/mobileMenu';
 import './js/modal';
-import './js/modal-rating';
+import './js/modalRating';
 import './js/exercises';
 import './js/quote';
 import './js/your-choice';
+import './js/footer';
+import './js/loader';
+import './js/search/search-input';
+import './js/quote-and-exercises-desktop';
+// import './js/showPageError';
