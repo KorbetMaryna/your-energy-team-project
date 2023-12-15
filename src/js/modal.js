@@ -12,6 +12,8 @@ function initializeExercisePage() {
   // Get the <span> element that closes the modal
   const closeBtn = document.getElementsByClassName("main-modal__close")[0];
   
+  const body = document.querySelector("body");
+  
   let savedExercises = localStorage.getItem('savedExercises') ? JSON.parse(localStorage.getItem('savedExercises')) : [];
   
   // When the user clicks on (x), close the modal
@@ -19,6 +21,7 @@ function initializeExercisePage() {
     closeBtn.onclick = function() {
       modal.style.display = "none";
       localStorage.removeItem('currentExercise');
+      document.body.style.overflow = "auto"; 
     }
   }
   
@@ -27,6 +30,7 @@ function initializeExercisePage() {
     if (event.target == modal) {
       modal.style.display = "none";
       localStorage.removeItem('currentExercise');
+      document.body.style.overflow = "auto"; 
     }
   }
   
@@ -41,7 +45,8 @@ function initializeExercisePage() {
       if (clickedListItem) {
         const exerciseId = categoryTileItem.dataset.id;
         modal.style.display = "flex"
-        
+        body.style.overflow = "hidden";
+
         const apiUrl = `https://your-energy.b.goit.study/api/exercises/${exerciseId}`;
         
         axios.get(apiUrl).then(response => {
@@ -63,7 +68,7 @@ function initializeExercisePage() {
               heartIcon.setAttribute('href', isSaved ? './img/icons.svg#icon-trash' : './img/icons.svg#icon-heart');
               
               // Set button text based on whether the exercise is saved or not
-              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Unfavorite' : 'Add to favorites';
+              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Remove from favorites' : 'Add to favorites';
               
               favBtn.addEventListener('click', function() {
                 const isSaved = savedExercises.some(exercise => exercise._id === data._id);
@@ -80,7 +85,7 @@ function initializeExercisePage() {
                 localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
                 
                 // Toggle button text between 'Add to favorites' and 'Remove from favorites'
-                favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Unfavorite';
+                favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Remove from favorites';
 
               // Change btn's icon when it is being saved/removed to/from favorires
                 const heartIcon = favBtn.querySelector('.main-modal__heart-icon use');
@@ -141,7 +146,7 @@ function initializeExercisePage() {
       </div>
       <div class="main-modal__details-wrapper main-modal__calories">
       <p class="main-modal__details-title">Burned Calories</p>
-      <p class="main-modal__details-info">${data.burnedCalories}</p>
+      <p class="main-modal__details-info">${data.burnedCalories + '/3 min'}</p>
       </div>`
       
       const description = `<div class="main-modal__description">${data.description}</div>`

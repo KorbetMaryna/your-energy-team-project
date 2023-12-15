@@ -14,10 +14,10 @@ button{
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: var(--modal-background-light-theme); 
     justify-content: center;  
     align-items: center; 
+
 }
 
 .main-modal{
@@ -29,6 +29,7 @@ button{
     padding: 40px 20px;
     width: 335px;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .main-modal__close {
@@ -141,6 +142,7 @@ button{
 .main-modal__calories{
     padding-bottom: 10px;
     border-bottom: 1px solid var(--grey-seven);
+    margin-right: 0;
 }
 
 
@@ -176,12 +178,13 @@ button{
 
 .main-modal__btns-wrapper{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 .main-modal__btn{
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 42px;
     border-radius: 30px;
 }
@@ -191,6 +194,8 @@ button{
     color: var(--main-color-light-theme);
     border: none;
     padding: 12px 19px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
 }
 
 .main-modal__fav-btn:hover{
@@ -204,6 +209,7 @@ button{
     color: var(--second-color-light-theme);
     border: 1px solid var(--second-color-light-theme);
     padding: 12px 19px;
+
 }
 
 .main-modal__rating-btn:hover{
@@ -271,7 +277,6 @@ button{
     }
 
     .main-modal__fav-btn{
-        width: 194px;
         padding: 12px 24px;
 
     }
@@ -291,7 +296,10 @@ button{
 
     .main-modal__btns-wrapper{
         justify-content: flex-end;
+        flex-direction: row;
         margin-left: 32px;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
     
     .main-modal__content-wrapper{
@@ -320,7 +328,6 @@ button{
 
     .main-modal__calories{
         padding-bottom: 8px;
-        margin-right: 0;
     }
 
     .main-modal__btns-wrapper{
