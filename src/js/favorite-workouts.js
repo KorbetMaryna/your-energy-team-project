@@ -12,20 +12,25 @@ function createStartMarkup() {
   let savedExercises = JSON.parse(localStorage.getItem('savedExercises'));
 
   checkIfEmpty(savedExercises);
+  refs.workoutsList.addEventListener('click', removeWorkoutCard);
 
   let currentSavedExercises;
-  let actualCards;
+  let isCardsActual;
   setInterval(() => {
     currentSavedExercises = JSON.parse(localStorage.getItem('savedExercises'));
-    actualCards = currentSavedExercises.length === savedExercises.length;
-    if (actualCards) {
-      actualCards = currentSavedExercises.every((card, idx) => {
+
+    if (currentSavedExercises === null) {
+      return;
+    }
+
+    isCardsActual = currentSavedExercises.length === savedExercises.length;
+    if (isCardsActual) {
+      isCardsActual = currentSavedExercises.every((card, idx) => {
         return card._id === savedExercises[idx]._id;
       });
     }
-    if (!actualCards) {
+    if (!isCardsActual) {
       savedExercises = [...currentSavedExercises];
-      refs.workoutsList.innerHTML = createWorkoutCardsMarkup(savedExercises);
       checkIfEmpty(savedExercises);
     }
   }, 2000);
@@ -35,11 +40,11 @@ function checkIfEmpty(savedExercises) {
   if (!savedExercises || savedExercises.length === 0) {
     refs.noExMessage.hidden = false;
     refs.workoutsList.classList.remove('fav-workouts-list');
+    refs.workoutsList.innerHTML = '';
   } else {
     refs.noExMessage.hidden = true;
     refs.workoutsList.classList.add('fav-workouts-list');
     refs.workoutsList.innerHTML = createWorkoutCardsMarkup(savedExercises);
-    refs.workoutsList.addEventListener('click', removeWorkoutCard);
   }
 }
 
@@ -56,7 +61,6 @@ function removeWorkoutCard(evt) {
   const removeElementIndex = savedExercises.findIndex(
     excercise => excercise._id === removeElementId
   );
-  console.log(removeElementIndex);
   if (removeElementIndex === -1) {
     showMessage('error', 'Excercise is already removed from favorites.');
   } else {
