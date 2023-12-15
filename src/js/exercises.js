@@ -2,6 +2,7 @@ import iziToast from 'izitoast';
 import { fetchApiData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
+import { toggleLoader } from './loader';
 
 iziToast.settings({
   position: 'topRight',
@@ -65,6 +66,7 @@ export function makeFilterButtonActive(el) {
 }
 
 async function fetchData(type, obj) {
+  toggleLoader(true)
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
@@ -89,7 +91,7 @@ async function fetchData(type, obj) {
       iziToast.error({
         message: 'Something went wrong :-( try again later.',
       });
-    });
+    }).finally(toggleLoader(false));
 }
 
 function createFilterMarkup({ results }) {
@@ -103,7 +105,7 @@ function createFilterMarkup({ results }) {
   refs.tilesFilterList.innerHTML = markup;
 }
 
-refs.tilesFilterList.addEventListener('click', onTileClick);
+refs.tilesFilterList?.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();

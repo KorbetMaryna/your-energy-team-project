@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { toggleLoader } from './loader';
 
 const BASE_URL = 'https://your-energy.b.goit.study/api';
-
-toggleLoader(true);
 
 async function fetchApiData(type, params) {
   for (const key of Object.keys(params)) {
