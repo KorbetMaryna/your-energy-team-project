@@ -20,6 +20,7 @@
 @import url('../css/components/privacy-terms.css');
 @import url('../css/components/page-error.css');
 @import url('../css/components/meta-exercises-quote-section.css');
+@import url('../css/components/favorite-workouts.css');
 
 /*-----layouts-----*/
 @import url('../css/layouts/loader.css');
