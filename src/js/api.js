@@ -14,7 +14,7 @@ async function fetchApiData(type, params) {
 
   const urlParams = new URLSearchParams(params);
 
-  const { data } = await axios(`${BASE_URL}${type}?${urlParams}`);
+  const { data } = await axios(`${BASE_URL}/${type}?${urlParams}`);
   toggleLoader(false);
   return data;
 }
