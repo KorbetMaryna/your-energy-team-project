@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toggleLoader } from './loader';
 
 const BASE_URL = 'https://your-energy.b.goit.study/api';
 
