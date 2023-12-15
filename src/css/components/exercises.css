@@ -12,86 +12,24 @@ button {
   border: none;
 }
 
-.exercises-section {
-  padding-top: 20px;
-  padding-bottom: 40px;
+.exercises-subcontainer {
+  margin-bottom: 80px;
 }
 
-.exercises-container {
+/* .exercises-container {
   max-width: 375px;
   padding-left: 20px;
   padding-right: 20px;
   margin-left: auto;
-  margin-right: auto;
-}
-
-/* Headline styles */
-
-.exercises-headline-wrapper {
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 20px;
-}
-
-.exercises-headline {
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: -0.56px;
-}
-
-.exercises-headline-category-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.exercises-headline-category {
-  color: var(--grey-four);
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: -0.4px;
-}
-
-/* Buttons styles */
-
-.exercises-buttons-wrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: start;
-  align-items: center;
-}
-
-.exercises-category-button {
-  position: relative;
-  color: var(--grey-three);
-  font-size: 14px;
-  line-height: 1.43;
-}
-
-.active-button {
-  position: relative;
-  color: var(--main-color-light-theme);
-}
-
-.active-button::after {
-  display: block;
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  content: '';
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-  background-color: black;
-  color: black;
-}
+  margin-right: auto;             
+} */
 
 /* Exercises styles */
 
 .exercises-tiles-filter-list {
   display: grid;
   gap: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .exercises-filter-tile-item {
@@ -100,6 +38,7 @@ button {
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .exercises-filter-tile-gradient {
@@ -147,7 +86,7 @@ button {
 .exercises-tiles-category-list {
   display: grid;
   gap: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .exercises-category-tile-item {
@@ -291,40 +230,23 @@ button {
 }
 
 @media screen and (min-width: 768px) {
-  .exercises-container {
+  .exercises-subcontainer {
+    margin-bottom: 64px;
+  }
+  /* .exercises-container {
     max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
-  }
-  .exercises-headline-wrapper {
-    padding-bottom: 32px;
-  }
-  .exercises-headline {
-    font-size: 44px;
-    line-height: 1.09;
-    letter-spacing: -0.88px;
-  }
-  .exercises-headline-category {
-    font-size: 24px;
-    line-height: 1.33;
-    letter-spacing: -0.48px;
-  }
-  .exercises-buttons-wrapper {
-  }
-  .exercises-category-button {
-    font-size: 16px;
-    line-height: 1.5;
-  }
+  } */
   .exercises-tiles-filter-list {
     grid-template-columns: auto auto auto;
     row-gap: 32px;
     column-gap: 15px;
-    margin-bottom: 64px;
+    margin-bottom: 32px;
   }
   .exercises-filter-tile-item {
     max-width: 225px;
     height: 225px;
-    cursor: pointer;
   }
   .exercises-filter-tile-headline {
     font-size: 24px;
@@ -334,7 +256,7 @@ button {
     grid-template-columns: auto auto;
     row-gap: 32px;
     column-gap: 16px;
-    margin-bottom: 64px;
+    margin-bottom: 32px;
   }
   .exercises-category-tile-item {
     max-width: 344px;
@@ -352,4 +274,19 @@ button {
     font-size: 24px;
     line-height: 1.33;
   }
+}
+
+@media screen and (min-width: 1440px) {
+  .exercises-subcontainer {
+    margin-bottom: 0;
+  }
+  .exercises-filter-tile-item {
+    width: 290px;
+    max-width: 290px;
+    height: 242px;
+  }
+  .exercises-category-tile-item {
+    width: 442px;
+    max-width: 442px;
+  } 
 }
