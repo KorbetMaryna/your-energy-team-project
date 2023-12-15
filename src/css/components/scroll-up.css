@@ -1,0 +1,42 @@
+/* Scroll up styles */
+
+.scroll-up-img {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 10px;
+    bottom: 30px;
+    cursor: pointer;
+    border: none;
+    background-image: url('../img/scroll-up/scroll-up-mobile.png');
+    background-repeat: no-repeat;
+    /*   z-index: 100000; */
+    transition: scale var(--transition-duration-time-function);
+}
+
+@media screen and (min-width: 375px) {
+    .scroll-up-img {
+        right: 20px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .scroll-up-img {
+        bottom: 15px;
+        right: 32px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .scroll-up-img {
+        width: 100px;
+        height: 100px;
+        background-image: url('../img/scroll-up/scroll-up-desktop.png');
+        bottom: 10px;
+    }
+}
+
+.scroll-up-img:hover,
+.scroll-up-img:focus {
+    scale: 1.1;
+}

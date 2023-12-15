@@ -21,9 +21,11 @@
 @import url('../css/components/page-error.css');
 @import url('../css/components/meta-exercises-quote-section.css');
 @import url('../css/components/favorite-workouts.css');
+@import url('../css//components/scroll-up.css');
 
 /*-----layouts-----*/
 @import url('../css/layouts/loader.css');
 
 /*-----variables-----*/
 @import url('./utils/variables.css');
+
