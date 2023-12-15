@@ -199,7 +199,7 @@ function initializeExercisePage() {
   // Trigger the code when the window finishes loading
   window.onload = function() {
     // Check if the current page matches the specific page structure
-    const isExercisePage = document.querySelector('.exercises-container');
+    const isExercisePage = document.querySelector('.js-tiles-category-list');
     
     // If the page structure matches, initialize the exercise page
     if (isExercisePage) {
