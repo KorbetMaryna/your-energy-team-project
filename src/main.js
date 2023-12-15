@@ -7,4 +7,5 @@ import './js/quote';
 import './js/footer';
 import './js/loader';
 import './js/search/search-input';
+import './js/quote-and-exercises-desktop';
 // import './js/showPageError';

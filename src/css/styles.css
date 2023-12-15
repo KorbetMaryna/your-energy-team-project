@@ -17,8 +17,8 @@
 @import url('../css/components/quote.css');
 @import url('../css/components/footer.css');
 @import url('../css/components/privacy-terms.css');
-
 @import url('../css/components/page-error.css');
+@import url('../css/components/quote-and-exercises-desktop.css');
 
 /*-----layouts-----*/
 @import url('../css/layouts/loader.css');

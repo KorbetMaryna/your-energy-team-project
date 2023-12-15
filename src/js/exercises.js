@@ -1,6 +1,6 @@
 import iziToast from 'izitoast';
 import { fetchApiData } from './api';
-import { filterMarkup, exercisesMarkup } from './esercises-markup';
+import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 
 iziToast.settings({
