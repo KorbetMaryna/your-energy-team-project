@@ -1,5 +1,11 @@
 /* Styles for the modal */
 
+button{
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
 .main-modal__background {
     display: none;
     position: fixed;
@@ -8,10 +14,10 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: var(--modal-background-light-theme); 
     justify-content: center;  
     align-items: center; 
+
 }
 
 .main-modal{
@@ -23,6 +29,7 @@
     padding: 40px 20px;
     width: 335px;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .main-modal__close {
@@ -135,6 +142,7 @@
 .main-modal__calories{
     padding-bottom: 10px;
     border-bottom: 1px solid var(--grey-seven);
+    margin-right: 0;
 }
 
 
@@ -161,7 +169,6 @@
 
 .main-modal__description{
     margin-top: 20px;
-    margin-bottom: 40px;
     color: var(--grey-nine);   
     font-family: inherit;
     font-size: 14px;
@@ -171,21 +178,24 @@
 
 .main-modal__btns-wrapper{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 .main-modal__btn{
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 42px;
     border-radius: 30px;
-    padding: 12px 19px;
 }
 
 .main-modal__fav-btn{
     background-color: var(--background-light-theme);
     color: var(--main-color-light-theme);
     border: none;
+    padding: 12px 19px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
 }
 
 .main-modal__fav-btn:hover{
@@ -198,6 +208,8 @@
     background-color: var(--main-color-light-theme);
     color: var(--second-color-light-theme);
     border: 1px solid var(--second-color-light-theme);
+    padding: 12px 19px;
+
 }
 
 .main-modal__rating-btn:hover{
@@ -231,6 +243,10 @@
     width: 55px;
 }
 
+.main-modal__content-wrapper{
+    margin-bottom: 40px;
+}
+
 @media screen and (min-width: 768px) {
     .main-modal{
         margin-left: 32px;
@@ -250,20 +266,54 @@
         width: 28px;
         height: 28px;
     }
+
+    .main-modal__heart-icon{
+        width: 20px;
+        height: 20px;
+    }
+    
+    .main-modal__btn{
+        height: 48px;
+    }
+
+    .main-modal__fav-btn{
+        padding: 12px 24px;
+
+    }
+    
+    .main-modal__rating-btn{
+        padding: 12px 22px;
+        width: 137px;
+    }
+
     .main-modal__main-container{
         display: flex;
+    }
+    
+    .main-modal__content-container{
+        height: auto;
+    }
+
+    .main-modal__btns-wrapper{
+        justify-content: flex-end;
+        flex-direction: row;
+        margin-left: 32px;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
     
     .main-modal__content-wrapper{
         margin-left: 32px;
         width: 338px;
-        height: auto;
+        margin-bottom: 64px;
     }
     
     .main-modal__gif-wrapper {
         width: 270px;
         height: 259px;
         margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
     }
     
     .main-modal__rating-container{
@@ -288,10 +338,6 @@
         margin-right: 7px;
     }
 
-    .main-modal__description{
-        margin-bottom: 64px;
-    }
-
     .main-modal__card-title{
         font-size: 24px;
         line-height: 1.33; 
@@ -305,7 +351,7 @@
     
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1440px) {
     .main-modal{
         margin-left: 366px;
         margin-right: 366px;
