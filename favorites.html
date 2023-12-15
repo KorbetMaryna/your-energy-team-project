@@ -26,9 +26,11 @@
     />
     <title>YOUR ENERGY</title>
     
-    <script type="module" crossorigin src="/your-energy-team-project/assets/vendor-9ff3fcae.js"></script>
-    <script type="module" crossorigin src="/your-energy-team-project/assets/main-d101bdb1.js"></script>
-    <link rel="stylesheet" href="/your-energy-team-project/assets/main-97eb6830.css">
+    <script type="module" crossorigin src="/your-energy-team-project/commonHelpers.js"></script>
+    <link rel="modulepreload" crossorigin href="/your-energy-team-project/assets/vendor-09c79f2e.js">
+    <link rel="modulepreload" crossorigin href="/your-energy-team-project/assets/quote-ff5326c2.js">
+    <link rel="stylesheet" href="/your-energy-team-project/assets/vendor-e5212ee8.css">
+    <link rel="stylesheet" href="/your-energy-team-project/assets/quote-dc6d9091.css">
   </head>
   <body>
     <header>
@@ -107,6 +109,65 @@
   </div>
 </header>
 
+    <section class="favorites container">
+      <h1 class="favorites-title">Favorites</h1>
+      <div class="favorites-wrapper">
+        <section class="quote-section">
+  <div class="quote-article">
+    <div class="quote-wrapper">
+      <h3 class="quote-title title">Quote of the day</h3>
+    </div>
+
+    <div class="quote-icon-circle">
+      <svg class="icon-running-man" aria-label="icon-running-man">
+        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-running-man"></use>
+      </svg>
+    </div>
+
+    <svg class="icon-commas" aria-label="icon-running-man">
+      <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-commas"></use>
+    </svg>
+  </div>
+  <img
+    srcset="/your-energy-team-project/assets/quote-mobile@1x-b8bbc15d.jpg 320w, /your-energy-team-project/assets/quote-mobile@2x-db2955a4.jpg 640w, /your-energy-team-project/assets/quote-tablet@1x-acea5295.jpg 768w, /your-energy-team-project/assets/quote-tablet@2x-03a9616b.jpg 1536w, /your-energy-team-project/assets/quote-desktop@1x-1791332a.jpg 1280w, /your-energy-team-project/assets/quote-desktop@2x-5960d9bf.jpg 1560w"
+    sizes="(max-width: 767px) 320px, (max-width: 1279px) 768px, (min-width: 1280px) 1280px"
+    src="./img/quote/desktop@1x.jpg"
+    alt="women talking in sportswear"
+    class="quote-img"
+  />
+
+  <article class="daily-norm">
+    <h3 class="daily-norm-title title">110 min</h3>
+    <p class="daily-norm-desc">Daily norm of sports</p>
+    <p class="daily-norm-text">
+      The World Health Organization recommends at least 150 minutes of
+      moderate-intensity aerobic physical activity throughout the week for
+      adults aged 18-64. However, what happens if we adjust that number to 110
+      minutes every day? While it might seem like a high number to hit,
+      dedicating 110 minutes daily to sporting activities may offer unparalleled
+      benefits to physical health, mental well-being, and overall quality of
+      life.
+    </p>
+
+    <div class="daily-norm-icon-circle">
+      <svg class="icon-dumb-bell" aria-label="dumb-bell">
+        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-dumb%20bell"></use>
+      </svg>
+    </div>
+  </article>
+</section>
+
+        <section class="fav-workouts-wrapper">
+  <p class="no-exercises-message js-no-exercises-message" hidden>
+    It appears that you haven't added any exercises to your favorites yet. To
+    get started, you can add exercises that you like to your favorites for
+    easier access in the future.
+  </p>
+  <ul class="fav-workouts-list js-workouts-list"></ul>
+</section>
+
+      </div>
+    </section>
     <div class="mobile-menu-backdrop js-menu-container" id="mobile-menu">
   <div class="mobile-menu-container">
     <button class="mobile-menu-close-btn js-close-menu" type="button">
@@ -174,51 +235,100 @@
 </div>
 
     
-
-    <section class="quote-section">
-  <div class="quote-article">
-    <div class="quote-wrapper">
-      <h3 class="quote-title title">Quote of the day</h3>
-    </div>
-
-    <div class="quote-icon-circle">
-      <svg class="icon-running-man" aria-label="icon-running-man">
-        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-running-man"></use>
+<div id="myModal" class="main-modal__background">
+  <div class="main-modal">
+    <button class="main-modal__close" type="button">
+      <svg class="main-modal__close-icon" aria-label="logo icon">
+        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-close-btn"></use>
       </svg>
-    </div>
-
-    <svg class="icon-commas" aria-label="icon-running-man">
-      <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-commas"></use>
-    </svg>
+    </button>
+    <div class="main-modal__main-container" id="exerciseDetails"></div>
   </div>
-  <img
-    srcset="/your-energy-team-project/assets/quote-mobile@1x-b8bbc15d.jpg 320w, /your-energy-team-project/assets/quote-mobile@2x-db2955a4.jpg 640w, /your-energy-team-project/assets/quote-tablet@1x-acea5295.jpg 768w, /your-energy-team-project/assets/quote-tablet@2x-03a9616b.jpg 1536w, /your-energy-team-project/assets/quote-desktop@1x-1791332a.jpg 1280w, /your-energy-team-project/assets/quote-desktop@2x-5960d9bf.jpg 1560w"
-    sizes="(max-width: 767px) 320px, (max-width: 1279px) 768px, (min-width: 1280px) 1280px"
-    src="./img/quote/desktop@1x.jpg"
-    alt="women talking in sportswear"
-    class="quote-img"
-  />
+</div>
 
-  <article class="daily-norm">
-    <h3 class="daily-norm-title title">110 min</h3>
-    <p class="daily-norm-desc">Daily norm of sports</p>
-    <p class="daily-norm-text">
-      The World Health Organization recommends at least 150 minutes of
-      moderate-intensity aerobic physical activity throughout the week for
-      adults aged 18-64. However, what happens if we adjust that number to 110
-      minutes every day? While it might seem like a high number to hit,
-      dedicating 110 minutes daily to sporting activities may offer unparalleled
-      benefits to physical health, mental well-being, and overall quality of
-      life.
-    </p>
+    <!-- modal backdrop -->
+<div class="modal rating-backdrop">
 
-    <div class="daily-norm-icon-circle">
-      <svg class="icon-dumb-bell" aria-label="dumb-bell">
-        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-dumb%20bell"></use>
+  <!-- modal content -->
+  <div class="rating-container">
+
+    <!-- close button -->
+    <a class="rating__close-btn">
+      <svg class="rating__icon-close">
+        <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-close-btn"></use>
       </svg>
-    </div>
-  </article>
-</section>
+    </a>
+
+    <!-- stars rating -->
+    <fieldset class="rating__fieldset">
+      <legend class="rating__title">Rating</legend>
+
+      <!-- average rating -->
+      <p class="rating__value">0.0</p>
+    
+      <!-- 1 star -->
+      <input class="rating__input" type="radio" id="star1" name="star"/>
+      <label class="rating__label" for="star1">
+        <svg class="rating__icon-star">
+          <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 2 stars -->
+      <input class="rating__input" type="radio" id="star2" name="star"/>
+      <label class="rating__label" for="star2">
+        <svg class="rating__icon-star">
+          <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 3 stars -->
+      <input class="rating__input" type="radio" id="star3" name="star"/>
+      <label class="rating__label" for="star3">
+        <svg class="rating__icon-star">
+          <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 4 starts -->
+      <input class="rating__input" type="radio" id="star4" name="star"/>
+      <label class="rating__label" for="star4">
+        <svg class="rating__icon-star">
+          <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+
+      <!-- 5 stars -->
+      <input class="rating__input" type="radio" id="star5" name="star"/>
+      <label class="rating__label" for="star5">
+        <svg class="rating__icon-star">
+          <use href="/your-energy-team-project/assets/icons-bc7ab812.svg#icon-star-rating"></use>
+        </svg>
+      </label>
+    </fieldset>
+
+    <form class="rating_form">
+      <!-- email input -->
+      <input 
+        class="rating__input-email" 
+        type="email" 
+        name="email" 
+        placeholder="Email"
+        required
+      >
+
+      <!-- comment input -->
+      <textarea 
+        class="rating__input-comment" 
+        name="comment" 
+        placeholder="Your comment"
+      ></textarea>
+    <!-- submit button -->
+    <button class="rating__submit-btn" type="submit">Send</button>
+  </form>
+
+  </div>
+</div>
 
     <div class="loader-container container">
   <div class="loader"></div>
@@ -233,7 +343,6 @@
   />
 </div>
  -->
-
 
     
   </body>
