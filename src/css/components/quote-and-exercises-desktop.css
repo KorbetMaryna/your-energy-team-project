@@ -1,0 +1,12 @@
+.quote-and-exercises-desktop-section {
+  padding-top: 20px;
+  padding-bottom: 132px;
+}
+
+.quote-and-exercises-desktop-container {
+  max-width: 1440px;
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+}
