@@ -1,0 +1,257 @@
+.favorites-title {
+  margin-top: 80px;
+  color: var(--main-color-light-theme);
+
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.36;
+  letter-spacing: -0.02em;
+}
+
+.favorites-wrapper {
+  padding-top: 20px;
+}
+
+.no-exercises-message {
+  margin-top: 20px;
+  margin-bottom: 46px;
+  padding: 0 8px;
+  color: var(--main-color-light-theme);
+  text-align: center;
+  line-height: 1.286;
+}
+
+.fav-workouts-list {
+  margin-top: 20px;
+  padding-bottom: 80px;
+}
+
+.fav-workouts-list-item {
+  padding: 16px;
+  border-radius: 15px;
+  background-color: white;
+  max-width: 335px; /*TODO*/
+}
+
+.fav-workouts-list-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.fav-workouts-list-item-buttons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.fav-workouts-tag-remove-wrapper {
+  display: flex;
+  justify-content: center;
+  column-gap: 3px;
+}
+
+.fav-workouts-tag {
+  display: block;
+  padding: 5px 8px;
+  border-radius: 15px;
+  border: 1px solid var(--main-color-light-theme);
+
+  text-transform: uppercase;
+  color: var(--main-color-light-theme);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.fav-workouts-remove-button {
+  border: none;
+  background-color: transparent;
+  display: block;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color var(--transition-duration-time-function),
+    stroke var(--transition-duration-time-function);
+}
+
+.fav-workouts-remove-button:hover {
+  background-color: var(--grey-five);
+}
+
+.fav-workouts-remove-button:hover .fav-workouts-remove-icon {
+  stroke: var(--second-color-light-theme);
+}
+
+.fav-workouts-remove-icon {
+  display: block;
+  stroke: var(--main-color-light-theme);
+  fill: none;
+  background-color: none;
+}
+
+.fav-workouts-start-button {
+  border: none;
+  background-color: transparent;
+  display: block;
+  line-height: 1;
+  padding: 0px;
+}
+
+.fav-workouts-start-text {
+  color: var(--main-color-light-theme);
+  line-height: 1.286;
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fav-workouts-arrow-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 1px;
+  stroke: var(--main-color-light-theme);
+  fill: none;
+  background-color: none;
+  transition: transform var(--transition-duration-time-function);
+}
+
+.fav-workouts-start-button:hover .fav-workouts-arrow-icon {
+  transform: translateX(4px);
+}
+
+.fav-workouts-excercise-name-wrapper {
+  display: flex;
+  column-gap: 16px;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.fav-workouts-running-icon-wrapper {
+  background-color: var(--main-color-light-theme);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.fav-workouts-running-icon {
+  margin: 0;
+  vertical-align: center;
+  fill: var(--second-color-light-theme);
+}
+
+.fav-workouts-excercise-name {
+  margin: 0;
+  color: var(--main-color-light-theme);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fav-workouts-descr-list {
+  display: flex;
+  column-gap: 10px;
+  margin-top: 16px;
+}
+
+.fav-workouts-descr-list-category {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: var(--grey-two);
+
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: DM Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.fav-workouts-descr-list-value {
+  max-width: 40px;
+  min-width: 32px;
+  color: var(--main-color-light-theme);
+}
+
+@media screen and (min-width: 768px) {
+  .favorites-title {
+    margin-top: 100px;
+    font-size: 44px;
+    line-height: 1.09;
+    letter-spacing: -0.02em;
+  }
+
+  .favorites-wrapper {
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .no-exercises-message {
+    margin-top: 132px;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 0 75px;
+    margin-bottom: 187px;
+  }
+
+  .fav-workouts-list {
+    margin-top: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 32px;
+  }
+
+  .fav-workouts-excercise-name {
+    font-size: 24px;
+    line-height: 1.33;
+  }
+
+  .fav-workouts-list-item:not(:last-child) {
+    margin-bottom: 0px;
+  }
+
+  .fav-workouts-list-item {
+    min-width: 344px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .favorites-title {
+    margin-top: 90px;
+  }
+
+  .favorites-wrapper {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 32px;
+    padding-bottom: 64px;
+  }
+
+  .no-exercises-message {
+    margin-top: 114px;
+    margin-bottom: 16px;
+  }
+
+  .fav-workouts-wrapper {
+    height: calc(100vh - 250px - 64px);
+    overflow: auto;
+  }
+
+  .fav-workouts-list {
+    margin-top: 0;
+  }
+
+  .fav-workouts-list-item {
+    min-width: 405px;
+  }
+}

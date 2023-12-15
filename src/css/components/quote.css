@@ -9,8 +9,8 @@
   max-width: 375px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 40px;
-  margin-bottom: 80px;
+  /* margin-top: 40px; */
+  /* margin-bottom: 80px; */
 }
 
 /* Quote of the day */
@@ -180,8 +180,8 @@
     column-gap: 16px;
 
     max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .quote-article {
@@ -225,23 +225,16 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .content-wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    column-gap: 32px;
-  }
-
+@media screen and (min-width: 1440px) {
   .quote-section {
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 32px;
-    column-gap: 16px;
+    flex-direction: column;
+    flex-wrap: no-wrap;
+    gap: 32px;
 
     max-width: 444px;
     padding-left: 0;
     padding-right: 0;
+    margin: 0;
   }
 
   .quote-article {
@@ -254,6 +247,7 @@
 
   .quote-img {
     max-width: 444px;
+    height: 242px;
   }
 
   .daily-norm {
@@ -262,6 +256,6 @@
     padding-bottom: 40px;
     padding-left: 90px;
     width: 100%;
-    height: 100%;
+    height: 315px;
   }
 }

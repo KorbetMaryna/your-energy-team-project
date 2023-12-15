@@ -2,6 +2,7 @@ import iziToast from 'izitoast';
 import { fetchApiData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
+import { toggleLoader } from './loader';
 
 iziToast.settings({
   position: 'topRight',
@@ -28,12 +29,14 @@ let basicUrlParams = {
   page: 1,
 };
 
-function checkScreenWidth(filter, width) {
+export function checkScreenWidth(filter, width) {
   if (filter !== '') {
     basicUrlParams.limit = width < 768 ? 9 : 12;
   } else {
     basicUrlParams.limit = width < 768 ? 8 : 10;
   }
+
+  return basicUrlParams.limit;
 }
 
 checkScreenWidth(basicUrlParams.filter, window.innerWidth);
@@ -52,23 +55,35 @@ refs.filterButtons.forEach(el => {
     basicUrlParams.filter = el.innerText;
     basicUrlParams.page = 1;
     fetchData('filters', basicUrlParams);
-    document.querySelector('.active-button').classList.remove('active-button');
-    el.classList.add('active-button');
+
+    makeFilterButtonActive(el);
   });
 });
 
+export function makeFilterButtonActive(el) {
+  document.querySelector('.active-button').classList.remove('active-button');
+  el.classList.add('active-button');
+}
+
 async function fetchData(type, obj) {
+  toggleLoader(true)
   await fetchApiData(type, obj)
     .then(data => {
+      const { page, totalPages } = data;
+
       if (data.results[0]?.filter) {
         checkScreenWidth(basicUrlParams.filter, window.innerWidth);
-        createFilterMarkup('filters', data);
+        const markupType = 'filters';
+        createFilterMarkup(data);
+        renderPagination({ page, totalPages, markupType });
         refs.headlineCategory.innerText = '';
         refs.headlineWrapper.classList.add('visually-hidden');
-        refs.searchForm.classList.add('visually-hidden');
+        hideSearchInput();
       } else {
         checkScreenWidth(basicUrlParams.filter, window.innerWidth);
-        createExercisesMarkup('exercises', data);
+        const markupType = 'exercises';
+        createExercisesMarkup(data);
+        renderPagination({ page, totalPages, markupType });
       }
     })
     .catch(err => {
@@ -76,24 +91,21 @@ async function fetchData(type, obj) {
       iziToast.error({
         message: 'Something went wrong :-( try again later.',
       });
-    });
+    }).finally(toggleLoader(false));
 }
 
-function createFilterMarkup(type, data) {
+function createFilterMarkup({ results }) {
   refs.tilesCategoryList.innerHTML = '';
   refs.tilesCategoryList.classList.add('visually-hidden');
   refs.tilesFilterList.classList.remove('visually-hidden');
-
-  const { page, totalPages, results } = data;
 
   const markup = results
     .map(({ filter, name, imgURL }) => filterMarkup(filter, name, imgURL))
     .join('');
   refs.tilesFilterList.innerHTML = markup;
-  renderPagination(page, totalPages, type);
 }
 
-refs.tilesFilterList.addEventListener('click', onTileClick);
+refs.tilesFilterList?.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();
@@ -120,12 +132,20 @@ function onTileClick(e) {
   Object.assign(basicUrlParams, { [filter]: name });
 
   fetchData('exercises', basicUrlParams);
-  refs.headlineWrapper.classList.remove('visually-hidden');
-  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
+  displayHeadline(name);
   refs.searchForm.classList.remove('visually-hidden');
 }
 
-function createExercisesMarkup(type, { page, totalPages, results }) {
+export function displayHeadline(name) {
+  refs.headlineWrapper.classList.remove('visually-hidden');
+  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
+}
+
+export function hideSearchInput() {
+  refs.searchForm.classList.add('visually-hidden');
+}
+
+export function createExercisesMarkup({ results }) {
   if (!results.length) {
     return iziToast.warning({
       message: "Unfortunately, we don't have any exercises in this category",
@@ -141,10 +161,9 @@ function createExercisesMarkup(type, { page, totalPages, results }) {
     .join('');
 
   refs.tilesCategoryList.innerHTML = markup;
-  renderPagination(page, totalPages, type);
 }
 
-function renderPagination(page, totalPages, type) {
+export function renderPagination({ page, totalPages, type, customListener }) {
   refs.paginationList.innerHTML = '';
 
   const maxPagesToShow = 6;
@@ -181,7 +200,11 @@ function renderPagination(page, totalPages, type) {
 
       pageElement.addEventListener('click', () => {
         basicUrlParams.page = i;
-        fetchData(type, basicUrlParams);
+        if (customListener) {
+          customListener(basicUrlParams.page);
+        } else {
+          fetchData(type, basicUrlParams);
+        }
       });
 
       refs.paginationList.appendChild(pageElement);
