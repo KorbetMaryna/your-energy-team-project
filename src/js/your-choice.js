@@ -108,11 +108,33 @@ class YourChoiceModal {
     }
   }
 
+  getFormValues() {
+    return {
+      bodyPart: this.bodyPartsOptions[this.bodyPartsSelectElem.value].name,
+      muscle: this.musclesOptions[this.musclesSelectElem.value].name,
+      equipment: this.equipmentOptions[this.equipmentSelectElem.value].name,
+    };
+  }
+
   async triggerSearchExercises() {
+    const { bodyPart, muscle, equipment } = this.getFormValues();
+    if (!bodyPart || !muscle || !equipment) {
+      return;
+    }
+
     this.submitBtnElem.disabled = true;
 
     try {
-      await this.getAndRenderExercises({ page: 1 });
+      const isFound = await this.getAndRenderExercises({ page: 1 });
+      if (!isFound) {
+        iziToast.warning({
+          message:
+            'No exercises found. Try another set of muscle, body part and equipment paramaters.',
+        });
+        this.submitBtnElem.disabled = false;
+        return;
+      }
+
       displayHeadline('you choice');
       hideSearchInput();
       MicroModal.close();
@@ -129,10 +151,7 @@ class YourChoiceModal {
   }
 
   async getAndRenderExercises({ page = 1 }) {
-    const bodyPart = this.bodyPartsOptions[this.bodyPartsSelectElem.value].name;
-    const muscle = this.musclesOptions[this.musclesSelectElem.value].name;
-    const equipment =
-      this.equipmentOptions[this.equipmentSelectElem.value].name;
+    const { bodyPart, muscle, equipment } = this.getFormValues();
 
     const limit = checkScreenWidth();
 
@@ -153,11 +172,7 @@ class YourChoiceModal {
     console.log({ results });
 
     if (!(results || []).length) {
-      iziToast.warning({
-        message:
-          'No exercises found. Try another set of muscle, body part, equipment paramaters.',
-      });
-      return;
+      return false;
     }
 
     createExercisesMarkup({ results });
@@ -168,6 +183,7 @@ class YourChoiceModal {
         this.getAndRenderExercises({ page });
       },
     });
+    return true;
   }
 }
 
