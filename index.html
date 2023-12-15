@@ -25,9 +25,9 @@
     />
     <title>YOUR ENERGY</title>
     
-    <script type="module" crossorigin src="/your-energy-team-project/assets/vendor-f9c1c104.js"></script>
-    <script type="module" crossorigin src="/your-energy-team-project/assets/main-e07e56a9.js"></script>
-    <link rel="stylesheet" href="/your-energy-team-project/assets/main-3069591b.css">
+    <script type="module" crossorigin src="/your-energy-team-project/assets/vendor-9ff3fcae.js"></script>
+    <script type="module" crossorigin src="/your-energy-team-project/assets/main-d101bdb1.js"></script>
+    <link rel="stylesheet" href="/your-energy-team-project/assets/main-97eb6830.css">
   </head>
   <body>
     <header>
@@ -357,17 +357,22 @@
       </button>
       <button class="exercises-category-button js-button">Body parts</button>
       <button class="exercises-category-button js-button">Equipment</button>
+      <button
+        class="exercises-category-button your-choice-button"
+        data-micromodal-trigger="your-choice-modal"
+      >
+        Your choice
+      </button>
     </div>
   </div>
 </div>
 
     <div class="exercises-and-quote-container">
       <section class="exercises-subcontainer">
-    <ul class="exercises-tiles-filter-list js-tiles-filter-list"></ul>
-    <ul class="exercises-tiles-category-list js-tiles-category-list"></ul>
-    <ul class="exercises-pagination-list js-pagination"></ul>
+  <ul class="exercises-tiles-filter-list js-tiles-filter-list"></ul>
+  <ul class="exercises-tiles-category-list js-tiles-category-list"></ul>
+  <ul class="exercises-pagination-list js-pagination"></ul>
 </section>
-
 
       <section class="quote-section">
   <div class="quote-article">
@@ -516,10 +521,59 @@
   </div>
 </footer>
 
-
     <div class="loader-container container">
   <div class="loader"></div>
 </div>
+
+
+    <div
+      class="modal micromodal-slide"
+      id="your-choice-modal"
+      aria-hidden="true"
+    >
+      <div class="modal__overlay" tabindex="-1">
+        <div
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="your-choice-modal-title"
+        >
+          <header class="modal__header">
+            <p class="modal__title" id="your-choice-modal-title">
+              Choose your set
+            </p>
+            <button
+              class="modal__close"
+              aria-label="Close modal"
+              data-micromodal-close
+            ></button>
+          </header>
+          <main class="modal__content" id="your-choice-modal-content">
+            <div class="modal__content-loading">Loading...</div>
+
+            <div class="select-group hidden">
+              <label>Body part</label>
+              <select id="you-choice-body-part"></select>
+            </div>
+
+            <div class="select-group hidden">
+              <label>Muscle</label>
+              <select id="your-choice-muscle"></select>
+            </div>
+
+            <div class="select-group hidden">
+              <label>Equipment</label>
+              <select id="your-choice-equipment"></select>
+            </div>
+          </main>
+          <div class="modal__footer">
+            <button id="search-exercises" class="modal__btn modal__btn-primary">
+              Search excercises
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--  <div class="container page-error-container">
   <img
