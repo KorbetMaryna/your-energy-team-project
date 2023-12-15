@@ -30,6 +30,18 @@ document.addEventListener('DOMContentLoaded', function() {
       let currentExercise = JSON.parse(localStorage.getItem('currentExercise')) || {};
       refs.ratingValue.innerHTML = currentExercise.rating.toString().includes('.') ? Math.round(currentExercise.rating * 10) / 10 : currentExercise.rating + '.0';
 
+      const onReset = () => {
+        selectedStar = null
+        refs.emailInput.value = ''
+        refs.commentInput.value = ''
+
+        const starsArray = Array.from(refs.starsContainer);
+        starsArray.forEach((star, index) => {
+          const starIcon = star.nextElementSibling.querySelector('.rating__icon-star');
+            starIcon.style.fill = 'var(--second-color-light-theme)';
+            starIcon.style.opacity = 0.2;
+        });
+      }
       const openModal = () => {
         mainModal.style.display = "none"
         refs.backdrop.classList.add('modal-open');
@@ -37,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       const closeModal = () => {
+        onReset()
         refs.backdrop.classList.remove('modal-open');
         refs.closeButton.removeEventListener('click', closeModal);
         mainModal.style.display = "flex"
