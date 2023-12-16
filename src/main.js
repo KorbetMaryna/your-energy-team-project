@@ -10,4 +10,4 @@ import './js/loader';
 import './js/search/search-input';
 // import './js/showPageError';
 import './js/handlerScrollUp';
-
+import './js/search/index';
