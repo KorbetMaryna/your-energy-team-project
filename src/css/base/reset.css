@@ -18,6 +18,10 @@ ul {
   list-style: none;
 }
 
+li {
+  list-style: none;
+}
+
 a {
   color: currentColor;
   text-decoration: none;
@@ -25,6 +29,9 @@ a {
 }
 
 button {
+  padding: 0;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
 
