@@ -10,8 +10,8 @@ import {
 import {
   checkScreenWidth,
   createExercisesMarkup,
-  displayHeadline,
-  hideSearchInput,
+  createHeadline,
+  hideHeadlineAndSearch,
   makeFilterButtonActive,
   renderPagination,
 } from './exercises';
@@ -135,8 +135,8 @@ class YourChoiceModal {
         return;
       }
 
-      displayHeadline('you choice');
-      hideSearchInput();
+      createHeadline('you choice');
+      hideHeadlineAndSearch();
       MicroModal.close();
       makeFilterButtonActive(youChoiceBtnElem);
     } catch (err) {
@@ -153,7 +153,7 @@ class YourChoiceModal {
   async getAndRenderExercises({ page = 1 }) {
     const { bodyPart, muscle, equipment } = this.getFormValues();
 
-    const limit = checkScreenWidth();
+    const limit = checkScreenWidth('');
 
     console.log('Calling api with', {
       bodyPart,

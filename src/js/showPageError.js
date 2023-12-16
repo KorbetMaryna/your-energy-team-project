@@ -1,8 +1,5 @@
 import { toggleLoader } from "./loader";
 
-const notFoundImage = document.querySelector('.page-error-container');
-
-
 document.addEventListener('DOMContentLoaded', function () {
     checkNetworkStatus();
 
@@ -12,10 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('offline', function () {
         handleNetworkChange(false);
-    });
-
-    window.addEventListener('load', function () {
-        handlePageLoad();
     });
 });
 
@@ -28,22 +21,26 @@ function checkNetworkStatus() {
 }
 
 function handleNetworkChange(online) {
-    if (!showLoader) {
-        if (online) {
-            notFoundImage.style.display = 'none';
-        } else {
-            notFoundImage.style.display = 'block';
+    const isLoaderVisible = toggleLoader(true);
+    const isPageErrorContainer = document.querySelector('.page-error-container');
+
+    if (!online || isLoaderVisible) {
+        if (!isPageErrorContainer) {
+            const notFoundContainerPageError = document.createElement('div');
+            notFoundContainerPageError.classList.add('page-error-container');
+
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Sorry, the page did not load.';
+            
+            notFoundContainerPageError.appendChild(errorMessage);
+            document.body.appendChild(notFoundContainerPageError);
+
+            document.body.classList.toggle('page-error-open');
+        }
+    } else {
+        if (isPageErrorContainer) {
+            isPageErrorContainer.remove();
+            document.body.classList.remove('page-error-open');
         }
     }
 }
-
-function showLoader() {
-    toggleLoader(true);
-    notFoundImage.style.display = 'none';
-}
-
-function closeLoader() {
-    toggleLoader(false);
-}
-
-

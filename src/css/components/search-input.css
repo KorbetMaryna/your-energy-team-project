@@ -3,6 +3,7 @@
 }
 .search-form {
   margin-bottom: 20px;
+  z-index: 1;
 }
 
 .search-form--label {
@@ -16,13 +17,15 @@
   height: 44px;
   padding-left: 14px;
   padding-right: 46px;
-
   border-radius: 30px;
   border: 1px solid var(--main-color-light-theme);
-  line-height: 1.43;
-}
+  line-height: 1.43;}
 .search-form--input:focus {
   outline: none;
+}
+
+.search-form--input:focus::placeholder {
+  color: transparent;
 }
 
 .search-form--btn {
@@ -30,7 +33,6 @@
   top: 50%;
   right: 14px;
   transform: translateY(-50%);
-  z-index: 10;
 
   background-color: transparent;
   border: none;
@@ -48,7 +50,8 @@
   .search-form--input {
     width: 273px;
     font-size: 16px;
-    line-height: 1.5; /* 150% */
+    line-height: 1.5;
+    height: 48px;
   }
   .exercises-data {
     display: flex;

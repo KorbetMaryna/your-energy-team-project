@@ -20,7 +20,7 @@ const refs = {
   paginationList: document.querySelector('.js-pagination'),
 };
 
-let basicUrlParams = {
+export let basicUrlParams = {
   filter: 'Muscles',
   bodypart: '',
   muscles: '',
@@ -29,7 +29,7 @@ let basicUrlParams = {
   page: 1,
 };
 
-checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+checkScreenWidth(basicUrlParams.filter);
 
 fetchData('filters', basicUrlParams);
 
@@ -41,7 +41,7 @@ refs.filterButtons.forEach(el => {
   });
 });
 
-async function fetchData(type, obj) {
+export async function fetchData(type, obj) {
   toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
@@ -50,8 +50,7 @@ async function fetchData(type, obj) {
         const markupType = 'filters';
         createFilterMarkup(data);
         renderPagination({ page, totalPages, type: markupType });
-        hideHeadlineCategory();
-        hideSearchInput();
+        hideHeadlineAndSearch();
       } else {
         const markupType = 'exercises';
         createExercisesMarkup(data);
@@ -86,8 +85,7 @@ function onTileClick(e) {
   let { name, filter } = e.target.parentNode.dataset;
   resetCategoryUrlObj(basicUrlParams, name, filter);
   fetchData('exercises', basicUrlParams);
-  displayHeadline(name);
-  refs.searchForm.classList.remove('visually-hidden');
+  createHeadline(name);
 }
 
 export function createExercisesMarkup({ results }) {
@@ -96,6 +94,7 @@ export function createExercisesMarkup({ results }) {
       message: "Unfortunately, we don't have any exercises in this category",
     });
   }
+  displayHeadlineAndSearch();
   clearFilterMarkup();
   const markup = results
     .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
@@ -106,25 +105,26 @@ export function createExercisesMarkup({ results }) {
   refs.tilesCategoryList.innerHTML = markup;
 }
 
-function hideHeadlineCategory() {
+export function hideHeadlineAndSearch() {
   refs.headlineCategory.innerText = '';
   refs.headlineWrapper.classList.add('visually-hidden');
-}
-
-export function displayHeadline(name) {
-  refs.headlineWrapper.classList.remove('visually-hidden');
-  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
-}
-
-export function hideSearchInput() {
   refs.searchForm.classList.add('visually-hidden');
 }
 
-export function checkScreenWidth(filter, width) {
+export function displayHeadlineAndSearch() {
+  refs.headlineWrapper.classList.remove('visually-hidden');
+  refs.searchForm.classList.remove('visually-hidden');
+}
+
+export function createHeadline(name) {
+  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
+}
+
+export function checkScreenWidth(filter) {
   if (filter !== '') {
-    basicUrlParams.limit = width < 768 ? 9 : 12;
+    basicUrlParams.limit = window.innerWidth < 768 ? 9 : 12;
   } else {
-    basicUrlParams.limit = width < 768 ? 8 : 10;
+    basicUrlParams.limit = window.innerWidth < 768 ? 8 : 10;
   }
   return basicUrlParams.limit;
 }
@@ -140,7 +140,7 @@ function resetExercisesUrlObj(basicUrlParams, el) {
     muscles: '',
     equipment: '',
   };
-  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+  checkScreenWidth(basicUrlParams.filter);
   Object.assign(basicUrlParams, obj);
   basicUrlParams.filter = el.innerText;
   basicUrlParams.page = 1;
@@ -152,7 +152,7 @@ function resetCategoryUrlObj(basicUrlParams, name, filter) {
     filter = 'bodypart';
   }
   Object.assign(basicUrlParams, { [filter]: name });
-  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+  checkScreenWidth(basicUrlParams.filter);
 }
 
 function clearCategoryMarkup() {
@@ -193,7 +193,6 @@ export function renderPagination({ page, totalPages, type, customListener }) {
   }
 
   function renderPages(start, end, currentPage, type) {
-    console.log('type: ', type);
     for (let i = start; i <= end; i++) {
       const pageElement = document.createElement('span');
       pageElement.classList.add('exercises-pagination-item');

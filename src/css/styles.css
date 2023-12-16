@@ -15,17 +15,17 @@
 @import url('../css/components/exercises-meta.css');
 @import url('../css/components/exercises.css');
 @import url('../css/components/quote.css');
+@import url('../css/components/quote-favorites.css');
 @import url('../css/components/your-choice.css');
 @import url('../css/components/footer.css');
 @import url('../css/components/privacy-terms.css');
 @import url('../css/components/page-error.css');
 @import url('../css/components/meta-exercises-quote-section.css');
 @import url('../css/components/favorite-workouts.css');
-@import url('../css//components/scroll-up.css');
+@import url('../css/components/scroll-up.css');
 
 /*-----layouts-----*/
 @import url('../css/layouts/loader.css');
 
 /*-----variables-----*/
 @import url('./utils/variables.css');
-

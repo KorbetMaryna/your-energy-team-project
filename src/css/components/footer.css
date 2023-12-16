@@ -5,7 +5,6 @@ footer {
 
 .footer-wrapper {
   max-width: 375px;
-  height: 590px;
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -113,6 +112,7 @@ footer {
   border-radius: 30px;
   background-color: var(--main-color-light-theme);
   border: 1px solid var(--second-color-light-theme);
+  color: var(--second-color-light-theme);
 }
 
 .footer-sub-form-input::placeholder {
@@ -145,17 +145,20 @@ footer {
   font-weight: 400;
   line-height: 129%;
 
-  transition: box-shadow var(--transition-duration-time-function);
+  transition: background-color var(--transition-duration-time-function),
+    color var(--transition-duration-time-function);
 }
 
 .submitBtn:hover,
 .submitBtn:focus {
-  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+  background-color: var(--main-color-light-theme);
+  color: var(--second-color-light-theme);
+  border: 1px solid var(--second-color-light-theme);
 }
 
 .footer-information {
   margin-top: 115px;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -213,6 +216,7 @@ footer {
   .footer-title-form-wrapper {
     max-width: 400px;
     gap: 32px;
+    margin-bottom: 64px;
   }
 
   .footer-title {
@@ -244,6 +248,7 @@ footer {
   }
 
   .footer-information {
+    width: 100%;
     margin-top: 0;
     justify-content: space-between;
     align-items: flex-end;
@@ -280,6 +285,7 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     gap: 115px;
+    margin-bottom: 70px;
   }
 
   .footer-title {

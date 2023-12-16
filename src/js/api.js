@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'https://your-energy.b.goit.study/api';
 
-async function fetchApiData(type, params) {
+export async function fetchApiData(type, params) {
   for (const key of Object.keys(params)) {
     if (params[key] === '') {
       delete params[key];
@@ -15,7 +15,18 @@ async function fetchApiData(type, params) {
   return data;
 }
 
-export { fetchApiData };
+export async function fetchSearchData(params) {
+  for (const key of Object.keys(params)) {
+    if (params[key] === '') {
+      delete params[key];
+    }
+  }
+
+  const urlParams = new URLSearchParams(params);
+
+  const { data } = await axios(`${BASE_URL}/exercises?${urlParams}`);
+  return data;
+}
 
 export const fetchMuscles = async ({ page = 1, limit = 100 } = {}) => {
   const { data } = await axios.get(

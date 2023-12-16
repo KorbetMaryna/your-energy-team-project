@@ -5,10 +5,9 @@ const QUOTE = document.querySelector('.quote-wrapper');
 
 async function checkQuote() {
   const todayDate = new Date().toLocaleDateString();
-  const restoredData = getQuoteFromStorage();
-  const restoredQuote = JSON.parse(restoredData);
+  const restoredQuote = getQuoteFromStorage(todayDate);
 
-  if (!restoredQuote || restoredQuote.date != todayDate) {
+  if (!validateStoredQuote(restoredQuote, todayDate)) {
     let { quote, author } = await getQuote();
 
     quoteMarkup(quote, author);
@@ -29,7 +28,10 @@ function storeQuote(quote, author, date) {
 }
 
 function getQuoteFromStorage() {
-  return localStorage.getItem('quoteOfDay');
+  const restoredData = localStorage.getItem('quoteOfDay');
+  const restoredQuote = JSON.parse(restoredData);
+
+  return restoredQuote;
 }
 
 async function getQuote() {
@@ -54,5 +56,21 @@ function errorHandler(errorMessage) {
     message: `${errorMessage}`,
   });
 }
+
+function validateStoredQuote(restoredQuote, todayDate) {
+  if (
+    !restoredQuote ||
+    !restoredQuote.quote ||
+    !restoredQuote.date ||
+    restoredQuote.author ||
+    restoredQuote.date != todayDate
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
 checkQuote();
+
 export { checkQuote, errorHandler };
