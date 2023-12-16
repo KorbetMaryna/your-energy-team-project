@@ -66,7 +66,7 @@ export function makeFilterButtonActive(el) {
 }
 
 async function fetchData(type, obj) {
-  toggleLoader(true)
+  toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
