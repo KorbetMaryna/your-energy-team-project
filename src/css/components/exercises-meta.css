@@ -83,13 +83,16 @@
   height: 44px;
   padding-left: 14px;
   padding-right: 46px;
-
   border-radius: 30px;
   border: 1px solid var(--main-color-light-theme);
   line-height: 1.43;
 }
 .search-form--input:focus {
   outline: none;
+}
+
+.search-form--input:focus::placeholder {
+  color: transparent;
 }
 
 .search-form--btn {
@@ -126,7 +129,7 @@
     letter-spacing: -0.48px;
   }
   .exercises-buttons-wrapper {
-      padding-bottom: 8px;
+    padding-bottom: 8px;
   }
   .exercises-category-button {
     font-size: 16px;
@@ -162,7 +165,7 @@
   .exercises-input-and-buttons-wrapper {
     margin-bottom: 0;
   }
-  .search-form { 
+  .search-form {
     margin-right: 30px;
     margin-bottom: 0;
   }
