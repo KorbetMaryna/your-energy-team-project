@@ -10,7 +10,8 @@
     border: none;
     background-image: url('../img/scroll-up/scroll-up-mobile.png');
     background-repeat: no-repeat;
-    /*   z-index: 100000; */
+
+    z-index: 1;
     transition: scale var(--transition-duration-time-function);
 }
 
@@ -22,8 +23,8 @@
 
 @media screen and (min-width: 768px) {
     .scroll-up-img {
-        bottom: 15px;
-        right: 32px;
+        bottom: 40px;
+        right: 15px;
     }
 }
 

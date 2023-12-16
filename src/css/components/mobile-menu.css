@@ -9,7 +9,7 @@
     visibility: hidden;
     pointer-events: none;
     background: var(--main-color-light-theme, #242424);
-    z-index: 1000;
+    z-index: 10;
     transition: transform var(--transition-duration-time-function);
 }
 
