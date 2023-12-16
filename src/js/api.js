@@ -42,10 +42,12 @@ export const fetchExercises = async ({
   equipment,
   page = 1,
   limit = 100,
+  keyword,
 }) => {
   const urlParams = new URLSearchParams({
     bodypart: bodyPart,
     muscles: muscle,
+    keyword,
     equipment,
     page,
     limit,
