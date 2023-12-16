@@ -1,3 +1,4 @@
+import iziToast from 'izitoast';
 import { debounce } from '../helpers/debounce';
 import { showEl, hideEl } from '../helpers/toggleHidden';
 import { refs } from './refs';
@@ -7,7 +8,7 @@ import {
   basicUrlParams,
   createExercisesMarkup,
 } from '../exercises';
-import { fetchExercises } from '../api';
+import { fetchSearchData } from '../api';
 import { renderPagination } from '../exercises';
 
 const processChange = debounce(e => onChange(e), 400);
@@ -36,8 +37,8 @@ async function onSubmitSearch(e) {
   e.preventDefault();
   const value = e.target.elements.search.value;
   if (value.trim()) {
-    const limit = checkScreenWidth();
-    const { totalPages, results } = await fetchExercises({
+    const limit = checkScreenWidth('');
+    const { totalPages, results } = await fetchSearchData({
       bodyPart: basicUrlParams.bodypart || '',
       muscle: basicUrlParams.muscles || '',
       equipment: basicUrlParams.equipment || '',
@@ -52,6 +53,10 @@ async function onSubmitSearch(e) {
       totalPages,
       type: 'exercises',
     });
-    onClearSearchInput();
+  } else {
+    iziToast.warning({
+      message: 'You should type something before searching!',
+    });
   }
+  onClearSearchInput();
 }
