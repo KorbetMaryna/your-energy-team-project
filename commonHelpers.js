@@ -1,4 +1,44 @@
-import"./assets/showPageError-b719518f.js";import{i as v}from"./assets/vendor-09c79f2e.js";const o={noExMessage:document.querySelector(".js-no-exercises-message"),workoutsList:document.querySelector(".js-workouts-list")};d();function d(){let s=JSON.parse(localStorage.getItem("savedExercises"));n(s),o.workoutsList.addEventListener("click",f);let e,t;setInterval(()=>{e=JSON.parse(localStorage.getItem("savedExercises")),e!==null&&(t=e.length===s.length,t&&(t=e.every((i,a)=>i._id===s[a]._id)),t||(s=[...e],n(s)))},2e3)}function n(s){!s||s.length===0?(o.noExMessage.hidden=!1,o.workoutsList.classList.remove("fav-workouts-list"),o.workoutsList.innerHTML=""):(o.noExMessage.hidden=!0,o.workoutsList.classList.add("fav-workouts-list"),o.workoutsList.innerHTML=l(s))}function f(s){const e=s.target;if(!e.closest(".fav-workouts-remove-button"))return;const a=e.closest(".fav-workouts-list-item").dataset.id,r=JSON.parse(localStorage.getItem("savedExercises")),c=r.findIndex(u=>u._id===a);c===-1?m("error","Excercise is already removed from favorites."):(r.splice(c,1),localStorage.setItem("savedExercises",JSON.stringify(r))),o.workoutsList.innerHTML=l(r),n(r)}function l(s){return s.map(e=>g(e)).join("")}function g({_id:s,name:e,time:t,burnedCalories:i,bodyPart:a,target:r}={}){return`<li class="fav-workouts-list-item" data-id="${s}">
+import"./assets/showPageError-85030a72.js";import{i as v}from"./assets/vendor-09c79f2e.js";function f(t,e){return h(t===1).concat(w(t,e),m(t===e))}function w(t,e){let a="";for(let n=1;n<=e;n+=1){if(n<t-2){a=a.concat('<li><span class="pagination-number">...</span></li>'),n=t-3;continue}if(n>t+2){a=a.concat('<li><span class="pagination-number">...</span></li>');break}a=a.concat(`<li>
+        <button class="js-page pagination-number${n===t?" active":""}" type="button"  data-page-navigate=${n}>${n}</button>
+      </li>`)}return`<ul class="fav-workouts-pagination-numbers">
+      ${a}
+    </ul>`}function h(t){return`    <ul class="pagination-btns fav-workouts-pagination-start">
+      <li class="">
+        <button class="js-page left pagination-btn" type="button"${t?" disabled":""} data-page-navigate="first-page">
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+        </button>
+      </li>
+      <li class="">
+        <button class="js-page left pagination-btn" type="button"${t?" disabled":""} data-page-navigate="previous-page">
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+        </button>
+      </li>
+    </ul>`}function m(t){return`<ul class="pagination-btns fav-workouts-pagination-end">
+      <li class="">
+        <button class="js-page pagination-btn" type="button"${t?" disabled":""} data-page-navigate="next-page">
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+        </button>
+      </li>
+      <li class="">
+        <button class="js-page pagination-btn" type="button"${t?" disabled":""} data-page-navigate="last-page">
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+          <svg class="" width="7px" height="14px">
+            <use href="./img/icons.svg#icon-next"></use>
+          </svg>
+        </button>
+      </li>
+    </ul>`}function u(t){return t.map(e=>k(e)).join("")}function k({_id:t,name:e,time:a,burnedCalories:n,bodyPart:l,target:o}={}){return`<li class="fav-workouts-list-item" data-id="${t}">
       <div class="fav-workouts-list-item-buttons">
         <div class="fav-workouts-tag-remove-wrapper">
           <span class="fav-workouts-tag">Workout</span>
@@ -29,14 +69,14 @@ import"./assets/showPageError-b719518f.js";import{i as v}from"./assets/vendor-09
       <ul class="fav-workouts-descr-list">
         <li class="fav-workouts-descr-list-category">
           Burned calories:
-          <span class="fav-workouts-descr-list-value">${i} / ${t} min</span>
+          <span class="fav-workouts-descr-list-value">${n} / ${a} min</span>
         </li>
         <li class="fav-workouts-descr-list-category">
-          Body part: <span class="fav-workouts-descr-list-value">${a}</span>
+          Body part: <span class="fav-workouts-descr-list-value">${l[0].toUpperCase()+l.substring(1)}</span>
         </li>
         <li class="fav-workouts-descr-list-category">
-          Target: <span class="fav-workouts-descr-list-value">${r}</span>
+          Target: <span class="fav-workouts-descr-list-value">${o[0].toUpperCase()+o.substring(1)}</span>
         </li>
       </ul>
-    </li>`}function m(s,e){let t;s==="error"?t="#f58e82":t="#9dfab5",v.show({messageColor:"#262121",backgroundColor:t,messageSize:"18px",position:"bottomRight",progressBar:!1,animateInside:!1,timeout:3e3,targetFirst:!1,message:e})}
+    </li>`}const i={noExMessage:document.querySelector(".js-no-exercises-message"),workoutsList:document.querySelector(".js-workouts-list"),paginationList:document.querySelector(".js-fav-pagination")};let s=1,r=1,p=window.innerWidth<768?"phone":window.innerWidth<1440?"tablet":"desktop";b();function b(){let t=JSON.parse(localStorage.getItem("savedExercises"));c(t),i.workoutsList.addEventListener("click",x),i.paginationList.addEventListener("click",M);let e,a;setInterval(()=>{if(e=JSON.parse(localStorage.getItem("savedExercises")),e===null)return;const n=window.innerWidth<768?"phone":window.innerWidth<1440?"tablet":"desktop";if(n!==p){p=n,c(e);return}a=e.length===t.length,a&&(a=e.every((l,o)=>l._id===t[o]._id)),a||(t=[...e],c(t))},1e3)}function c(t){if(!t||t.length===0){i.noExMessage.hidden=!1,i.noExMessage.classList.remove("visually-hidden"),i.workoutsList.classList.remove("fav-workouts-list"),i.workoutsList.innerHTML="";return}if(i.noExMessage.hidden=!0,i.noExMessage.classList.add("visually-hidden"),i.workoutsList.classList.add("fav-workouts-list"),window.innerWidth>=1440)i.workoutsList.innerHTML=u(t);else{if(window.innerWidth>=768){r=Math.ceil(t.length/10),s>r&&(s=r);const e=t.slice((s-1)*10,s*10);s!==1&&t.length===0?(s-=1,i.workoutsList.innerHTML=u(t.slice((s-1)*10,s*10))):i.workoutsList.innerHTML=u(e)}else{r=Math.ceil(t.length/8),s>r&&(s=r);const e=t.slice((s-1)*8,s*8);s!==1&&t.length===0?(s-=1,i.workoutsList.innerHTML=u(t.slice((s-1)*8,s*8))):i.workoutsList.innerHTML=u(e)}L(s,r)}}function x(t){const e=t.target;if(!e.closest(".fav-workouts-remove-button"))return;const l=e.closest(".fav-workouts-list-item").dataset.id,o=JSON.parse(localStorage.getItem("savedExercises")),g=o.findIndex(d=>d._id===l);g===-1?y("error","Excercise is already removed from favorites."):(o.splice(g,1),localStorage.setItem("savedExercises",JSON.stringify(o))),c(o)}function L(t,e){if(e<=1){i.paginationList.classList.add("visually-hidden");return}i.paginationList.classList.remove("visually-hidden"),i.paginationList.innerHTML=f(t,e)}function M(t){const e=t.target.closest(".js-page");if(!e)return;const a=e.dataset.pageNavigate;if(Number(a)===s)return;switch(a){case"first-page":s=1;break;case"previous-page":s=s-1;break;case"next-page":s=s+1;break;case"last-page":s=r;break;default:if(Number.isNaN(Number(a)))return;s=Number(a)}const n=localStorage.getItem("savedExercises");c(JSON.parse(n))}function y(t,e){let a;t==="error"?a="#f58e82":a="#9dfab5",v.show({messageColor:"#262121",backgroundColor:a,messageSize:"18px",position:"bottomRight",progressBar:!1,animateInside:!1,timeout:3e3,targetFirst:!1,message:e})}
 //# sourceMappingURL=commonHelpers.js.map
