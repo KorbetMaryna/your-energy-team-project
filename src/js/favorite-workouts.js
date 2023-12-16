@@ -46,7 +46,6 @@ function createStartMarkup() {
         : 'desktop';
 
     if (newDevice !== device) {
-      console.log('widthChanged');
       device = newDevice;
       renderWorkoutsMarkup(currentSavedExercises);
       return;
@@ -66,7 +65,6 @@ function createStartMarkup() {
 }
 
 function renderWorkoutsMarkup(savedExercises) {
-  console.dir(savedExercises);
   if (!savedExercises || savedExercises.length === 0) {
     refs.noExMessage.hidden = false;
     refs.noExMessage.classList.remove('visually-hidden');
