@@ -50,8 +50,7 @@ async function fetchData(type, obj) {
         const markupType = 'filters';
         createFilterMarkup(data);
         renderPagination({ page, totalPages, type: markupType });
-        refs.headlineCategory.innerText = '';
-        refs.headlineWrapper.classList.add('visually-hidden');
+        hideHeadlineCategory();
         hideSearchInput();
       } else {
         const markupType = 'exercises';
@@ -69,9 +68,7 @@ async function fetchData(type, obj) {
 }
 
 function createFilterMarkup({ results }) {
-  refs.tilesCategoryList.innerHTML = '';
-  refs.tilesCategoryList.classList.add('visually-hidden');
-  refs.tilesFilterList.classList.remove('visually-hidden');
+  clearCategoryMarkup();
 
   const markup = results
     .map(({ filter, name, imgURL }) => filterMarkup(filter, name, imgURL))
@@ -93,24 +90,13 @@ function onTileClick(e) {
   refs.searchForm.classList.remove('visually-hidden');
 }
 
-export function displayHeadline(name) {
-  refs.headlineWrapper.classList.remove('visually-hidden');
-  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
-}
-
-export function hideSearchInput() {
-  refs.searchForm.classList.add('visually-hidden');
-}
-
 export function createExercisesMarkup({ results }) {
   if (!results.length) {
     return iziToast.warning({
       message: "Unfortunately, we don't have any exercises in this category",
     });
   }
-  refs.tilesFilterList.innerHTML = '';
-  refs.tilesFilterList.classList.add('visually-hidden');
-  refs.tilesCategoryList.classList.remove('visually-hidden');
+  clearFilterMarkup();
   const markup = results
     .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
       exercisesMarkup(rating, name, burnedCalories, bodyPart, target, _id)
@@ -118,6 +104,20 @@ export function createExercisesMarkup({ results }) {
     .join('');
 
   refs.tilesCategoryList.innerHTML = markup;
+}
+
+function hideHeadlineCategory() {
+  refs.headlineCategory.innerText = '';
+  refs.headlineWrapper.classList.add('visually-hidden');
+}
+
+export function displayHeadline(name) {
+  refs.headlineWrapper.classList.remove('visually-hidden');
+  refs.headlineCategory.innerText = capitalizeFirstLetter(name);
+}
+
+export function hideSearchInput() {
+  refs.searchForm.classList.add('visually-hidden');
 }
 
 export function checkScreenWidth(filter, width) {
@@ -153,6 +153,18 @@ function resetCategoryUrlObj(basicUrlParams, name, filter) {
   }
   Object.assign(basicUrlParams, { [filter]: name });
   checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+}
+
+function clearCategoryMarkup() {
+  refs.tilesCategoryList.innerHTML = '';
+  refs.tilesCategoryList.classList.add('visually-hidden');
+  refs.tilesFilterList.classList.remove('visually-hidden');
+}
+
+function clearFilterMarkup() {
+  refs.tilesFilterList.innerHTML = '';
+  refs.tilesFilterList.classList.add('visually-hidden');
+  refs.tilesCategoryList.classList.remove('visually-hidden');
 }
 
 export function renderPagination({ page, totalPages, type, customListener }) {
