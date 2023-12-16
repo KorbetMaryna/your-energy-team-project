@@ -22,22 +22,25 @@ function checkNetworkStatus() {
 
 function handleNetworkChange(online) {
     const isLoaderVisible = toggleLoader(true);
-    const isPageError = document.querySelector('.page-error-container');
+    const isPageErrorContainer = document.querySelector('.page-error-container');
 
     if (!online || isLoaderVisible) {
-        if (!isPageError) {
+        if (!isPageErrorContainer) {
             const notFoundContainerPageError = document.createElement('div');
             notFoundContainerPageError.classList.add('page-error-container');
 
             const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Sorry, the page did not load. Please check your internet connection.';
+            errorMessage.textContent = 'Sorry, the page did not load.';
             
             notFoundContainerPageError.appendChild(errorMessage);
             document.body.appendChild(notFoundContainerPageError);
+
+            document.body.classList.toggle('page-error-open');
         }
     } else {
-        if (isPageError) {
-            isPageError.remove();
+        if (isPageErrorContainer) {
+            isPageErrorContainer.remove();
+            document.body.classList.remove('page-error-open');
         }
     }
 }

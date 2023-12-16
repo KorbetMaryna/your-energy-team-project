@@ -11,9 +11,24 @@
     align-items: center;
     gap: 10px;
     z-index: 9999;
-    overflow: hidden;
 }
 
 .page-error-container p {
     color: var(--background-light-theme);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.28;
+}
+
+@media screen and (min-width: 768px) {
+    .page-error-container p {
+        font-size: 18px;
+        line-height: 1.33;
+    }
+}
+
+body.page-error-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
 }

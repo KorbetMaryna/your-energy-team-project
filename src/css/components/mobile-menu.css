@@ -74,3 +74,8 @@
     line-height: 1.29;
 }
 
+body.mobile-menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
