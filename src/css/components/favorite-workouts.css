@@ -23,14 +23,14 @@
 
 .fav-workouts-list {
   margin-top: 20px;
-  padding-bottom: 80px;
+  padding-bottom: 20px;
 }
 
 .fav-workouts-list-item {
   padding: 16px;
   border-radius: 15px;
   background-color: white;
-  max-width: 335px; /*TODO*/
+  max-width: 335px;
 }
 
 .fav-workouts-list-item:not(:last-child) {
@@ -154,6 +154,10 @@
   text-overflow: ellipsis;
 }
 
+.fav-workouts-excercise-name:first-letter {
+  text-transform: uppercase;
+}
+
 .fav-workouts-descr-list {
   display: flex;
   column-gap: 10px;
@@ -178,6 +182,77 @@
   max-width: 40px;
   min-width: 32px;
   color: var(--main-color-light-theme);
+}
+
+/* Pagination */
+.fav-workouts-pagination {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.fav-workouts-pagination {
+  margin-bottom: 80px;
+}
+
+.pagination-btns {
+  display: flex;
+  column-gap: 4px;
+}
+
+.pagination-btn {
+  background-color: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--main-color-light-theme);
+  fill: var(--main-color-light-theme);
+}
+
+.pagination-btn:disabled {
+  fill: rgba(36, 36, 36, 0.5);
+  border-color: var(--grey-one);
+}
+
+.pagination-btn.left {
+  transform: scaleX(-1);
+}
+
+.pagination-btn svg {
+  width: 6px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.fav-workouts-pagination-numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.pagination-number {
+  color: var(--pagination-not-activ);
+  background-color: transparent;
+  font-size: 24px;
+  line-height: 1.333;
+  letter-spacing: 0.04em;
+}
+
+.pagination-number.active {
+  color: #242424;
+  width: 32px;
+  height: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--main-color-light-theme);
 }
 
 @media screen and (min-width: 768px) {
@@ -208,6 +283,7 @@
     flex-wrap: wrap;
     column-gap: 16px;
     row-gap: 32px;
+    padding-bottom: 32px;
   }
 
   .fav-workouts-excercise-name {
@@ -221,6 +297,10 @@
 
   .fav-workouts-list-item {
     min-width: 344px;
+  }
+
+  .fav-workouts-pagination {
+    margin-bottom: 100px;
   }
 }
 
@@ -238,8 +318,10 @@
   }
 
   .no-exercises-message {
+    display: block;
     margin-top: 114px;
     margin-bottom: 16px;
+    padding: 0 148px;
   }
 
   .fav-workouts-wrapper {
@@ -249,9 +331,18 @@
 
   .fav-workouts-list {
     margin-top: 0;
+    padding-bottom: 0;
   }
 
   .fav-workouts-list-item {
     min-width: 405px;
+  }
+
+  .fav-workouts-descr-list {
+    column-gap: 16px;
+  }
+
+  .fav-workouts-pagination {
+    display: none;
   }
 }
