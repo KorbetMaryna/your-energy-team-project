@@ -255,3 +255,20 @@
     min-width: 405px;
   }
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  flex-shrink: 0;
+  height: 153px;
+}
+
+::-webkit-scrollbar-thumb {
+
+  border-radius: 12px;
+  background: var(--main-color-light-theme);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background: rgba(36, 36, 36, 0.10);
+}
