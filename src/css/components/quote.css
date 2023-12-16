@@ -9,8 +9,12 @@
   max-width: 375px;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: 40px; */
-  /* margin-bottom: 80px; */
+}
+
+.favorites-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Quote of the day */
@@ -213,6 +217,10 @@
     padding-left: 90px;
     width: 400px;
     height: 249px;
+  }
+
+  .daily-norm-title {
+    font-size: 24px;
   }
 
   .daily-norm-desc {
