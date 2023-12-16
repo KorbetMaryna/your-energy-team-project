@@ -1,18 +1,33 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import {
+  createWorkoutCardsMarkup,
+  createPaginationMarkup,
+} from './favorite-workouts-markup';
 
 const refs = {
   noExMessage: document.querySelector('.js-no-exercises-message'),
   workoutsList: document.querySelector('.js-workouts-list'),
+  paginationList: document.querySelector('.js-fav-pagination'),
 };
+
+let currentPage = 1;
+let totalPages = 1;
+let device =
+  window.innerWidth < 768
+    ? 'phone'
+    : window.innerWidth < 1440
+    ? 'tablet'
+    : 'desktop';
 
 createStartMarkup();
 
 function createStartMarkup() {
   let savedExercises = JSON.parse(localStorage.getItem('savedExercises'));
 
-  checkIfEmpty(savedExercises);
+  renderWorkoutsMarkup(savedExercises);
   refs.workoutsList.addEventListener('click', removeWorkoutCard);
+  refs.paginationList.addEventListener('click', navigateToPage);
 
   let currentSavedExercises;
   let isCardsActual;
@@ -20,6 +35,19 @@ function createStartMarkup() {
     currentSavedExercises = JSON.parse(localStorage.getItem('savedExercises'));
 
     if (currentSavedExercises === null) {
+      return;
+    }
+
+    const newDevice =
+      window.innerWidth < 768
+        ? 'phone'
+        : window.innerWidth < 1440
+        ? 'tablet'
+        : 'desktop';
+
+    if (newDevice !== device) {
+      device = newDevice;
+      renderWorkoutsMarkup(currentSavedExercises);
       return;
     }
 
@@ -31,20 +59,63 @@ function createStartMarkup() {
     }
     if (!isCardsActual) {
       savedExercises = [...currentSavedExercises];
-      checkIfEmpty(savedExercises);
+      renderWorkoutsMarkup(savedExercises);
     }
-  }, 2000);
+  }, 1000);
 }
 
-function checkIfEmpty(savedExercises) {
+function renderWorkoutsMarkup(savedExercises) {
   if (!savedExercises || savedExercises.length === 0) {
     refs.noExMessage.hidden = false;
+    refs.noExMessage.classList.remove('visually-hidden');
     refs.workoutsList.classList.remove('fav-workouts-list');
     refs.workoutsList.innerHTML = '';
-  } else {
-    refs.noExMessage.hidden = true;
-    refs.workoutsList.classList.add('fav-workouts-list');
+    return;
+  }
+
+  refs.noExMessage.hidden = true;
+  refs.noExMessage.classList.add('visually-hidden');
+  refs.workoutsList.classList.add('fav-workouts-list');
+
+  if (window.innerWidth >= 1440) {
     refs.workoutsList.innerHTML = createWorkoutCardsMarkup(savedExercises);
+  } else {
+    if (window.innerWidth >= 768) {
+      totalPages = Math.ceil(savedExercises.length / 10);
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+      const excercises = savedExercises.slice(
+        (currentPage - 1) * 10,
+        currentPage * 10
+      );
+      if (currentPage !== 1 && savedExercises.length === 0) {
+        currentPage -= 1;
+        refs.workoutsList.innerHTML = createWorkoutCardsMarkup(
+          savedExercises.slice((currentPage - 1) * 10, currentPage * 10)
+        );
+      } else {
+        refs.workoutsList.innerHTML = createWorkoutCardsMarkup(excercises);
+      }
+    } else {
+      totalPages = Math.ceil(savedExercises.length / 8);
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+      const excercises = savedExercises.slice(
+        (currentPage - 1) * 8,
+        currentPage * 8
+      );
+      if (currentPage !== 1 && savedExercises.length === 0) {
+        currentPage -= 1;
+        refs.workoutsList.innerHTML = createWorkoutCardsMarkup(
+          savedExercises.slice((currentPage - 1) * 8, currentPage * 8)
+        );
+      } else {
+        refs.workoutsList.innerHTML = createWorkoutCardsMarkup(excercises);
+      }
+    }
+    renderPagination(currentPage, totalPages);
   }
 }
 
@@ -67,63 +138,54 @@ function removeWorkoutCard(evt) {
     savedExercises.splice(removeElementIndex, 1);
     localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
   }
-  refs.workoutsList.innerHTML = createWorkoutCardsMarkup(savedExercises);
-  checkIfEmpty(savedExercises);
+  renderWorkoutsMarkup(savedExercises);
 }
 
-function createWorkoutCardsMarkup(array) {
-  return array.map(obj => createWorkoutCardMarkup(obj)).join('');
+function renderPagination(currentPage, totalPages) {
+  if (totalPages <= 1) {
+    refs.paginationList.classList.add('visually-hidden');
+    return;
+  }
+  refs.paginationList.classList.remove('visually-hidden');
+  refs.paginationList.innerHTML = createPaginationMarkup(
+    currentPage,
+    totalPages
+  );
 }
 
-function createWorkoutCardMarkup({
-  _id,
-  name,
-  time,
-  burnedCalories,
-  bodyPart,
-  target,
-} = {}) {
-  return `<li class="fav-workouts-list-item" data-id="${_id}">
-      <div class="fav-workouts-list-item-buttons">
-        <div class="fav-workouts-tag-remove-wrapper">
-          <span class="fav-workouts-tag">Workout</span>
-          <button class="fav-workouts-remove-button" type="button">
-            <svg class="fav-workouts-remove-icon" width="16px" height="15px">
-              <use href="./img/icons.svg#icon-trash"></use>
-            </svg>
-          </button>
-        </div>
+function navigateToPage(evt) {
+  const closestButton = evt.target.closest('.js-page');
+  if (!closestButton) {
+    return;
+  }
 
-        <button type="button" class="fav-workouts-start-button">
-          <span class="fav-workouts-start-text">Start</span>
-          <svg class="fav-workouts-arrow-icon" width="16px" height="16px">
-            <use href="./img/icons.svg#icon-arrow"></use>
-          </svg>
-        </button>
-      </div>
+  const pageNavigate = closestButton.dataset.pageNavigate;
 
-      <div class="fav-workouts-excercise-name-wrapper">
-        <div class="fav-workouts-running-icon-wrapper">
-          <svg class="fav-workouts-running-icon" width="20px" height="20px">
-            <use href="./img/icons.svg#icon-running-man"></use>
-          </svg>
-        </div>
-        <h3 class="fav-workouts-excercise-name">${name}</h3>
-      </div>
+  if (Number(pageNavigate) === currentPage) {
+    return;
+  }
 
-      <ul class="fav-workouts-descr-list">
-        <li class="fav-workouts-descr-list-category">
-          Burned calories:
-          <span class="fav-workouts-descr-list-value">${burnedCalories} / ${time} min</span>
-        </li>
-        <li class="fav-workouts-descr-list-category">
-          Body part: <span class="fav-workouts-descr-list-value">${bodyPart}</span>
-        </li>
-        <li class="fav-workouts-descr-list-category">
-          Target: <span class="fav-workouts-descr-list-value">${target}</span>
-        </li>
-      </ul>
-    </li>`;
+  switch (pageNavigate) {
+    case 'first-page':
+      currentPage = 1;
+      break;
+    case 'previous-page':
+      currentPage = currentPage - 1;
+      break;
+    case 'next-page':
+      currentPage = currentPage + 1;
+      break;
+    case 'last-page':
+      currentPage = totalPages;
+      break;
+    default:
+      if (Number.isNaN(Number(pageNavigate))) {
+        return;
+      }
+      currentPage = Number(pageNavigate);
+  }
+  const savedExercises = localStorage.getItem('savedExercises');
+  renderWorkoutsMarkup(JSON.parse(savedExercises));
 }
 
 function showMessage(type, message) {
