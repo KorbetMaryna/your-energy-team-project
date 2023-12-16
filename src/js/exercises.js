@@ -3,6 +3,7 @@ import { fetchApiData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 import { toggleLoader } from './loader';
+import { merge } from 'lodash';
 
 iziToast.settings({
   position: 'topRight',
@@ -29,50 +30,24 @@ let basicUrlParams = {
   page: 1,
 };
 
-export function checkScreenWidth(filter, width) {
-  if (filter !== '') {
-    basicUrlParams.limit = width < 768 ? 9 : 12;
-  } else {
-    basicUrlParams.limit = width < 768 ? 8 : 10;
-  }
-
-  return basicUrlParams.limit;
-}
-
 checkScreenWidth(basicUrlParams.filter, window.innerWidth);
 
 fetchData('filters', basicUrlParams);
 
 refs.filterButtons.forEach(el => {
   el.addEventListener('click', () => {
-    let obj = {
-      bodypart: '',
-      muscles: '',
-      equipment: '',
-    };
-
-    Object.assign(basicUrlParams, obj);
-    basicUrlParams.filter = el.innerText;
-    basicUrlParams.page = 1;
+    resetExercisesUrlObj(basicUrlParams, el);
     fetchData('filters', basicUrlParams);
-
     makeFilterButtonActive(el);
   });
 });
 
-export function makeFilterButtonActive(el) {
-  document.querySelector('.active-button').classList.remove('active-button');
-  el.classList.add('active-button');
-}
-
 async function fetchData(type, obj) {
-  toggleLoader(true)
+  toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
-
       if (data.results[0]?.filter) {
-        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
         const markupType = 'filters';
         createFilterMarkup(data);
         renderPagination({ page, totalPages, markupType });
@@ -80,7 +55,6 @@ async function fetchData(type, obj) {
         refs.headlineWrapper.classList.add('visually-hidden');
         hideSearchInput();
       } else {
-        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
         const markupType = 'exercises';
         createExercisesMarkup(data);
         renderPagination({ page, totalPages, markupType });
@@ -91,7 +65,8 @@ async function fetchData(type, obj) {
       iziToast.error({
         message: 'Something went wrong :-( try again later.',
       });
-    }).finally(toggleLoader(false));
+    })
+    .finally(toggleLoader(false));
 }
 
 function createFilterMarkup({ results }) {
@@ -105,32 +80,15 @@ function createFilterMarkup({ results }) {
   refs.tilesFilterList.innerHTML = markup;
 }
 
-refs.tilesFilterList?.addEventListener('click', onTileClick);
+refs.tilesFilterList.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();
-
-  let obj = {
-    filter: '',
-    bodypart: '',
-    muscles: '',
-    equipment: '',
-  };
-
-  Object.assign(basicUrlParams, obj);
-
   if (e.currentTarget === e.target) {
     return;
   }
-
   let { name, filter } = e.target.parentNode.dataset;
-
-  if (filter === 'body') {
-    filter = 'bodypart';
-  }
-
-  Object.assign(basicUrlParams, { [filter]: name });
-
+  resetCategoryUrlObj(basicUrlParams, name, filter);
   fetchData('exercises', basicUrlParams);
   displayHeadline(name);
   refs.searchForm.classList.remove('visually-hidden');
@@ -161,6 +119,41 @@ export function createExercisesMarkup({ results }) {
     .join('');
 
   refs.tilesCategoryList.innerHTML = markup;
+}
+
+export function checkScreenWidth(filter, width) {
+  if (filter !== '') {
+    basicUrlParams.limit = width < 768 ? 9 : 12;
+  } else {
+    basicUrlParams.limit = width < 768 ? 8 : 10;
+  }
+  return basicUrlParams.limit;
+}
+
+export function makeFilterButtonActive(el) {
+  document.querySelector('.active-button').classList.remove('active-button');
+  el.classList.add('active-button');
+}
+
+function resetExercisesUrlObj(basicUrlParams, el) {
+  let obj = {
+    bodypart: '',
+    muscles: '',
+    equipment: '',
+  };
+  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+  Object.assign(basicUrlParams, obj);
+  basicUrlParams.filter = el.innerText;
+  basicUrlParams.page = 1;
+}
+
+function resetCategoryUrlObj(basicUrlParams, name, filter) {
+  basicUrlParams.filter = '';
+  if (filter === 'body') {
+    filter = 'bodypart';
+  }
+  Object.assign(basicUrlParams, { [filter]: name });
+  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
 }
 
 export function renderPagination({ page, totalPages, type, customListener }) {
