@@ -165,8 +165,6 @@ button{
     font-size: 14px;
     font-weight: 500;
     line-height: 1.28;  
-    flex-shrink: 0;
-    white-space: nowrap;
 }
 
 .main-modal__description{
