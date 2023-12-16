@@ -15,6 +15,19 @@ export async function fetchApiData(type, params) {
   return data;
 }
 
+export async function fetchSearchData(params) {
+  for (const key of Object.keys(params)) {
+    if (params[key] === '') {
+      delete params[key];
+    }
+  }
+
+  const urlParams = new URLSearchParams(params);
+
+  const { data } = await axios(`${BASE_URL}/exercises?${urlParams}`);
+  return data;
+}
+
 export const fetchMuscles = async ({ page = 1, limit = 100 } = {}) => {
   const { data } = await axios.get(
     `${BASE_URL}/filters?filter=Muscles&page=${page}&limit=${limit}`
@@ -42,12 +55,10 @@ export const fetchExercises = async ({
   equipment,
   page = 1,
   limit = 100,
-  keyword,
 }) => {
   const urlParams = new URLSearchParams({
     bodypart: bodyPart,
     muscles: muscle,
-    keyword,
     equipment,
     page,
     limit,
