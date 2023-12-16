@@ -39,8 +39,8 @@ async function onSubmitSearch(e) {
   if (value.trim()) {
     const limit = checkScreenWidth('');
     const { totalPages, results } = await fetchSearchData({
-      bodyPart: basicUrlParams.bodypart || '',
-      muscle: basicUrlParams.muscles || '',
+      bodypart: basicUrlParams.bodypart || '',
+      muscles: basicUrlParams.muscles || '',
       equipment: basicUrlParams.equipment || '',
       page: basicUrlParams.page,
       keyword: value,
