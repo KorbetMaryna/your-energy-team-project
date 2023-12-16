@@ -3,7 +3,6 @@ import { fetchApiData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 import { toggleLoader } from './loader';
-import { merge } from 'lodash';
 
 iziToast.settings({
   position: 'topRight',
@@ -50,14 +49,14 @@ async function fetchData(type, obj) {
       if (data.results[0]?.filter) {
         const markupType = 'filters';
         createFilterMarkup(data);
-        renderPagination({ page, totalPages, markupType });
+        renderPagination({ page, totalPages, type: markupType });
         refs.headlineCategory.innerText = '';
         refs.headlineWrapper.classList.add('visually-hidden');
         hideSearchInput();
       } else {
         const markupType = 'exercises';
         createExercisesMarkup(data);
-        renderPagination({ page, totalPages, markupType });
+        renderPagination({ page, totalPages, type: markupType });
       }
     })
     .catch(err => {
@@ -182,6 +181,7 @@ export function renderPagination({ page, totalPages, type, customListener }) {
   }
 
   function renderPages(start, end, currentPage, type) {
+    console.log('type: ', type);
     for (let i = start; i <= end; i++) {
       const pageElement = document.createElement('span');
       pageElement.classList.add('exercises-pagination-item');
