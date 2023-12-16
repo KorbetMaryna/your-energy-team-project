@@ -29,61 +29,33 @@ let basicUrlParams = {
   page: 1,
 };
 
-export function checkScreenWidth(filter, width) {
-  if (filter !== '') {
-    basicUrlParams.limit = width < 768 ? 9 : 12;
-  } else {
-    basicUrlParams.limit = width < 768 ? 8 : 10;
-  }
-
-  return basicUrlParams.limit;
-}
-
 checkScreenWidth(basicUrlParams.filter, window.innerWidth);
 
 fetchData('filters', basicUrlParams);
 
 refs.filterButtons.forEach(el => {
   el.addEventListener('click', () => {
-    let obj = {
-      bodypart: '',
-      muscles: '',
-      equipment: '',
-    };
-
-    Object.assign(basicUrlParams, obj);
-    basicUrlParams.filter = el.innerText;
-    basicUrlParams.page = 1;
+    resetExercisesUrlObj(basicUrlParams, el);
     fetchData('filters', basicUrlParams);
-
     makeFilterButtonActive(el);
   });
 });
 
-export function makeFilterButtonActive(el) {
-  document.querySelector('.active-button').classList.remove('active-button');
-  el.classList.add('active-button');
-}
-
 async function fetchData(type, obj) {
-  toggleLoader(true)
+  toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
-
       if (data.results[0]?.filter) {
-        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
         const markupType = 'filters';
         createFilterMarkup(data);
-        renderPagination({ page, totalPages, markupType });
-        refs.headlineCategory.innerText = '';
-        refs.headlineWrapper.classList.add('visually-hidden');
+        renderPagination({ page, totalPages, type: markupType });
+        hideHeadlineCategory();
         hideSearchInput();
       } else {
-        checkScreenWidth(basicUrlParams.filter, window.innerWidth);
         const markupType = 'exercises';
         createExercisesMarkup(data);
-        renderPagination({ page, totalPages, markupType });
+        renderPagination({ page, totalPages, type: markupType });
       }
     })
     .catch(err => {
@@ -91,13 +63,12 @@ async function fetchData(type, obj) {
       iziToast.error({
         message: 'Something went wrong :-( try again later.',
       });
-    }).finally(toggleLoader(false));
+    })
+    .finally(toggleLoader(false));
 }
 
 function createFilterMarkup({ results }) {
-  refs.tilesCategoryList.innerHTML = '';
-  refs.tilesCategoryList.classList.add('visually-hidden');
-  refs.tilesFilterList.classList.remove('visually-hidden');
+  clearCategoryMarkup();
 
   const markup = results
     .map(({ filter, name, imgURL }) => filterMarkup(filter, name, imgURL))
@@ -105,35 +76,39 @@ function createFilterMarkup({ results }) {
   refs.tilesFilterList.innerHTML = markup;
 }
 
-refs.tilesFilterList?.addEventListener('click', onTileClick);
+refs.tilesFilterList.addEventListener('click', onTileClick);
 
 function onTileClick(e) {
   e.preventDefault();
-
-  let obj = {
-    filter: '',
-    bodypart: '',
-    muscles: '',
-    equipment: '',
-  };
-
-  Object.assign(basicUrlParams, obj);
-
   if (e.currentTarget === e.target) {
     return;
   }
-
   let { name, filter } = e.target.parentNode.dataset;
-
-  if (filter === 'body') {
-    filter = 'bodypart';
-  }
-
-  Object.assign(basicUrlParams, { [filter]: name });
-
+  resetCategoryUrlObj(basicUrlParams, name, filter);
   fetchData('exercises', basicUrlParams);
   displayHeadline(name);
   refs.searchForm.classList.remove('visually-hidden');
+}
+
+export function createExercisesMarkup({ results }) {
+  if (!results.length) {
+    return iziToast.warning({
+      message: "Unfortunately, we don't have any exercises in this category",
+    });
+  }
+  clearFilterMarkup();
+  const markup = results
+    .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
+      exercisesMarkup(rating, name, burnedCalories, bodyPart, target, _id)
+    )
+    .join('');
+
+  refs.tilesCategoryList.innerHTML = markup;
+}
+
+function hideHeadlineCategory() {
+  refs.headlineCategory.innerText = '';
+  refs.headlineWrapper.classList.add('visually-hidden');
 }
 
 export function displayHeadline(name) {
@@ -145,22 +120,51 @@ export function hideSearchInput() {
   refs.searchForm.classList.add('visually-hidden');
 }
 
-export function createExercisesMarkup({ results }) {
-  if (!results.length) {
-    return iziToast.warning({
-      message: "Unfortunately, we don't have any exercises in this category",
-    });
+export function checkScreenWidth(filter, width) {
+  if (filter !== '') {
+    basicUrlParams.limit = width < 768 ? 9 : 12;
+  } else {
+    basicUrlParams.limit = width < 768 ? 8 : 10;
   }
+  return basicUrlParams.limit;
+}
+
+export function makeFilterButtonActive(el) {
+  document.querySelector('.active-button').classList.remove('active-button');
+  el.classList.add('active-button');
+}
+
+function resetExercisesUrlObj(basicUrlParams, el) {
+  let obj = {
+    bodypart: '',
+    muscles: '',
+    equipment: '',
+  };
+  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+  Object.assign(basicUrlParams, obj);
+  basicUrlParams.filter = el.innerText;
+  basicUrlParams.page = 1;
+}
+
+function resetCategoryUrlObj(basicUrlParams, name, filter) {
+  basicUrlParams.filter = '';
+  if (filter === 'body') {
+    filter = 'bodypart';
+  }
+  Object.assign(basicUrlParams, { [filter]: name });
+  checkScreenWidth(basicUrlParams.filter, window.innerWidth);
+}
+
+function clearCategoryMarkup() {
+  refs.tilesCategoryList.innerHTML = '';
+  refs.tilesCategoryList.classList.add('visually-hidden');
+  refs.tilesFilterList.classList.remove('visually-hidden');
+}
+
+function clearFilterMarkup() {
   refs.tilesFilterList.innerHTML = '';
   refs.tilesFilterList.classList.add('visually-hidden');
   refs.tilesCategoryList.classList.remove('visually-hidden');
-  const markup = results
-    .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
-      exercisesMarkup(rating, name, burnedCalories, bodyPart, target, _id)
-    )
-    .join('');
-
-  refs.tilesCategoryList.innerHTML = markup;
 }
 
 export function renderPagination({ page, totalPages, type, customListener }) {
@@ -189,6 +193,7 @@ export function renderPagination({ page, totalPages, type, customListener }) {
   }
 
   function renderPages(start, end, currentPage, type) {
+    console.log('type: ', type);
     for (let i = start; i <= end; i++) {
       const pageElement = document.createElement('span');
       pageElement.classList.add('exercises-pagination-item');

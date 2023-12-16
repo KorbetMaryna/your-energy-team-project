@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toggleLoader } from './loader';
 
 const BASE_URL = 'https://your-energy.b.goit.study/api';
 
@@ -13,7 +12,6 @@ async function fetchApiData(type, params) {
   const urlParams = new URLSearchParams(params);
 
   const { data } = await axios(`${BASE_URL}/${type}?${urlParams}`);
-  toggleLoader(false);
   return data;
 }
 
