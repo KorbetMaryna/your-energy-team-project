@@ -11,4 +11,4 @@ import './js/search/search-input';
 import './js/handlerScrollUp';
 import './js/showPageError';
 import './js/search/index';
-
+import './js/privacy&terms';
