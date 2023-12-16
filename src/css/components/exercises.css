@@ -263,9 +263,7 @@
     height: 242px;
   }
   .exercises-tiles-category-list {
-    height: 833px;
-    width: 900px;
-    grid-auto-rows: 141px;
+    display: none;
   }
   .exercises-category-tile-item {
     width: 442px;
