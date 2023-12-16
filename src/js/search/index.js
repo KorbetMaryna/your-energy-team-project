@@ -1,2 +1,0 @@
-import './searchInput';
-import './searchApi';
