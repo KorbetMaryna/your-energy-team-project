@@ -267,6 +267,7 @@
     padding-top: 32px;
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 
   .no-exercises-message {
@@ -325,6 +326,7 @@
   }
 
   .fav-workouts-wrapper {
+    width: 850px;
     height: calc(100vh - 250px - 64px);
     overflow: auto;
   }
@@ -354,12 +356,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-
   border-radius: 12px;
   background: var(--main-color-light-theme);
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 12px;
-  background: rgba(36, 36, 36, 0.10);
+  background: rgba(36, 36, 36, 0.1);
 }
