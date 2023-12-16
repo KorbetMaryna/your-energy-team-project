@@ -1,8 +1,5 @@
 import { toggleLoader } from "./loader";
 
-const notFoundImage = document.querySelector('.page-error-container');
-
-
 document.addEventListener('DOMContentLoaded', function () {
     checkNetworkStatus();
 
@@ -12,10 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('offline', function () {
         handleNetworkChange(false);
-    });
-
-    window.addEventListener('load', function () {
-        handlePageLoad();
     });
 });
 
@@ -28,22 +21,23 @@ function checkNetworkStatus() {
 }
 
 function handleNetworkChange(online) {
-    if (!showLoader) {
-        if (online) {
-            notFoundImage.style.display = 'none';
-        } else {
-            notFoundImage.style.display = 'block';
+    const isLoaderVisible = toggleLoader(true);
+    const isPageError = document.querySelector('.page-error-container');
+
+    if (!online || isLoaderVisible) {
+        if (!isPageError) {
+            const notFoundContainerPageError = document.createElement('div');
+            notFoundContainerPageError.classList.add('page-error-container');
+
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Sorry, the page did not load. Please check your internet connection.';
+            
+            notFoundContainerPageError.appendChild(errorMessage);
+            document.body.appendChild(notFoundContainerPageError);
+        }
+    } else {
+        if (isPageError) {
+            isPageError.remove();
         }
     }
 }
-
-function showLoader() {
-    toggleLoader(true);
-    notFoundImage.style.display = 'none';
-}
-
-function closeLoader() {
-    toggleLoader(false);
-}
-
-

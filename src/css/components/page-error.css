@@ -1,18 +1,19 @@
 .page-error-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--main-color-light-theme);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
-    z-index: 99999999;
-    transition: var(--transition-duration-time-function);
+    gap: 10px;
+    z-index: 9999;
+    overflow: hidden;
 }
 
-.page-error {
-    width: 100%;
-    height: 100%;
-}
-
-.js-page-error.hidden{
-    display: none;
+.page-error-container p {
+    color: var(--background-light-theme);
 }
