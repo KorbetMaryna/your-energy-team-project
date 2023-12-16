@@ -20,7 +20,7 @@ const refs = {
   paginationList: document.querySelector('.js-pagination'),
 };
 
-let basicUrlParams = {
+export let basicUrlParams = {
   filter: 'Muscles',
   bodypart: '',
   muscles: '',
@@ -41,7 +41,7 @@ refs.filterButtons.forEach(el => {
   });
 });
 
-async function fetchData(type, obj) {
+export async function fetchData(type, obj) {
   toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
