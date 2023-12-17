@@ -61,20 +61,6 @@
   text-align: left;
 }
 
-.hero-img {
-  height: 460px;
-  border-radius: 30px;
-  background-image: url('../img/hero/hero-mobile@1x.jpg');
-  background-repeat: no-repeat;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
-  .hero-img {
-    background-image: url('../img/hero/hero-mobile@2x.jpg');
-    background-size: 335px 460px;
-  }
-}
-
 .hero-tags-list {
   display: flex;
   gap: 6px;
@@ -115,13 +101,13 @@
     padding-bottom: 32px;
   }
 
+  .hero-img {
+    padding-bottom: 16px;
+  }
+
   .hero-title-icon {
     width: 59px;
     height: 59px;
-  }
-
-  .hero-title-wrap {
-    padding-bottom: 20px;
   }
 
   .hero-title {
@@ -133,21 +119,6 @@
     width: 528px;
     font-size: 18px;
     line-height: 24px;
-  }
-
-  .hero-img {
-    height: 550px;
-    border-radius: 60px;
-    background-image: url('../img/hero/hero-tablet@1x.jpg');
-    background-repeat: no-repeat;
-    margin-bottom: 16px;
-  }
-
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
-    .hero-img {
-      background-image: url('../img/hero/hero-tablet@2x.jpg');
-      background-size: 704px 550px;
-    }
   }
 
   .hero-tags-list {
@@ -182,41 +153,16 @@
     align-items: flex-end;
   }
 
-  .hero-desktop-right-img {
-    width: 168px;
-    height: 100px;
-    border-radius: 20px;
-    background-image: url('../img/hero/hero-right-desktop@1x.jpg');
-    background-repeat: no-repeat;
-  }
-
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
-    .hero-desktop-right-img {
-      background-image: url('../img/hero/hero-right-desktop@2x.jpg');
-      background-size: 168px 100px;
-    }
+  .hero-img {
+    padding-bottom: 0px;
   }
 
   .hero-tags-list {
     width: 197px;
     justify-content: flex-end;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
     padding-bottom: 0;
-  }
-
-  .hero-img {
-    height: 350px;
-    border-radius: 60px;
-    background-image: url('../img/hero/hero-desktop@1x.jpg');
-    background-repeat: no-repeat;
-  }
-
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
-    .hero-img {
-      background-image: url('../img/hero/hero-desktop@2x.jpg');
-      background-size: 1376px 350px;
-    }
   }
 
   .hero-tags-bottom {
