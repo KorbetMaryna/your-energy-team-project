@@ -252,7 +252,7 @@
   .exercises-subcontainer {
     margin-bottom: 0;
   }
-  .exercises-tiles-filter-list {
+  .filter-desktop {
     height: 1064px;
     width: 900px;
     grid-auto-rows: 242px;
@@ -262,7 +262,7 @@
     max-width: 290px;
     height: 242px;
   }
-  .exercises-tiles-category-list {
+  .category-desktop {
     height: 833px;
     width: 900px;
     grid-auto-rows: 141px;

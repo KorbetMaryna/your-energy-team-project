@@ -68,7 +68,6 @@ export async function fetchData(type, obj) {
 
 function createFilterMarkup({ results }) {
   clearCategoryMarkup();
-
   const markup = results
     .map(({ filter, name, imgURL }) => filterMarkup(filter, name, imgURL))
     .join('');
@@ -94,8 +93,8 @@ export function createExercisesMarkup({ results }) {
       message: "Unfortunately, we don't have any exercises in this category",
     });
   }
-  displayHeadlineAndSearch();
   clearFilterMarkup();
+  displayHeadlineAndSearch();
   const markup = results
     .map(({ rating, name, burnedCalories, bodyPart, target, _id }) =>
       exercisesMarkup(rating, name, burnedCalories, bodyPart, target, _id)
@@ -159,12 +158,23 @@ function clearCategoryMarkup() {
   refs.tilesCategoryList.innerHTML = '';
   refs.tilesCategoryList.classList.add('visually-hidden');
   refs.tilesFilterList.classList.remove('visually-hidden');
+  checkDesktopScreen() &&
+    refs.tilesCategoryList.classList.remove('category-desktop');
+  checkDesktopScreen() && refs.tilesFilterList.classList.add('filter-desktop');
 }
 
 function clearFilterMarkup() {
   refs.tilesFilterList.innerHTML = '';
   refs.tilesFilterList.classList.add('visually-hidden');
   refs.tilesCategoryList.classList.remove('visually-hidden');
+  checkDesktopScreen() &&
+    refs.tilesFilterList.classList.remove('filter-desktop');
+  checkDesktopScreen() &&
+    refs.tilesCategoryList.classList.add('category-desktop');
+}
+
+function checkDesktopScreen() {
+  return window.innerWidth >= 1440;
 }
 
 export function renderPagination({ page, totalPages, type, customListener }) {
