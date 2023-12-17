@@ -1,7 +1,4 @@
-import { toggleLoader } from './loader';
-
 document.addEventListener('DOMContentLoaded', function () {
-  toggleLoader(true);
 
   const currentPage = window.location.pathname.split('/').pop();
 
@@ -15,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
       (currentPage === '' && linkPage === 'index.html')
     ) {
       link.classList.add('header-nav-current');
-      toggleLoader(false);
     } else {
       link.classList.remove('header-nav-current');
-      toggleLoader(false);
     }
   });
 });
