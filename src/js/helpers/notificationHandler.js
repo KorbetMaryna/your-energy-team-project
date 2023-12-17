@@ -1,14 +1,20 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const colors = {
+  colorSuccess: '#0ecc2e',
+  colorError: '#f58e82',
+  colorInfo: '#9dfab5',
+};
+
 function showMessage(type, message) {
   let color;
   if (type === 'error') {
-    color = '#f58e82';
+    color = colors.colorError;
   } else if (type === 'success') {
-    color = '#0ecc2e';
+    color = colors.colorSuccess;
   } else {
-    color = '#9dfab5';
+    color = colors.colorInfo;
   }
 
   iziToast.show({
