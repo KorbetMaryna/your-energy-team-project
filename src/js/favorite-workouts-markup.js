@@ -38,11 +38,11 @@ function createBeforePageNumbersMarkup(isDisabled) {
       <li class="">
         <button class="js-page left pagination-btn" type="button"${
           isDisabled ? ' disabled' : ''
-        } data-page-navigate="first-page">
+        } data-page-navigate="first-page" aria-label="go to first page">
           <svg class="" width="7px" height="14px">
             <use href="./img/icons.svg#icon-next"></use>
           </svg>
-          <svg class="" width="7px" height="14px">
+          <svg class="" width="7px" height="14px" aria-label="go to previous page">
             <use href="./img/icons.svg#icon-next"></use>
           </svg>
         </button>
@@ -64,7 +64,7 @@ function createAfterPageNumbersMarkup(isDisabled) {
       <li class="">
         <button class="js-page pagination-btn" type="button"${
           isDisabled ? ' disabled' : ''
-        } data-page-navigate="next-page">
+        } data-page-navigate="next-page" aria-label="go to next page">
           <svg class="" width="7px" height="14px">
             <use href="./img/icons.svg#icon-next"></use>
           </svg>
@@ -73,7 +73,7 @@ function createAfterPageNumbersMarkup(isDisabled) {
       <li class="">
         <button class="js-page pagination-btn" type="button"${
           isDisabled ? ' disabled' : ''
-        } data-page-navigate="last-page">
+        } data-page-navigate="last-page" aria-label="go to last page">
           <svg class="" width="7px" height="14px">
             <use href="./img/icons.svg#icon-next"></use>
           </svg>
