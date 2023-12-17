@@ -8,7 +8,6 @@ iziToast.settings({
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Get the closest parent element that exists initially
   const mainModal = document.querySelector('#myModal');
 
   mainModal.addEventListener('click', function(event) {
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         refs.commentInput.value = ''
 
         const starsArray = Array.from(refs.starsContainer);
-        starsArray.forEach((star, index) => {
+        starsArray.forEach((star) => {
           const starIcon = star.nextElementSibling.querySelector('.rating__icon-star');
             starIcon.style.fill = 'var(--second-color-light-theme)';
             starIcon.style.opacity = 0.2;
@@ -53,6 +52,17 @@ document.addEventListener('DOMContentLoaded', function() {
         refs.backdrop.classList.remove('modal-open');
         refs.closeButton.removeEventListener('click', closeModal);
         mainModal.style.display = "flex"
+
+        refs.submitButton.removeEventListener('click', handleSubmit);
+        refs.starsContainer.forEach(star => {
+          star.removeEventListener('click', function (event) {
+            selectedStar = event.target;
+            updateStarsColor();
+          });
+        });
+        refs.backdrop.removeEventListener('click', function (event) {
+          if (event.target === refs.backdrop && !event.target.closest('.rating__close-btn') && !event.target.closest('.rating__submit-btn')) closeModal();
+        });
       };
 
       const updateStarsColor = () => {
@@ -80,15 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const starRating = parseInt(starId?.replace('star', ''), 10);
       
         if (!starRating || isNaN(starRating)) {
-          iziToast.show({ title: 'Error', message: 'Please add your rating' });
+          iziToast.show({ message: 'Please add your rating' });
           return;
         }
         if (!isValidEmail(refs.emailInput.value)) {
-          iziToast.show({ title: 'Error', message: 'Please enter a valid email address' });
+          iziToast.show({ message: 'Please enter a valid email address' });
           return;
         }
         if (refs.commentInput.value.length <= 3) {
-          iziToast.show({ title: 'Error', message: 'Please leave your comment' });
+          iziToast.show({ message: 'Please leave your comment' });
           return;
         }
         
@@ -101,12 +111,18 @@ document.addEventListener('DOMContentLoaded', function() {
             review: refs.commentInput.value,
           });
           if (response.status === 200) {
-            iziToast.success({ title: 'Success', message: 'Rating submitted successfully!' });
+            iziToast.success({ message: 'Rating submitted successfully!' });
           } else {
             iziToast.error({ title: 'Error', message: 'Failed to submit rating' });
           }
         } catch (error) {
-          iziToast.error({ title: 'Error', message: 'Failed to submit rating' });
+          if (error.response.status === 409) {
+            iziToast.info({ message: 'Such email already exists' });
+          } else if (error.response.status === 404) {
+            iziToast.warning({ message: 'Such exercise not found' });
+          } else {
+            iziToast.error({ title: 'Error', message: 'Failed to submit rating' });
+          }
         }
         closeModal();
       };
