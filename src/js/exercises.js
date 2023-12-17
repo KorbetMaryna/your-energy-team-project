@@ -181,6 +181,10 @@ export function renderPagination({
 }) {
   refs.paginationList.innerHTML = '';
 
+  if (totalPages <= 1) {
+    return;
+  }
+
   const maxPagesToShow = 6;
 
   if (totalPages <= maxPagesToShow) {
