@@ -12,6 +12,11 @@ async function subscribeHandler(event) {
 
   const email = event.target.email.value;
 
+  const isValidEmail = email => {
+    const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return emailRegex.test(email);
+  };
+
   if (!isValidEmail(email)) {
     showMessage(
       'warning',
@@ -30,8 +35,3 @@ async function subscribeHandler(event) {
     event.target.email.value = '';
   }
 }
-
-const isValidEmail = email => {
-  const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  return emailRegex.test(email);
-};
