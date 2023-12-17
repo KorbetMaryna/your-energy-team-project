@@ -24,8 +24,6 @@ button{
     position: relative;
     background-color: var( --main-color-light-theme);
     color: var(--background-light-theme);
-    margin-left: 20px;
-    margin-right: 20px;
     padding: 40px 20px;
     width: 335px;
     border-radius: 20px;
@@ -255,8 +253,6 @@ button{
 
 @media screen and (min-width: 768px) {
     .main-modal{
-        margin-left: 32px;
-        margin-right: 32px;
         padding: 32px;
         width: 704px;
     }
@@ -294,22 +290,24 @@ button{
 
     .main-modal__main-container{
         display: flex;
+        flex-direction: column;
+        gap: 32px;
     }
     
     .main-modal__content-container{
         height: auto;
+        display: flex;
+        gap: 32px;
     }
 
     .main-modal__btns-wrapper{
         justify-content: flex-end;
         flex-direction: row;
-        margin-left: 32px;
         flex-shrink: 0;
         white-space: nowrap;
     }
     
     .main-modal__content-wrapper{
-        margin-left: 32px;
         width: 338px;
         margin-bottom: 64px;
     }
@@ -342,6 +340,7 @@ button{
 
     .main-modal__fav-btn{
         margin-right: 7px;
+        margin-bottom: 0;
     }
 
     .main-modal__card-title{
@@ -359,8 +358,6 @@ button{
 
 @media screen and (min-width: 1440px) {
     .main-modal{
-        margin-left: 366px;
-        margin-right: 366px;
         width: 708px;
     }
 }
