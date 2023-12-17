@@ -64,11 +64,15 @@
 .hero-img {
   height: 460px;
   border-radius: 30px;
-  background-image: image-set(
-    url('../img/hero/hero-mobile@1x.jpg') 1x,
-    url('../img/hero/hero-mobile@2x.jpg') 2x
-  );
+  background-image: url('../img/hero/hero-mobile@1x.jpg');
   background-repeat: no-repeat;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
+  .hero-img {
+    background-image: url('../img/hero/hero-mobile@2x.jpg');
+    background-size: 335px 460px;
+  }
 }
 
 .hero-tags-list {
@@ -134,12 +138,16 @@
   .hero-img {
     height: 550px;
     border-radius: 60px;
-    background-image: image-set(
-      url('../img/hero/hero-tablet@1x.jpg') 1x,
-      url('../img/hero/hero-tablet@2x.jpg') 2x
-    );
+    background-image: url('../img/hero/hero-tablet@1x.jpg');
     background-repeat: no-repeat;
     margin-bottom: 16px;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
+    .hero-img {
+      background-image: url('../img/hero/hero-tablet@2x.jpg');
+      background-size: 704px 550px;
+    }
   }
 
   .hero-tags-list {
@@ -148,7 +156,7 @@
   }
 
   .hero-tag {
-    padding: 4px, 16px, 4px, 16px;
+    padding: 4px 16px 4px 16px;
 
     /* font */
     font-size: 16px;
@@ -178,11 +186,15 @@
     width: 168px;
     height: 100px;
     border-radius: 20px;
-    background-image: image-set(
-      url('../img/hero/hero-right-desktop@1x.jpg') 1x,
-      url('../img/hero/hero-right-desktop@2x.jpg') 2x
-    );
+    background-image: url('../img/hero/hero-right-desktop@1x.jpg');
     background-repeat: no-repeat;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
+    .hero-desktop-right-img {
+      background-image: url('../img/hero/hero-right-desktop@2x.jpg');
+      background-size: 168px 100px;
+    }
   }
 
   .hero-tags-list {
@@ -196,11 +208,15 @@
   .hero-img {
     height: 350px;
     border-radius: 60px;
-    background-image: image-set(
-      url('../img/hero/hero-desktop@1x.jpg') 1x,
-      url('../img/hero/hero-desktop@2x.jpg') 2x
-    );
+    background-image: url('../img/hero/hero-desktop@1x.jpg');
     background-repeat: no-repeat;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 196dpi) {
+    .hero-img {
+      background-image: url('../img/hero/hero-desktop@2x.jpg');
+      background-size: 1376px 350px;
+    }
   }
 
   .hero-tags-bottom {
