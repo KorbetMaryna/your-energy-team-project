@@ -1,5 +1,3 @@
-import { toggleLoader } from "./loader";
-
 document.addEventListener('DOMContentLoaded', function () {
     checkNetworkStatus();
 
@@ -21,10 +19,9 @@ function checkNetworkStatus() {
 }
 
 function handleNetworkChange(online) {
-    const isLoaderVisible = toggleLoader(true);
     const isPageErrorContainer = document.querySelector('.page-error-container');
 
-    if (!online || isLoaderVisible) {
+    if (!online) {
         if (!isPageErrorContainer) {
             const notFoundContainerPageError = document.createElement('div');
             notFoundContainerPageError.classList.add('page-error-container');

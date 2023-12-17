@@ -1,14 +1,8 @@
-import iziToast from 'izitoast';
 import { fetchApiData, fetchSearchData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 import { toggleLoader } from './loader';
-
-iziToast.settings({
-  position: 'topRight',
-  transitionIn: 'bounceInDown',
-  closeOnEscape: true,
-});
+import { showMessage } from './helpers/notificationHandler';
 
 const refs = {
   headlineWrapper: document.querySelector('.js-headline-category-wrapper'),
@@ -42,7 +36,7 @@ refs.filterButtons.forEach(el => {
 });
 
 export async function fetchData(type, obj) {
-  toggleLoader(true);
+  toggleLoader(type, true);
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
@@ -58,12 +52,10 @@ export async function fetchData(type, obj) {
       }
     })
     .catch(err => {
-      console.log(err);
-      iziToast.error({
-        message: 'Something went wrong :-( try again later.',
-      });
+      console.log(err.message);
+      showMessage('error', 'Something went wrong 😔 try again later.');
     })
-    .finally(toggleLoader(false));
+    .finally(() => toggleLoader(type, false));
 }
 
 function createFilterMarkup({ results }) {
@@ -89,10 +81,12 @@ function onTileClick(e) {
 
 export function createExercisesMarkup({ results }) {
   if (!results.length) {
-    return iziToast.warning({
-      message: "Unfortunately, we don't have any exercises in this category",
-    });
+    return showMessage(
+      'warning',
+      "Unfortunately, we don't have any exercises in this category"
+    );
   }
+
   clearFilterMarkup();
   displayHeadlineAndSearch();
   const markup = results
@@ -187,6 +181,10 @@ export function renderPagination({
 }) {
   refs.paginationList.innerHTML = '';
 
+  if (totalPages <= 1) {
+    return;
+  }
+
   const maxPagesToShow = 6;
 
   if (totalPages <= maxPagesToShow) {
@@ -211,7 +209,7 @@ export function renderPagination({
 
   function renderPages(start, end, currentPage, type) {
     for (let i = start; i <= end; i++) {
-      const pageElement = document.createElement('span');
+      const pageElement = document.createElement('li');
       pageElement.classList.add('exercises-pagination-item');
       pageElement.textContent = i;
 

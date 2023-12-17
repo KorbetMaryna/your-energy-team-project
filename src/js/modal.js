@@ -1,34 +1,36 @@
-
 import axios from 'axios';
 
 const isExercisePage = document.querySelector('.js-tiles-category-list');
 
-let currentList = null
+let currentList = null;
 
 // Trigger the code when the window finishes loading
-window.onload = function() {
-  
+window.onload = function () {
   if (isExercisePage) {
-    currentList = document.getElementsByClassName('exercises-tiles-category-list');
-  }else{
+    currentList = document.getElementsByClassName(
+      'exercises-tiles-category-list'
+    );
+  } else {
     currentList = document.getElementsByClassName('fav-workouts-list');
   }
-  
+
   // Loop through the HTML collection (if there are multiple elements with this class)
-  for (let i = 0; i < currentList.length; i+=1) {
+  for (let i = 0; i < currentList.length; i += 1) {
     const current = currentList[i];
-    
+
     // Add an event listener to each element in the HTMLCollection
-    current.addEventListener('click', function(event) {
-      
-      const clickedListItem = isExercisePage ? event.target.closest('.exercises-category-tile-button') : event.target.closest('.fav-workouts-start-button');
-      const categoryTileItem = isExercisePage ? event.target.closest('.exercises-category-tile-item') : event.target.closest('.fav-workouts-list-item');
-      
+    current.addEventListener('click', function (event) {
+      const clickedListItem = isExercisePage
+        ? event.target.closest('.exercises-category-tile-button')
+        : event.target.closest('.fav-workouts-start-button');
+      const categoryTileItem = isExercisePage
+        ? event.target.closest('.exercises-category-tile-item')
+        : event.target.closest('.fav-workouts-list-item');
+
       if (clickedListItem) {
-        
         // Get the modal element
-        const modal = document.getElementById("myModal");
-        
+        const modal = document.getElementById('myModal');
+
         // Get the <span> element that closes the modal
         const closeBtn = document.getElementsByClassName("main-modal__close")[0];
         
@@ -57,7 +59,7 @@ window.onload = function() {
         if (closeBtn) {
           closeBtn.addEventListener('click', closeModal);
         }
-        
+
         // When the user clicks anywhere outside of the modal, close it
         function closeModalOutside(event) {
           if (event.target === modal) {
@@ -69,9 +71,9 @@ window.onload = function() {
         window.addEventListener('click', closeModalOutside);
 
         const exerciseId = categoryTileItem.dataset.id;
-        modal.style.display = "flex"
-        body.style.overflow = "hidden";
-        
+        modal.style.display = 'flex';
+        body.style.overflow = 'hidden';
+
         const apiUrl = `https://your-energy.b.goit.study/api/exercises/${exerciseId}`;
               
         axios.get(apiUrl).then(response => {
@@ -82,43 +84,68 @@ window.onload = function() {
           }})
           .then(data => {
             displayExerciseDetails(data);
-            
-            const favBtn = document.getElementById("fav-btn");
+
+            const favBtn = document.getElementById('fav-btn');
             if (favBtn) {
               // Check if the exercise is in the savedExercises array
-              const isSaved = savedExercises.some(exercise => exercise._id === data._id);
-              
+              const isSaved = savedExercises.some(
+                exercise => exercise._id === data._id
+              );
+
               // Check if the exercise is in the savedExercises array and render necessary icon accordingly
-              const heartIcon = favBtn.querySelector('.main-modal__heart-icon use');
-              heartIcon.setAttribute('href', isSaved ? './img/icons.svg#icon-trash' : './img/icons.svg#icon-heart');
-              
+              const heartIcon = favBtn.querySelector(
+                '.main-modal__heart-icon use'
+              );
+              heartIcon.setAttribute(
+                'href',
+                isSaved
+                  ? './img/icons.svg#icon-trash'
+                  : './img/icons.svg#icon-heart'
+              );
+
               // Set button text based on whether the exercise is saved or not
-              favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Remove from favorites' : 'Add to favorites';
-              
-              favBtn.addEventListener('click', function() {
-                const isSaved = savedExercises.some(exercise => exercise._id === data._id);
-                
+              favBtn.querySelector('.main-modal__btn-text').textContent =
+                isSaved ? 'Remove from favorites' : 'Add to favorites';
+
+              favBtn.addEventListener('click', function () {
+                const isSaved = savedExercises.some(
+                  exercise => exercise._id === data._id
+                );
+
                 if (isSaved) {
                   // Remove the exercise from savedExercises array
-                  savedExercises = savedExercises.filter(exercise => exercise._id !== data._id);
+                  savedExercises = savedExercises.filter(
+                    exercise => exercise._id !== data._id
+                  );
                 } else {
                   // Add the exercise to savedExercises array
                   savedExercises.push(data);
                 }
-                
+
                 // Update localStorage with the updated savedExercises array
-                localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
-                
+                localStorage.setItem(
+                  'savedExercises',
+                  JSON.stringify(savedExercises)
+                );
+
                 // Toggle button text between 'Add to favorites' and 'Remove from favorites'
-                favBtn.querySelector('.main-modal__btn-text').textContent = isSaved ? 'Add to favorites' : 'Remove from favorites';
-                
+                favBtn.querySelector('.main-modal__btn-text').textContent =
+                  isSaved ? 'Add to favorites' : 'Remove from favorites';
+
                 // Change btn's icon when it is being saved/removed to/from favorires
-                const heartIcon = favBtn.querySelector('.main-modal__heart-icon use');
-                heartIcon.setAttribute('href', isSaved ? './img/icons.svg#icon-heart' : './img/icons.svg#icon-trash');
+                const heartIcon = favBtn.querySelector(
+                  '.main-modal__heart-icon use'
+                );
+                heartIcon.setAttribute(
+                  'href',
+                  isSaved
+                    ? './img/icons.svg#icon-heart'
+                    : './img/icons.svg#icon-trash'
+                );
               });
             }
           })
-          .catch(error => {       
+          .catch(error => {
             console.error('There was a problem with the Axios request:', error);
           });
           
