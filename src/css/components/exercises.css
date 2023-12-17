@@ -175,6 +175,30 @@
   color: var(--grey-two);
 }
 
+
+@media screen and (max-width: 375px) {
+  .exercises-category-tile-item {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  .exercises-category-tile-badge {
+    margin-right: 8px;
+  }
+
+  .exercises-category-tile-name {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .exercises-category-tile-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+}
+
 /* Pagination styles */
 
 .exercises-pagination-list {
