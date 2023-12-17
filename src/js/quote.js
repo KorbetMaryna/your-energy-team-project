@@ -5,7 +5,7 @@ const QUOTE = document.querySelector('.quote-wrapper');
 
 async function checkQuote() {
   const todayDate = new Date().toLocaleDateString();
-  const restoredQuote = getQuoteFromStorage(todayDate);
+  const restoredQuote = getQuoteFromStorage();
 
   if (!validateStoredQuote(restoredQuote, todayDate)) {
     let { quote, author } = await getQuote();
@@ -57,7 +57,7 @@ function validateStoredQuote(restoredQuote, todayDate) {
     !restoredQuote ||
     !restoredQuote.quote ||
     !restoredQuote.date ||
-    restoredQuote.author ||
+    !restoredQuote.author ||
     restoredQuote.date != todayDate
   ) {
     return false;
