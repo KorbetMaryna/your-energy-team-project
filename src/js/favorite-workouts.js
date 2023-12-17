@@ -60,7 +60,7 @@ function createStartMarkup() {
       savedExercises = [...currentSavedExercises];
       renderWorkoutsMarkup(savedExercises);
     }
-  }, 1000);
+  }, 300);
 }
 
 function renderWorkoutsMarkup(savedExercises) {
