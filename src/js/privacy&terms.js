@@ -1,6 +1,15 @@
 const privacyTerms = document.querySelector('.footer-information-list');
 
+const closeBtn = document.querySelector('.info-close-btn-id');
+const infoBackdrop = document.querySelector('.info-backdrop-id');
+const infoModal = document.querySelector('.info-modal');
+
+const termsCloseBtn = document.querySelector('.terms-close-btn-id');
+const termsBackdrop = document.querySelector('.terms-backdrop-id');
+const termsModal = document.querySelector('.terms-modal');
+
 privacyTerms.addEventListener('click', privacyTermsHandler);
+termsCloseBtn.addEventListener('click', closeTermsModal);
 
 function privacyTermsHandler(event) {
   const pressedBtn = event.target.classList.value;
@@ -17,10 +26,6 @@ function privacyTermsHandler(event) {
   }
 }
 
-const closeBtn = document.querySelector('.info-close-btn-id');
-const infoBackdrop = document.querySelector('.info-backdrop-id');
-const infoModal = document.querySelector('.info-modal');
-
 function openInfoModal() {
   infoBackdrop.style.opacity = '1';
   infoBackdrop.classList.remove('is-hidden');
@@ -31,14 +36,8 @@ function closeInfoModal() {
   infoBackdrop.style.opacity = '0';
   infoBackdrop.classList.add('is-hidden');
   document.body.style.overflow = '';
-  closeBtn.removeEventListener('click');
+  closeBtn.removeEventListener('click', closeInfoModal);
 }
-
-const termsCloseBtn = document.querySelector('.terms-close-btn-id');
-const termsBackdrop = document.querySelector('.terms-backdrop-id');
-const termsModal = document.querySelector('.terms-modal');
-
-termsCloseBtn.addEventListener('click', closeTermsModal);
 
 function openTermsModal() {
   termsBackdrop.style.opacity = '1';
@@ -50,5 +49,5 @@ function closeTermsModal() {
   termsBackdrop.style.opacity = '0';
   termsBackdrop.classList.add('is-hidden');
   document.body.style.overflow = '';
-  termsCloseBtn.removeEventListener('click');
+  termsCloseBtn.removeEventListener('click', closeTermsModal);
 }
