@@ -1,4 +1,4 @@
-import{s as d}from"./assets/showPageError-0a589264.js";import"./assets/vendor-09c79f2e.js";function f(t,s){return h(t===1).concat(w(t,s),k(t===s))}function w(t,s){let a="";for(let n=1;n<=s;n+=1){if(n<t-2){a=a.concat('<li><span class="pagination-number">...</span></li>'),n=t-3;continue}if(n>t+2){a=a.concat('<li><span class="pagination-number">...</span></li>');break}a=a.concat(`<li>
+import{s as d}from"./assets/showPageError-e7833756.js";import"./assets/vendor-1133ef0b.js";function f(t,s){return h(t===1).concat(w(t,s),k(t===s))}function w(t,s){let a="";for(let n=1;n<=s;n+=1){if(n<t-2){a=a.concat('<li><span class="pagination-number">...</span></li>'),n=t-3;continue}if(n>t+2){a=a.concat('<li><span class="pagination-number">...</span></li>');break}a=a.concat(`<li>
         <button class="js-page pagination-number${n===t?" active":""}" type="button"  data-page-navigate=${n}>${n}</button>
       </li>`)}return`<ul class="fav-workouts-pagination-numbers">
       ${a}
