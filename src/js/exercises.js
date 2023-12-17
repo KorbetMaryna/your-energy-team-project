@@ -181,6 +181,10 @@ export function renderPagination({
 }) {
   refs.paginationList.innerHTML = '';
 
+  if (totalPages <= 1) {
+    return;
+  }
+
   const maxPagesToShow = 6;
 
   if (totalPages <= maxPagesToShow) {
@@ -205,7 +209,7 @@ export function renderPagination({
 
   function renderPages(start, end, currentPage, type) {
     for (let i = start; i <= end; i++) {
-      const pageElement = document.createElement('span');
+      const pageElement = document.createElement('li');
       pageElement.classList.add('exercises-pagination-item');
       pageElement.textContent = i;
 
