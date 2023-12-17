@@ -7,7 +7,7 @@
 .exercises-headline-wrapper {
   display: flex;
   flex-direction: row;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .exercises-headline {
@@ -109,10 +109,10 @@
 
 @media screen and (min-width: 768px) {
   .exercises-meta-subcontainer {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
   .exercises-headline-wrapper {
-    padding-bottom: 32px;
+    margin-bottom: 32px;
   }
   .exercises-headline {
     font-size: 44px;
@@ -124,9 +124,6 @@
     font-size: 24px;
     line-height: 1.33;
     letter-spacing: -0.48px;
-  }
-  .exercises-buttons-wrapper {
-    padding-bottom: 8px;
   }
   .exercises-category-button {
     font-size: 16px;
@@ -155,9 +152,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 32px;
   }
   .exercises-headline-wrapper {
-    padding-bottom: 0;
+    margin-bottom: 0;
   }
   .exercises-input-and-buttons-wrapper {
     margin-bottom: 0;
