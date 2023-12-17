@@ -84,7 +84,7 @@
   display: block;
   stroke: var(--main-color-light-theme);
   fill: none;
-  background-color: none;
+  background-color: transparent;
 }
 
 .fav-workouts-start-button {
@@ -109,7 +109,7 @@
   margin-top: 1px;
   stroke: var(--main-color-light-theme);
   fill: none;
-  background-color: none;
+  background-color: transparent;
   transition: transform var(--transition-duration-time-function);
 }
 
@@ -202,7 +202,7 @@
 }
 
 .pagination-btn {
-  background-color: none;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
