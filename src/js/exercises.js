@@ -1,5 +1,5 @@
 import iziToast from 'izitoast';
-import { fetchApiData } from './api';
+import { fetchApiData, fetchSearchData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 import { toggleLoader } from './loader';
@@ -148,6 +148,7 @@ function resetExercisesUrlObj(basicUrlParams, el) {
 
 function resetCategoryUrlObj(basicUrlParams, name, filter) {
   basicUrlParams.filter = '';
+  basicUrlParams.keyword = '';
   if (filter === 'body') {
     filter = 'bodypart';
   }
@@ -167,7 +168,13 @@ function clearFilterMarkup() {
   refs.tilesCategoryList.classList.remove('visually-hidden');
 }
 
-export function renderPagination({ page, totalPages, type, customListener }) {
+export function renderPagination({
+  page,
+  totalPages,
+  type,
+  keyword,
+  customListener,
+}) {
   refs.paginationList.innerHTML = '';
 
   const maxPagesToShow = 6;
@@ -204,6 +211,10 @@ export function renderPagination({ page, totalPages, type, customListener }) {
 
       pageElement.addEventListener('click', () => {
         basicUrlParams.page = i;
+        if (keyword) {
+          basicUrlParams.keyword = keyword;
+          fetchSearchData(basicUrlParams);
+        }
         if (customListener) {
           customListener(basicUrlParams.page);
         } else {

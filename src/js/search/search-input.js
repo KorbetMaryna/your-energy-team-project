@@ -2,7 +2,6 @@ import iziToast from 'izitoast';
 import { debounce } from '../helpers/debounce';
 import { showEl, hideEl } from '../helpers/toggleHidden';
 import { refs } from './refs';
-import { exercisesMarkup } from '../exercises-markup';
 import {
   checkScreenWidth,
   basicUrlParams,
@@ -42,16 +41,17 @@ async function onSubmitSearch(e) {
       bodypart: basicUrlParams.bodypart || '',
       muscles: basicUrlParams.muscles || '',
       equipment: basicUrlParams.equipment || '',
-      page: basicUrlParams.page,
+      page: 1,
       keyword: value,
       limit,
     });
 
     createExercisesMarkup({ results });
     renderPagination({
-      page: basicUrlParams.page,
+      page: 1,
       totalPages,
       type: 'exercises',
+      keyword: value,
     });
   } else {
     iziToast.warning({
