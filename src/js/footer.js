@@ -22,6 +22,7 @@ async function subscribeHandler(event) {
       'warning',
       'Please enter email in correct format. (test@email.com)'
     );
+    return
   }
 
   try {
