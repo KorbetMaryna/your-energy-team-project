@@ -2,33 +2,15 @@
   padding-bottom: 80px;
 }
 
-.meta-exercises-quote-container {
-  max-width: 375px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 @media screen and (min-width: 768px) {
   .meta-exercises-quote-section {
     padding-bottom: 100px;
-  }
-  .meta-exercises-quote-container {
-    max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .meta-exercises-quote-section {
     padding-bottom: 132px;
-  }
-  .meta-exercises-quote-container {
-    max-width: 1440px;
-    padding-left: 32px;
-    padding-right: 32px;
   }
   .exercises-and-quote-container {
     display: flex;
