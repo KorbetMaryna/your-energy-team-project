@@ -19,13 +19,11 @@ export function toggleLoader(type, show) {
     loaderStates[type] = true;
     loader.style.display = 'block';
     loaderBackdrop.style.display = "block";
-    console.log(`active`);
   } else {
     loaderStates[type] = false;
     if (loader) {
       loader.style.display = 'none';
       loaderBackdrop.style.display = "none";
-      console.log(`not active`);
     }
   }
 };
