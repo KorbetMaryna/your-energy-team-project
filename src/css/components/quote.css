@@ -144,6 +144,7 @@
   max-height: 200px;
   overflow-y: auto;
   word-wrap: break-word;
+  overflow: hidden;
 }
 
 .daily-norm-icon-circle {
