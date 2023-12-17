@@ -57,6 +57,12 @@
   text-align: left;
 }
 
+.hero-img {
+  border-radius: 30px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 .hero-tags-list {
   display: flex;
   gap: 6px;
@@ -95,6 +101,7 @@
 
   .hero-img {
     padding-bottom: 16px;
+    border-radius: 60px;
   }
 
   .hero-title-icon {
