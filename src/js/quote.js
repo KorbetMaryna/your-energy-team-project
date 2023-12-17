@@ -40,7 +40,8 @@ async function getQuote() {
 
     return { quote, author };
   } catch (err) {
-    showMessage('error', err.message);
+    console.log(err.message);
+    showMessage('error', 'Something went wrong 😔 try again later.');
   }
 }
 

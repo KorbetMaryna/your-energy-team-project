@@ -24,7 +24,8 @@ async function subscribeHandler(event) {
 
     showMessage('success', data.message);
   } catch (error) {
-    showMessage('error', error.response.data.message);
+    console.log(error.response.data.message);
+    showMessage('error', 'Something went wrong 😔 try again later.');
   } finally {
     event.target.email.value = '';
   }

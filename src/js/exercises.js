@@ -52,7 +52,8 @@ export async function fetchData(type, obj) {
       }
     })
     .catch(err => {
-      showMessage('error', err.message);
+      console.log(err.message);
+      showMessage('error', 'Something went wrong 😔 try again later.');
     })
     .finally(toggleLoader(false));
 }
