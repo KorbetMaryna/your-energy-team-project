@@ -1,4 +1,4 @@
-import{t as M,f as R,a as O,b as G,c as N,d as U,e as V,g as z}from"./assets/showPageError-d5f974f1.js";import{i as m,l as k,a as Y}from"./assets/vendor-09c79f2e.js";function g(e){return e[0].toUpperCase()+e.slice(1)}function K(e,s,t){return`      
+import{t as M,f as R,a as O,b as G,c as N,d as U,e as V,g as z}from"./assets/showPageError-f6ea5495.js";import{i as m,l as k,a as Y}from"./assets/vendor-09c79f2e.js";function g(e){return e[0].toUpperCase()+e.slice(1)}function K(e,s,t){return`      
 <li class="exercises-filter-tile-item" data-name=${s} data-filter=${e.toLowerCase()}>
       <div class="exercises-filter-tile-gradient"></div>
       <img class="exercises-filter-tile-img" src="${t}" alt="${s}" onerror="this.onerror=null; this.src='./../img/no-image.jpg'"/>
