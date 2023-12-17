@@ -10,7 +10,6 @@ window.onscroll = function () {
 
 function handlerScrollUp() {
     const scrollThreshold = getScrollThreshold();
-    
     if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
         scrollUpButton.style.display = "block";
     } else {
