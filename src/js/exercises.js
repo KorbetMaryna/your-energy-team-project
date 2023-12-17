@@ -1,14 +1,8 @@
-import iziToast from 'izitoast';
 import { fetchApiData, fetchSearchData } from './api';
 import { filterMarkup, exercisesMarkup } from './exercises-markup';
 import { capitalizeFirstLetter } from './helpers/capitalizeFirstLetter';
 import { toggleLoader } from './loader';
-
-iziToast.settings({
-  position: 'topRight',
-  transitionIn: 'bounceInDown',
-  closeOnEscape: true,
-});
+import { showMessage } from './helpers/notificationHandler';
 
 const refs = {
   headlineWrapper: document.querySelector('.js-headline-category-wrapper'),
@@ -58,10 +52,8 @@ export async function fetchData(type, obj) {
       }
     })
     .catch(err => {
-      console.log(err);
-      iziToast.error({
-        message: 'Something went wrong :-( try again later.',
-      });
+      console.log(err.message);
+      showMessage('error', 'Something went wrong 😔 try again later.');
     })
     .finally(toggleLoader(false));
 }
@@ -89,10 +81,12 @@ function onTileClick(e) {
 
 export function createExercisesMarkup({ results }) {
   if (!results.length) {
-    return iziToast.warning({
-      message: "Unfortunately, we don't have any exercises in this category",
-    });
+    return showMessage(
+      'warning',
+      "Unfortunately, we don't have any exercises in this category"
+    );
   }
+
   clearFilterMarkup();
   displayHeadlineAndSearch();
   const markup = results

@@ -1,5 +1,5 @@
 import MicroModal from 'micromodal';
-import iziToast from 'izitoast';
+import { showMessage } from './helpers/notificationHandler';
 
 import {
   fetchBodyParts,
@@ -85,10 +85,8 @@ class YourChoiceModal {
       });
     } catch (err) {
       const msg = 'Could not fetch lists of filters for modal';
-      console.error(msg, err);
-      iziToast.error({
-        message: msg,
-      });
+      console.log(msg);
+      showMessage('error', err.message);
     }
   }
 
@@ -127,10 +125,11 @@ class YourChoiceModal {
     try {
       const isFound = await this.getAndRenderExercises({ page: 1 });
       if (!isFound) {
-        iziToast.warning({
-          message:
-            'No exercises found. Try another set of muscle, body part and equipment paramaters.',
-        });
+        showMessage(
+          'warning',
+          'No exercises found. Try another set of muscle, body part and equipment paramaters.'
+        );
+
         this.submitBtnElem.disabled = false;
         return;
       }
@@ -140,11 +139,7 @@ class YourChoiceModal {
       MicroModal.close();
       makeFilterButtonActive(youChoiceBtnElem);
     } catch (err) {
-      const msg = `Could not fetch exercises because of error`;
-      console.error(msg, err);
-      iziToast.error({
-        message: msg,
-      });
+      showMessage('error', err.message);
     } finally {
       this.submitBtnElem.disabled = false;
     }

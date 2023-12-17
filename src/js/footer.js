@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { errorHandler } from './quote';
-import iziToast from 'izitoast';
+
+import { showMessage } from './helpers/notificationHandler';
 
 const subscribeForm = document.querySelector('.footer-sub-form');
 const BASE_URL = 'https://your-energy.b.goit.study/api/';
@@ -12,17 +12,26 @@ async function subscribeHandler(event) {
 
   const email = event.target.email.value;
 
+  if (!isValidEmail(email)) {
+    showMessage(
+      'warning',
+      'Please enter email in correct format. (test@email.com)'
+    );
+  }
+
   try {
     const { data } = await axios.post(`${BASE_URL}subscription`, { email });
 
-    subscriptionSuccessfull(data.message);
+    showMessage('success', data.message);
   } catch (error) {
-    errorHandler(error.response.data.message);
+    console.log(error.response.data.message);
+    showMessage('error', 'Something went wrong 😔 try again later.');
+  } finally {
+    event.target.email.value = '';
   }
 }
 
-function subscriptionSuccessfull(message) {
-  iziToast.success({
-    message: `${message}`,
-  });
-}
+const isValidEmail = email => {
+  const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  return emailRegex.test(email);
+};

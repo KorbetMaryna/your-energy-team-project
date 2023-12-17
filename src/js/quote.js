@@ -1,5 +1,5 @@
-import iziToast from 'izitoast';
 import { fetchApiData } from './api';
+import { showMessage } from './helpers/notificationHandler';
 
 const QUOTE = document.querySelector('.quote-wrapper');
 
@@ -40,7 +40,8 @@ async function getQuote() {
 
     return { quote, author };
   } catch (err) {
-    errorHandler(err.message);
+    console.log(err.message);
+    showMessage('error', 'Something went wrong 😔 try again later.');
   }
 }
 
@@ -49,12 +50,6 @@ function quoteMarkup(quote, author) {
     <p class="qoute-author">${author}</p>`;
 
   QUOTE.insertAdjacentHTML('beforeend', markup);
-}
-
-function errorHandler(errorMessage) {
-  iziToast.error({
-    message: `${errorMessage}`,
-  });
 }
 
 function validateStoredQuote(restoredQuote, todayDate) {
@@ -73,4 +68,4 @@ function validateStoredQuote(restoredQuote, todayDate) {
 
 checkQuote();
 
-export { checkQuote, errorHandler };
+export { checkQuote };
