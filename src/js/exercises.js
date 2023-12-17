@@ -209,7 +209,7 @@ export function renderPagination({
 
   function renderPages(start, end, currentPage, type) {
     for (let i = start; i <= end; i++) {
-      const pageElement = document.createElement('span');
+      const pageElement = document.createElement('li');
       pageElement.classList.add('exercises-pagination-item');
       pageElement.textContent = i;
 
