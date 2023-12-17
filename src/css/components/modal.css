@@ -291,13 +291,13 @@ button{
     .main-modal__main-container{
         display: flex;
         flex-direction: column;
-        gap: 32px;
     }
     
     .main-modal__content-container{
         height: auto;
         display: flex;
         gap: 32px;
+        margin-bottom: 64px;
     }
 
     .main-modal__btns-wrapper{
@@ -309,7 +309,7 @@ button{
     
     .main-modal__content-wrapper{
         width: 338px;
-        margin-bottom: 64px;
+        margin-bottom: 0;
     }
     
     .main-modal__gif-wrapper {
