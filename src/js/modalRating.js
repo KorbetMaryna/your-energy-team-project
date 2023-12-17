@@ -1,5 +1,6 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
+import { showMessage } from './helpers/notificationHandler';
 
 iziToast.settings({
   position: 'topRight',
@@ -7,14 +8,13 @@ iziToast.settings({
   closeOnEscape: true,
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const mainModal = document.querySelector('#myModal');
 
-  mainModal.addEventListener('click', function(event) {
+  mainModal.addEventListener('click', function (event) {
     const ratingButton = event.target.closest('.main-modal__rating-btn');
-    
-    if (ratingButton) {
 
+    if (ratingButton) {
       const refs = {
         backdrop: document.querySelector('.rating-backdrop'),
         closeButton: document.querySelector('.rating__close-btn'),
@@ -26,32 +26,38 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       let selectedStar = null;
-      let currentExercise = JSON.parse(localStorage.getItem('currentExercise')) || {};
-      refs.ratingValue.innerHTML = currentExercise.rating.toString().includes('.') ? Math.round(currentExercise.rating * 10) / 10 : currentExercise.rating + '.0';
+      let currentExercise =
+        JSON.parse(localStorage.getItem('currentExercise')) || {};
+      refs.ratingValue.innerHTML = currentExercise.rating
+        .toString()
+        .includes('.')
+        ? Math.round(currentExercise.rating * 10) / 10
+        : currentExercise.rating + '.0';
 
       const onReset = () => {
-        selectedStar = null
-        refs.emailInput.value = ''
-        refs.commentInput.value = ''
+        selectedStar = null;
+        refs.emailInput.value = '';
+        refs.commentInput.value = '';
 
         const starsArray = Array.from(refs.starsContainer);
-        starsArray.forEach((star) => {
-          const starIcon = star.nextElementSibling.querySelector('.rating__icon-star');
-            starIcon.style.fill = 'var(--second-color-light-theme)';
-            starIcon.style.opacity = 0.2;
+        starsArray.forEach(star => {
+          const starIcon =
+            star.nextElementSibling.querySelector('.rating__icon-star');
+          starIcon.style.fill = 'var(--second-color-light-theme)';
+          starIcon.style.opacity = 0.2;
         });
-      }
+      };
       const openModal = () => {
-        mainModal.style.display = "none"
+        mainModal.style.display = 'none';
         refs.backdrop.classList.add('modal-open');
         refs.closeButton.addEventListener('click', closeModal);
       };
 
       const closeModal = () => {
-        onReset()
+        onReset();
         refs.backdrop.classList.remove('modal-open');
         refs.closeButton.removeEventListener('click', closeModal);
-        mainModal.style.display = "flex"
+        mainModal.style.display = 'flex';
 
         refs.submitButton.removeEventListener('click', handleSubmit);
         refs.starsContainer.forEach(star => {
@@ -61,15 +67,24 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         });
         refs.backdrop.removeEventListener('click', function (event) {
-          if (event.target === refs.backdrop && !event.target.closest('.rating__close-btn') && !event.target.closest('.rating__submit-btn')) closeModal();
+          if (
+            event.target === refs.backdrop &&
+            !event.target.closest('.rating__close-btn') &&
+            !event.target.closest('.rating__submit-btn')
+          )
+            closeModal();
         });
       };
 
       const updateStarsColor = () => {
         const starsArray = Array.from(refs.starsContainer);
         starsArray.forEach((star, index) => {
-          const starIcon = star.nextElementSibling.querySelector('.rating__icon-star');
-          if (star === selectedStar || (selectedStar && index < starsArray.indexOf(selectedStar))) {
+          const starIcon =
+            star.nextElementSibling.querySelector('.rating__icon-star');
+          if (
+            star === selectedStar ||
+            (selectedStar && index < starsArray.indexOf(selectedStar))
+          ) {
             starIcon.style.fill = 'var(--stars-color-activ)';
             starIcon.style.opacity = 1;
           } else {
@@ -79,31 +94,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       };
 
-      const isValidEmail = (email) => {
+      const isValidEmail = email => {
         const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
         return emailRegex.test(email);
       };
 
-      const handleSubmit = async (event) => {
-        event.preventDefault()
+      const handleSubmit = async event => {
+        event.preventDefault();
         const starId = selectedStar?.id;
         const starRating = parseInt(starId?.replace('star', ''), 10);
-      
+
         if (!starRating || isNaN(starRating)) {
-          iziToast.show({ message: 'Please add your rating' });
+          showMessage('info', 'Please add your rating');
+
           return;
         }
         if (!isValidEmail(refs.emailInput.value)) {
-          iziToast.show({ message: 'Please enter a valid email address' });
+          showMessage('info', 'Please enter a valid email address');
+
           return;
         }
         if (refs.commentInput.value.length <= 3) {
-          iziToast.show({ message: 'Please leave your comment' });
+          showMessage('info', 'Please leave your comment');
+
           return;
         }
-        
+
         const url = `https://your-energy.b.goit.study/api/exercises/${currentExercise._id}/rating`;
-      
+
         try {
           const response = await axios.patch(url, {
             rate: starRating,
@@ -111,22 +129,22 @@ document.addEventListener('DOMContentLoaded', function() {
             review: refs.commentInput.value,
           });
           if (response.status === 200) {
-            iziToast.success({ message: 'Rating submitted successfully!' });
+            showMessage('success', 'Rating submitted successfully!');
           } else {
-            iziToast.error({ title: 'Error', message: 'Failed to submit rating' });
+            showMessage('error', 'Failed to submit rating');
           }
         } catch (error) {
           if (error.response.status === 409) {
-            iziToast.info({ message: 'Such email already exists' });
+            showMessage('message', 'Such email already exists');
           } else if (error.response.status === 404) {
-            iziToast.warning({ message: 'Such exercise not found' });
+            showMessage('warning', 'Such exercise not found');
           } else {
-            iziToast.error({ title: 'Error', message: 'Failed to submit rating' });
+            showMessage('error', 'Failed to submit rating');
           }
         }
         closeModal();
       };
-      
+
       refs.starsContainer.forEach(star => {
         star.addEventListener('click', function (event) {
           selectedStar = event.target;
@@ -135,18 +153,23 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       refs.backdrop.addEventListener('click', function (event) {
-        if (event.target === refs.backdrop && !event.target.closest('.rating__close-btn') && !event.target.closest('.rating__submit-btn')) closeModal();
-      });      
+        if (
+          event.target === refs.backdrop &&
+          !event.target.closest('.rating__close-btn') &&
+          !event.target.closest('.rating__submit-btn')
+        )
+          closeModal();
+      });
 
       refs.closeButton.addEventListener('click', closeModal);
 
       refs.submitButton.addEventListener('click', handleSubmit);
 
-      document.addEventListener('keydown', (event) => {
+      document.addEventListener('keydown', event => {
         if (event.key === 'Escape') closeModal();
       });
 
-      openModal()
+      openModal();
     }
   });
 });
