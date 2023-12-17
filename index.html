@@ -20,8 +20,8 @@
     
     <script type="module" crossorigin src="/your-energy-team-project/commonHelpers2.js"></script>
     <link rel="modulepreload" crossorigin href="/your-energy-team-project/assets/vendor-1133ef0b.js">
-    <link rel="modulepreload" crossorigin href="/your-energy-team-project/assets/showPageError-d1fbf77f.js">
-    <link rel="stylesheet" href="/your-energy-team-project/assets/showPageError-015960f4.css">
+    <link rel="modulepreload" crossorigin href="/your-energy-team-project/assets/showPageError-9ed80bf2.js">
+    <link rel="stylesheet" href="/your-energy-team-project/assets/showPageError-10797846.css">
     <link rel="stylesheet" href="/your-energy-team-project/assets/vendor-e5212ee8.css">
   </head>
   <body>
@@ -395,7 +395,7 @@
   <ul class="exercises-pagination-list js-pagination"></ul>
 </section>
 
-      <section class="quote-section">
+      <div class="quote-section">
   <div class="quote-article">
     <div class="quote-wrapper">
       <h3 class="quote-title title">Quote of the day</h3>
@@ -439,14 +439,14 @@
       </svg>
     </div>
   </article>
-</section>
+</div>
 
     </div>
   </div>
 </section>
 
     <footer>
-  <div class="footer-wrapper conatiner">
+  <div class="container footer-wrapper">
     <div class="footer-logo-social-wrapper">
       <a href="./index.html">
         <svg class="footer-logo" aria-label="logo icon">
@@ -513,6 +513,8 @@
           name="email"
           id="sub-email"
           placeholder="Email"
+          pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+          required
         />
         <button type="submit" class="submitBtn">Send</button>
       </form>
