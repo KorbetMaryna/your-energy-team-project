@@ -1,5 +1,5 @@
 <section class="hero-section">
-  <div class="hero-container">
+  <div class="container hero-container">
     <div class="hero-title-desc-wrap">
       <div class="hero-title-desc-left">
         <div class="hero-title-wrap">
@@ -19,11 +19,44 @@
         </p>
       </div>
       <div class="hero-title-desc-right">
-        <div class="hero-desktop-right-img"></div>
+        <div class="hero-desktop-right-img">
+          <img
+            srcset="
+              ./img/hero/hero-right-desktop@1x.png 1x,
+              ./img/hero/hero-right-desktop@2x.png 2x
+            "
+          />
+        </div>
         <load ="partials/hero-tags.html" />
       </div>
     </div>
-    <div class="hero-img"></div>
+
+    <div class="hero-img">
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          srcset="
+            ./img/hero/hero-mobile@1x.png 1x,
+            ./img/hero/hero-mobile@2x.png 2x
+          "
+        />
+        <source
+          media="(max-width: 1439px)"
+          srcset="
+            ./img/hero/hero-tablet@1x.png 1x,
+            ./img/hero/hero-tablet@2x.png 2x
+          "
+        />
+        <source
+          media="(min-width: 1440px)"
+          srcset="
+            ./img/hero/hero-desktop@1x.png 1x,
+            ./img/hero/hero-desktop@2x.png 2x
+          "
+        />
+        <img src="./img/hero/hero-desktop@1x.png" />
+      </picture>
+    </div>
     <div class="hero-tags-bottom">
       <load ="partials/hero-tags.html" />
     </div>
