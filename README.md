@@ -1,113 +1,160 @@
-# Vanilla App Template
+<div align="center" id="top"> 
+  <img src="./src/public/apple-touch-icon.png" alt="Your Energy" />
 
-Цей проект було створено за допомогою Vite. Для знайомства та налаштування
-додаткових можливостей [звернись до документації](https://vitejs.dev/).
+&#xa0;
 
-## Створення репозиторію за шаблоном
+<a href="https://korbetmaryna.github.io/your-energy-team-project">Demo</a>
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення
-репозиторію свого проекту. Для цього натисни на кнопку `«Use this template»` і
-обери опцію `«Create a new repository»`, як показано на зображенні.
+</div>
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+<h1 align="center">YOUR ENERGY</h1>
+<p align="center">Team project</p>
 
-На наступному етапі відкриється сторінка створення нового репозиторію. Заповни
-поле його імені, переконайся, що репозиторій публічний, після чого натисни
-кнопку `«Create repository from template»`.
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/KorbetMaryna/your-energy-team-project?color=242424">
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/KorbetMaryna/your-energy-team-project?color=242424">
 
-Після того, як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як показано
-на зображенні.
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/KorbetMaryna/your-energy-team-project?color=242424">
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+  <img alt="Github forks" src="https://img.shields.io/github/forks/KorbetMaryna/your-energy-team-project?color=242424" />
 
-Проскроливши сторінку до самого кінця, в секції `«Workflow permissions»` обери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це необхідно
-для автоматизації процесу деплою проекту.
+</p>
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+<p align="center">
+  <a href="#white_circle">About</a> &#xa0; | &#xa0; 
+  <a href="#black_circle">Features</a> &#xa0; | &#xa0;
+  <a href="#gear">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#computer">Starting</a> &#xa0; 
+</p>
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів та папок
-репозиторію-шаблону. Далі працюй з ним, як з будь-яким іншим особистим
-репозиторієм, клонуй його собі на комп'ютер, пиши код, роби коміти та відправляй
-їх на GitHub.
+<p align="center"><a href="https://github.com/KorbetMaryna/your-energy-team-project/graphs/contributors" target="_blank">Developers</a></p>
+<br>
 
-## Підготовка до роботи
+## :white_circle: About
 
-1. Переконайся, що на комп'ютері встановлено LTS-версію Node.js.
-   [Скачай та встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проекту в терміналі командою `npm install`.
-3. Запусти режим розробки, виконавши в терміналі команду `npm run dev`.
-4. Перейдіть у браузері за адресою
-   [http://localhost:5173](http://localhost:5173). Ця сторінка буде автоматично
-   перезавантажуватись після збереження змін у файли проекту.
+Welcome to Your Energy, a collaborative project by our team of skilled
+programmers. Our platform, a health-centric website, offers a curated collection
+of physical exercises to strengthen your well-being. Users can save favorite
+exercises on a dedicated 'Favorites' page. The site features a search
+functionality, allowing users to find exercises by keyword and filter them.
+Tailor your workout by selecting exercises based on individual preferences, and
+rate exercises with the option to provide feedback to the backend. Additionally,
+users can subscribe via the provided form for updates and newsletters. Explore a
+comprehensive fitness experience designed with you in mind.
 
-## Файли і папки
+## :black_circle: Features
 
-- Файли розмітки компонентів сторінки повинні лежати в папці `src/partials` та
-  імпортуватись до файлу `index.html`. Наприклад, файл з розміткою хедера
-  `header.html` створюємо у папці `partials` та імпортуємо в `index.html`.
-- Файли стилів повинні лежати в папці `src/css` та імпортуватись до HTML-файлів
-  сторінок. Наприклад, для `index.html` файл стилів називається `index.css`.
-- Зображення додавай до папки `src/img`. Збирач оптимізує їх, але тільки при
-  деплої продакшн версії проекту. Все це відбувається у хмарі, щоб не
-  навантажувати твій комп'ютер, тому що на слабких компʼютерах це може зайняти
-  багато часу.
+:radio_button: Header:
 
-## Деплой
+:black_medium_square: Mobile :black_medium_small_square: Logo and burger menu
+with navigation and links to social media.
 
-Продакшн версія проекту буде автоматично збиратися та деплоїтись на GitHub
-Pages, у гілку `gh-pages`, щоразу, коли оновлюється гілка `main`. Наприклад,
-після прямого пуша або прийнятого пул-реквесту. Для цього необхідно у файлі
-`package.json` змінити значення прапора `--base=/<REPO>/`, для команди `build`,
-замінивши `<REPO>` на назву свого репозиторію, та відправити зміни на GitHub.
+:black_medium_square: Tablet & Desktop
 
-```json
-"build": "vite build --base=/<REPO>/",
-```
+:black_medium_small_square: Logo, navigation, and social media links.
+:black_medium_small_square: Clicking on the logo or "Home" redirects the user to
+the home page. :black_medium_small_square: Clicking on "Favorites" opens a page
+with a list of exercises added to favorites. :black_medium_small_square:
+Clicking on the burger menu expands it to the full height of the viewport.
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) та
-виставити роздачу продакшн версії файлів з папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
+:radio_button: Home:
 
-![GitHub Pages settings](./assets/repo-settings.png)
+:black_medium_small_square: Hero section with the site title and a list of
+popular tags. :black_medium_small_square: Filter panel block for users to search
+for specific exercises. :black_medium_small_square: Categories/exercises block
+based on the chosen filter (by body part, muscles, or equipment).
+:black_medium_small_square: Quote of the day block retrieved from the backend
+and stored in localStorage. :black_medium_small_square: Informative block about
+the importance of dedicating 110 minutes to sports daily.
+:black_medium_small_square: Categories section displaying dynamically fetched
+categories based on the selected filter.
 
-### Статус деплою
+:radio_button: Exercise Category Card:
 
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
+:black_medium_small_square: Template for displaying a category card with an
+image, title, and the associated filter. :black_medium_small_square: Clicking on
+a category card hides the category list and displays exercises related to the
+chosen category.
 
-- **Жовтий колір** - виконується збірка та деплой проекту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, збірки чи деплою сталася помилка.
+:radio_button: Exercise List:
 
-Більш детальну інформацію про статус можна переглянути натиснувши на іконку, і в
-вікні, що випадає, перейти за посиланням `Details`.
+:black_medium_small_square: Display exercises considering the user's chosen
+filter and category. :black_medium_small_square: Include a section title
+indicating the currently selected category. :black_medium_small_square: Include
+a search bar for searching exercises by keyword, considering filters and
+categories. :black_medium_small_square: Pagination functionality for server-side
+pagination, sending requests based on the page number and items per page.
+:black_medium_small_square: If no exercises are found on the backend, display a
+corresponding message to the user.
 
-![Deployment status](./assets/deploy-status.png)
+:radio_button: Exercise Card:
 
-### Жива сторінка
+:black_medium_small_square: Template for displaying an exercise card with the
+exercise name, calories burned, targeted body part, goal, and a start button.\
+:black_medium_small_square: Clicking the start button opens a modal window with detailed
+information about the exercise.
 
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися за
-адресою, вказаною на вкладці `Settings` > `Pages` в налаштуваннях репозиторію.
-Наприклад, ось посилання на живу версію для цього репозиторію
+:radio_button: Modal Window (Exercise Details):
 
-[https://goitacademy.github.io/vanilla-app-template/](https://goitacademy.github.io/vanilla-app-template/).
+:black_medium_small_square:Include a video demonstration (if available),
+exercise name, rating, goal, targeted body part, popularity among users,
+calories burned, and a brief description. :black_medium_small_square: Add a
+button to add/remove the exercise from favorites, updating the localStorage
+information. :black_medium_small_square: Include a button to rate the exercise,
+linking the rating to the user's email (optional feature).
+:black_medium_small_square: Clicking the backdrop, the close button, or pressing
+ESC should close the modal window, removing event listeners.
 
-Якщо відкриється порожня сторінка, переконайся, що у вкладці `Console` немає
-помилок пов'язаних з неправильними шляхами до CSS та JS файлів проекту
-(**404**). Швидше за все у тебе неправильне значення прапора `--base` для
-команди `build` у файлі `package.json`.
+:radio_button: Favorites Page:
 
-## Як це працює
+:black_medium_small_square: Display a list of exercises added to favorites by
+the user. :black_medium_small_square: Include the exercise name, calories
+burned, targeted body part, and goal. :black_medium_small_square: Provide a
+button to remove an exercise from favorites, updating localStorage.
 
-![How it works](./assets/how-it-works.png)
+:radio_button: Rating Feature:
 
-1. Після кожного пуша у гілку `main` GitHub-репозиторію, запускається
-   спеціальний скрипт (GitHub Action) із файлу `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується та
-   проходить лінтинг та збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн версія файлів проекту
-   відправляється у гілку `gh-pages`. В іншому випадку, у лозі виконання скрипта
-   буде вказано в чому проблема.
+:black_medium_small_square: Exercise Card: :black_medium_small_square: Add "Give
+a rating" button.
+
+:black_medium_small_square: Rating Modal: :black_medium_small_square: Radio
+buttons, description, and mandatory email input.
+
+:black_medium_small_square: Form Interaction: :black_medium_small_square: Submit
+sends a backend request; closes modal on success, displays error notification on
+failure.
+
+:black_medium_small_square: Modal Interaction: :black_medium_small_square:
+Opens/closes exercise details modal accordingly.
+
+:black_medium_small_square: Notifications: :black_medium_small_square: Clear
+success/error notifications.
+
+:black_medium_small_square: Implementation: :black_medium_small_square: Ensure
+seamless functionality, robust validation, and smooth transitions for a
+user-friendly experience.
+
+## :gear: Technologies
+
+The following tools were used in this project:
+
+- [JavaScript](https://www.w3schools.com/js/)
+- [HTML](https://www.w3schools.com/html/)
+- [CSS](https://www.w3schools.com/css/)
+
+:black_medium_small_square: Libraries:\
+
+- [vanilla-app-template](https://github.com/goitacademy/vanilla-app-template)
+- [axios](https://www.npmjs.com/package/axios)
+- [izitoast](https://www.npmjs.com/package/izitoast)
+- [lodash](https://www.npmjs.com/package/lodash)
+- [micromodal](https://www.npmjs.com/package/micromodal)
+
+## :computer: Starting
+
+  <p>Follow the link: </p>
+  <a href="https://korbetmaryna.github.io/your-energy-team-project">Your
+  Energy</a>
+  &#xa0;
