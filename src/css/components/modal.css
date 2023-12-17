@@ -132,6 +132,10 @@ button{
     margin-top: 10px;
     margin-bottom: 20px;
 }
+.main-modal__bottom-details-container{
+    display: flex;
+    border-bottom: 1px solid var(--grey-seven);
+}
 
 .main-modal__details-wrapper{
     display: flex;
@@ -141,7 +145,6 @@ button{
 
 .main-modal__calories{
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--grey-seven);
     margin-right: 0;
 }
 
@@ -165,7 +168,10 @@ button{
     font-size: 14px;
     font-weight: 500;
     line-height: 1.28;  
+    flex-shrink: 0;
+    white-space: nowrap;
 }
+
 
 .main-modal__description{
     margin-top: 20px;

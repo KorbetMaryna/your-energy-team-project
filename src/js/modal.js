@@ -36,6 +36,7 @@ window.onload = function() {
         
         let savedExercises = localStorage.getItem('savedExercises') ? JSON.parse(localStorage.getItem('savedExercises')) : [];    
         
+        
         // This function is used to add a page markup
         function displayExerciseDetails(data) {
           const exerciseDetailsContainer = document.getElementById('exerciseDetails');
@@ -80,9 +81,11 @@ window.onload = function() {
           <p class="main-modal__details-info">${data.popularity}</p>
           </div>
           </div>
+          <div class="main-modal__bottom-details-container">
           <div class="main-modal__details-wrapper main-modal__calories">
           <p class="main-modal__details-title">Burned Calories</p>
           <p class="main-modal__details-info">${data.burnedCalories + '/3 min'}</p>
+          </div>
           </div>`
           
           const description = `<div class="main-modal__description">${data.description}</div>`
@@ -100,8 +103,50 @@ window.onload = function() {
           </div>`
           
           exerciseDetailsContainer.innerHTML = `${ gifImage +`<div class="main-modal__content-container">${ `<div class="main-modal__content-wrapper">${title + rating + details + description} </div> ${buttons}`}</div>`}`;
+
+          // Function is used to calculate the total width of details wrappers components
+          function getTotalDetailsWidth() {
+            const detailsWrappers = document.querySelectorAll('.main-modal__details-wrapper');
+            let totalWidth = 0;
+            
+            detailsWrappers.forEach(wrapper => {
+              totalWidth += wrapper.offsetWidth;
+            });
+            return totalWidth;
+          }
+
+           // Function to transfer popular to bottom details container based on screen width
+          function movePopularSectionIfNeeded() {
+            const bottomDetailsContainer = document.querySelector('.main-modal__bottom-details-container');
+            const popularSection = document.querySelector('.main-modal__details-wrapper:nth-child(4)');
+            const totalDetailsWidth = getTotalDetailsWidth();
+            
+            function applyRulesForScreenWidth(matches) {
+              if (matches) {
+                if (totalDetailsWidth > 364) {
+                  bottomDetailsContainer.insertBefore(popularSection, bottomDetailsContainer.firstChild);
+                }
+              } else {
+                if (totalDetailsWidth > 315) {
+                  bottomDetailsContainer.insertBefore(popularSection, bottomDetailsContainer.firstChild);
+                }
+              }
+            }
+            
+            const mediaQuery = window.matchMedia('(min-width: 768px)');
+            
+            applyRulesForScreenWidth(mediaQuery.matches);
+            
+            // Add event listener for changes in viewport width
+            mediaQuery.addEventListener('change', event => {
+              applyRulesForScreenWidth(event.matches);
+            });
+          }
+          
+          movePopularSectionIfNeeded();
         }
         
+        // Function is used to generate star rating
         function generateStarRating(rating) {
           const starIcon = `<div class="main-modal__star-wrapper"><svg class="main-modal__star-icon main-modal__colored-star">
           <use href="./img/icons.svg#icon-star"></use>
@@ -200,7 +245,7 @@ window.onload = function() {
           .catch(error => {       
             console.error('There was a problem with the Axios request:', error);
           });
-      }
-    });
-  }  
-};
+        }
+      });
+    }  
+  };
