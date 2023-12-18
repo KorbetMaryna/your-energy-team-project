@@ -18,8 +18,8 @@ function showMessage(type, message) {
   }
 
   iziToast.show({
-    messageColor: '#262121',
-    backgroundColor: color,
+    messageColor: color,
+    backgroundColor: 'rgba(36, 36, 36, 0.8)',
     messageSize: '18px',
     position: 'bottomRight',
     progressBar: false,
@@ -27,6 +27,8 @@ function showMessage(type, message) {
     timeout: 3000,
     targetFirst: false,
     message: message,
+    position: 'topRight',
+    animateInside: true,
   });
 }
 

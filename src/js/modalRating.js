@@ -1,12 +1,5 @@
 import axios from 'axios';
-import iziToast from 'izitoast';
 import { showMessage } from './helpers/notificationHandler';
-
-iziToast.settings({
-  position: 'topRight',
-  transitionIn: 'bounceInDown',
-  closeOnEscape: true,
-});
 
 document.addEventListener('DOMContentLoaded', function () {
   const mainModal = document.querySelector('#myModal');

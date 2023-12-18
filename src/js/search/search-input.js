@@ -1,4 +1,3 @@
-import iziToast from 'izitoast';
 import { debounce } from '../helpers/debounce';
 import { showEl, hideEl } from '../helpers/toggleHidden';
 import { refs } from './refs';
@@ -9,6 +8,7 @@ import {
 } from '../exercises';
 import { fetchSearchData } from '../api';
 import { renderPagination } from '../exercises';
+import { showMessage } from '../helpers/notificationHandler';
 
 const processChange = debounce(e => onChange(e), 400);
 
@@ -54,9 +54,7 @@ async function onSubmitSearch(e) {
       keyword: value,
     });
   } else {
-    iziToast.warning({
-      message: 'You should type something before searching!',
-    });
+    showMessage('warning', 'You should type something before searching!');
   }
   onClearSearchInput();
 }

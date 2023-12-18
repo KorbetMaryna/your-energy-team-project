@@ -54,7 +54,6 @@ class YourChoiceModal {
       this.musclesOptions = muscles.results;
       this.bodyPartsOptions = bodyParts.results;
       this.equipmentOptions = equipment.results;
-      console.log({ muscles, bodyParts, equipment });
 
       this.hideLoading();
       this.toggleShowSelectGroups(true);
@@ -73,7 +72,6 @@ class YourChoiceModal {
           elem: this.equipmentSelectElem,
         },
       ].forEach(({ filters, elem }) => {
-        console.log({ filters, elem });
         const options = [];
         for (let i = 0; i < filters.length; i++) {
           const { name } = filters[i];
