@@ -1,30 +1,15 @@
 const loaderBackdrop = document.querySelector('.loader-backdrop');
 
-const loaderElements = {
-  filters: document.getElementById('loader-filters'),
-  exercises: document.querySelector('.js-button'),
-};
-
-const loaderStates = {
-  filters: false,
-  exercises: false,
-};
-
-loaderBackdrop.style.display = "none";
-
-export function toggleLoader(type, show) {
-  const loader = loaderElements[type];
-
-  if (show && !loaderStates[type] && loader) {
-    loaderStates[type] = true;
-    loader.style.display = 'block';
-    loaderBackdrop.style.display = "block";
-  } else {
-    loaderStates[type] = false;
-    if (loader) {
-      loader.style.display = 'none';
-      loaderBackdrop.style.display = "none";
-    }
+export function toggleLoader(showLoader) {
+  if (showLoader && !loaderBackdrop.classList.contains('loader-backdrop-open')) {
+    document.body.style.overflow = 'hidden';
+    loaderBackdrop.classList.add('loader-backdrop-open');
+  } else if (!showLoader) {
+    setTimeout(() => {
+      document.body.style.overflow = '';
+      loaderBackdrop.classList.remove('loader-backdrop-open');
+    }, 1000); 
   }
-};
+}
+
 

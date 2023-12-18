@@ -36,7 +36,7 @@ refs.filterButtons.forEach(el => {
 });
 
 export async function fetchData(type, obj) {
-  toggleLoader(type, true);
+  toggleLoader(true);
   await fetchApiData(type, obj)
     .then(data => {
       const { page, totalPages } = data;
@@ -55,7 +55,7 @@ export async function fetchData(type, obj) {
       console.log(err.message);
       showMessage('error', 'Something went wrong 😔 try again later.');
     })
-    .finally(() => toggleLoader(type, false));
+    .finally(() => toggleLoader(false));
 }
 
 function createFilterMarkup({ results }) {
