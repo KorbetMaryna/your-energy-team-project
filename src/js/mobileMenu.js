@@ -9,7 +9,7 @@ function mobileMenuOpen() {
   mobileMenuLinks.forEach(el => {
     const href = el.getAttribute('href');
 
-    if (currentPagePath === '/' && href.includes('index.html')) {
+    if (!currentPagePath.includes('.html') && href.includes('index.html')) {
       el.classList.add('active-mobile-menu-item');
       return;
     }
