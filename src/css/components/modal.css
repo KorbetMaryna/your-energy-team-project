@@ -17,7 +17,7 @@ button{
     background-color: var(--modal-background-light-theme); 
     justify-content: center;  
     align-items: center; 
-
+    transition: opacity var(--transition-duration-time-function);
 }
 
 .main-modal{
