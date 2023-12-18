@@ -7,7 +7,7 @@ function mobileMenuOpen() {
   const currentPagePath = window.location.pathname;
 
   mobileMenuLinks.forEach(el => {
-    if (currentPagePath.includes(el.getAttribute('href'))) {
+    if (currentPagePath.includes(el.getAttribute('href').slice(2))) {
       el.classList.add('active-mobile-menu-item');
     }
   });
@@ -31,4 +31,3 @@ function mobileMenuOpen() {
 }
 
 mobileMenuOpen();
-
